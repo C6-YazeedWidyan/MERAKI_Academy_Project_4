@@ -14,12 +14,14 @@ app.use(express.json());
 const roleRouter = require("./routes/roles");
 const usersRouter = require("./routes/users");
 const gamesRouter = require("./routes/games");
+const loginRouter = require("./routes/login");
 
 // Routes Middleware
 
 app.use("/roles", roleRouter);
 app.use("/users", usersRouter);
 app.use("/games", gamesRouter);
+app.use("/login", loginRouter);
 
 // Handles any other endpoints [unassigned - endpoints]
 app.use("*", (req, res) => res.status(404).json("NO content at this path"));
