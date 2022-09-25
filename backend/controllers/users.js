@@ -32,4 +32,25 @@ const register = (req, res) => {
     });
 };
 
-module.exports = { register };
+const getAllUsers = (req, res) => {
+  userModel
+    .find({})
+    .then((result) => {
+      res.status(200);
+      res.json({
+        success: true,
+        message: "All the Users",
+        users: result,
+      });
+    })
+    .catch((err) => {
+      res.status(500);
+      res.json({
+        success: false,
+        message: "Server Error",
+        Error: err.message,
+      });
+    });
+};
+
+module.exports = { register, getAllUsers };
