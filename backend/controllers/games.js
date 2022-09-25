@@ -146,4 +146,37 @@ const updateGameById = (req, res) => {
     });
 };
 
-module.exports = { addNewGame, getAllGames, getGameById, updateGameById };
+const deleteGameById = (req, res) => {
+  const id = req.params.id;
+
+  gameModel
+    .findByIdAndDelete({ _id: id })
+    .then((result) => {
+      if (!result) {
+        return res.status(404).json({
+          success: false,
+          message: "The game is not found",
+        });
+      }
+      res.status(200).json({
+        success: true,
+        message: "game deleted",
+        game: result,
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        success: false,
+        message: "Server Error",
+        Error: err.message,
+      });
+    });
+};
+
+module.exports = {
+  addNewGame,
+  getAllGames,
+  getGameById,
+  updateGameById,
+  deleteGameById,
+};
