@@ -53,4 +53,31 @@ const getAllUsers = (req, res) => {
     });
 };
 
-module.exports = { register, getAllUsers };
+const getUserById = (req, res) => {
+  const id = req.params.id;
+
+  userModel
+    .findOne({ _id: id })
+    .then((result) => {
+      if (!result) {
+        return res.status(404).json({
+          success: false,
+          message: "The user is not found",
+        });
+      }
+      res.status(200).json({
+        success: true,
+        message: `The user with id ${id}`,
+        user: result,
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        success: false,
+        message: "Server Error",
+        Error: err.message,
+      });
+    });
+};
+
+module.exports = { register, getAllUsers, getUserById };
