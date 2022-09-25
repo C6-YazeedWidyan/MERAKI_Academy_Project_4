@@ -66,4 +66,31 @@ const getAllGames = (req, res) => {
     });
 };
 
-module.exports = { addNewGame, getAllGames };
+const getGameById = (req, res) => {
+  const id = req.params.id;
+
+  gameModel
+    .findOne({ _id: id })
+    .then((result) => {
+      if (!result) {
+        return res.status(404).json({
+          success: false,
+          message: "The game is not found",
+        });
+      }
+      res.status(200).json({
+        success: true,
+        message: `The game with id ${id}`,
+        game: result,
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        success: false,
+        message: "Server Error",
+        Error: err.message,
+      });
+    });
+};
+
+module.exports = { addNewGame, getAllGames, getGameById };
