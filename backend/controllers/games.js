@@ -93,4 +93,57 @@ const getGameById = (req, res) => {
     });
 };
 
-module.exports = { addNewGame, getAllGames, getGameById };
+const updateGameById = (req, res) => {
+  const id = req.params.id;
+
+  const {
+    name,
+    price,
+    image,
+    category,
+    description,
+    platform,
+    inStock,
+    rating,
+    releaseDate,
+  } = req.body;
+
+  gameModel
+    .findOneAndUpdate(
+      { _id: id },
+      {
+        name,
+        price,
+        image,
+        category,
+        description,
+        platform,
+        inStock,
+        rating,
+        releaseDate,
+      },
+      { new: true }
+    )
+    .then((result) => {
+      if (!result) {
+        return res.status(404).json({
+          success: false,
+          message: "The game is not found",
+        });
+      }
+      res.status(201).json({
+        success: true,
+        message: "The game updated",
+        game: result,
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        success: false,
+        message: "Server Error",
+        Error: err.message,
+      });
+    });
+};
+
+module.exports = { addNewGame, getAllGames, getGameById, updateGameById };
