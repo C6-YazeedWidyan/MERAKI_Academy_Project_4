@@ -45,4 +45,25 @@ const addNewGame = (req, res) => {
     });
 };
 
+const getAllGames = (req, res) => {
+  gameModel
+    .find({})
+    .then((result) => {
+      res.status(200);
+      res.json({
+        success: true,
+        message: "All the games",
+        games: result,
+      });
+    })
+    .catch((err) => {
+      res.status(500);
+      res.json({
+        success: false,
+        message: "Server Error",
+        Error: err.message,
+      });
+    });
+};
+
 module.exports = { addNewGame, getAllGames };
