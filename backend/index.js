@@ -11,11 +11,13 @@ app.use(cors());
 app.use(express.json());
 
 // Import Routers
+
 const roleRouter = require("./routes/roles");
 const usersRouter = require("./routes/users");
 const gamesRouter = require("./routes/games");
 const loginRouter = require("./routes/login");
 const categoryRouter = require("./routes/category");
+const cartRouter = require("./routes/cart");
 
 // Routes Middleware
 
@@ -24,6 +26,7 @@ app.use("/users", usersRouter);
 app.use("/games", gamesRouter);
 app.use("/login", loginRouter);
 app.use("/category", categoryRouter);
+app.use("/cart", cartRouter);
 
 // Handles any other endpoints [unassigned - endpoints]
 app.use("*", (req, res) => res.status(404).json("NO content at this path"));
