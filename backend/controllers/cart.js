@@ -43,7 +43,7 @@ const createCartForUser = (req, res) => {
 };
 
 const getCartByUserId = (req, res) => {
-  const userId = req.params.id;
+  const userId = req.body;
 
   cartModel
     .findOne({ userId })
@@ -69,4 +69,52 @@ const getCartByUserId = (req, res) => {
     });
 };
 
-module.exports = { createCartForUser, getCartByUserId };
+const updateOnUserCart = (req, res) => {
+  const { userId, gameId } = req.body;
+
+  cartModel
+    .findOne({ userId })
+    .then((result) => {
+      if (!result) {
+        return res.status(404).json({
+          success: false,
+          message: "The cart is not found",
+        });
+      }
+      if (result.games.includes(gameId)) {
+        res.status(302).json({
+          message: "the game is in cart",
+        });
+      } else {
+        cartModel
+          .findOneAndUpdate(
+            { userId },
+            { $push: { games: gameId } },
+            { new: true }
+          )
+          .then((result) => {
+            res.status(201).json({
+              success: true,
+              message: "Added the game",
+              cart: result,
+            });
+          })
+          .catch((err) => {
+            res.status(500).json({
+              success: false,
+              message: "Server Error",
+              Error: err.message,
+            });
+          });
+      }
+    })
+    .catch((err) => {
+      res.status(500).json({
+        success: false,
+        message: "Server Error",
+        Error: err.message,
+      });
+    });
+};
+
+module.exports = { createCartForUser, getCartByUserId, updateOnUserCart };
