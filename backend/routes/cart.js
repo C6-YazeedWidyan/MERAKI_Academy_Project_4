@@ -5,11 +5,13 @@ const {
   updateOnUserCart,
   deleteFromUserCart,
 } = require("../controllers/cart");
+const authentication = require("../middlewares/authentication");
+const authorization = require("../middlewares/authorization");
 const cartRouter = express.Router();
 
 cartRouter.post("/", createCartForUser);
-cartRouter.get("/", getCartByUserId);
-cartRouter.put("/", updateOnUserCart);
-cartRouter.delete("/", deleteFromUserCart);
+cartRouter.get("/", authentication, getCartByUserId);
+cartRouter.put("/", authentication, authorization, updateOnUserCart);
+cartRouter.delete("/", authentication, authorization, deleteFromUserCart);
 
 module.exports = cartRouter;

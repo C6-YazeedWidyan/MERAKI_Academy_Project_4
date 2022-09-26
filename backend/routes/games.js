@@ -5,6 +5,7 @@ const {
   getGameById,
   updateGameById,
   deleteGameById,
+  searchGameByKeyword,
 } = require("../controllers/games");
 const authentication = require("../middlewares/authentication");
 const authorization = require("../middlewares/authorization");
@@ -25,5 +26,6 @@ gamesRouter.delete(
   authorization("DELETE_GAME"),
   deleteGameById
 );
+gamesRouter.get("/search", searchGameByKeyword);
 
 module.exports = gamesRouter;

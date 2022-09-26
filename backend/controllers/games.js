@@ -178,10 +178,26 @@ const deleteGameById = (req, res) => {
     });
 };
 
+const searchGameByKeyword = (req, res) => {
+  const keyword = req.query.keyword;
+
+  gameModel
+    .find({ name: keyword })
+    .then((result) => {
+      res.status(200);
+      res.json(result);
+    })
+    .catch((err) => {
+      res.status(500);
+      res.json("Server Error");
+    });
+};
+
 module.exports = {
   addNewGame,
   getAllGames,
   getGameById,
   updateGameById,
   deleteGameById,
+  searchGameByKeyword,
 };
