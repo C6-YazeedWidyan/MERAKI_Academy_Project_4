@@ -18,6 +18,7 @@ const gamesRouter = require("./routes/games");
 const loginRouter = require("./routes/login");
 const categoryRouter = require("./routes/category");
 const cartRouter = require("./routes/cart");
+const wishListRouter = require("./routes/wishlist");
 
 // Routes Middleware
 
@@ -27,6 +28,7 @@ app.use("/games", gamesRouter);
 app.use("/login", loginRouter);
 app.use("/category", categoryRouter);
 app.use("/cart", cartRouter);
+app.use("/wishlist", wishListRouter);
 
 // Handles any other endpoints [unassigned - endpoints]
 app.use("*", (req, res) => res.status(404).json("NO content at this path"));

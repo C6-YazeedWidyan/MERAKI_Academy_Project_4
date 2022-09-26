@@ -2,6 +2,7 @@ const cartModel = require("../models/cart");
 
 const createCartForUser = (req, res) => {
   const { userId } = req.body;
+  console.log(userId);
 
   cartModel
     .findOne({ userId })
