@@ -44,7 +44,7 @@ const createCartForUser = (req, res) => {
 };
 
 const getCartByUserId = (req, res) => {
-  const userId = req.body;
+  const { userId } = req.body;
 
   cartModel
     .findOne({ userId })
