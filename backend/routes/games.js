@@ -6,13 +6,15 @@ const {
   updateGameById,
   deleteGameById,
   searchGameByKeyword,
+  getGamesByNewOrOld,
 } = require("../controllers/games");
 const authentication = require("../middlewares/authentication");
 const authorization = require("../middlewares/authorization");
 const gamesRouter = express.Router();
 
-gamesRouter.post("/", authentication, authorization("ADD_GAME"), addNewGame);
+gamesRouter.post("/", addNewGame);
 gamesRouter.get("/", getAllGames);
+gamesRouter.get("/neworold", getGamesByNewOrOld);
 gamesRouter.get("/:id", getGameById);
 gamesRouter.put(
   "/:id",

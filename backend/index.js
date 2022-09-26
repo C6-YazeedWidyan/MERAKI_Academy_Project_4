@@ -19,6 +19,7 @@ const loginRouter = require("./routes/login");
 const categoryRouter = require("./routes/category");
 const cartRouter = require("./routes/cart");
 const wishListRouter = require("./routes/wishlist");
+const orderRouter = require("./routes/order");
 
 // Routes Middleware
 
@@ -29,6 +30,7 @@ app.use("/login", loginRouter);
 app.use("/category", categoryRouter);
 app.use("/cart", cartRouter);
 app.use("/wishlist", wishListRouter);
+app.use("/order", orderRouter);
 
 // Handles any other endpoints [unassigned - endpoints]
 app.use("*", (req, res) => res.status(404).json("NO content at this path"));

@@ -52,4 +52,19 @@ const getOrdersByUserId = (req, res) => {
     });
 };
 
-module.exports = { getOrdersByUserId, createOrder };
+const getAllOrders = (req, res) => {
+  orderModel
+    .find({})
+    .then((result) => {
+      res.status(200).json({
+        orders: result,
+      });
+    })
+    .catch((err) => {
+      res.status(404).json({
+        Error: err.message,
+      });
+    });
+};
+
+module.exports = { getOrdersByUserId, createOrder, getAllOrders };

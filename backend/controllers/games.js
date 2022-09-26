@@ -10,6 +10,7 @@ const addNewGame = (req, res) => {
     platform,
     inStock,
     rating,
+    newOrOld,
     releaseDate,
   } = req.body;
 
@@ -22,6 +23,7 @@ const addNewGame = (req, res) => {
     platform,
     inStock,
     rating,
+    newOrOld,
     releaseDate,
   });
 
@@ -110,6 +112,7 @@ const updateGameById = (req, res) => {
     platform,
     inStock,
     rating,
+    newOrOld,
     releaseDate,
   } = req.body;
 
@@ -125,6 +128,7 @@ const updateGameById = (req, res) => {
         platform,
         inStock,
         rating,
+        newOrOld,
         releaseDate,
       },
       { new: true }
@@ -193,6 +197,22 @@ const searchGameByKeyword = (req, res) => {
     });
 };
 
+const getGamesByNewOrOld = (req, res) => {
+  const newOrOld = req.body.newOrOld;
+
+  gameModel
+    .find({ newOrOld })
+    .then((result) => {
+      res.status(200);
+      res.json(result);
+    })
+    .catch((err) => {
+      res.status(500);
+      res.json(err);
+    });
+};
+``;
+
 module.exports = {
   addNewGame,
   getAllGames,
@@ -200,4 +220,5 @@ module.exports = {
   updateGameById,
   deleteGameById,
   searchGameByKeyword,
+  getGamesByNewOrOld,
 };

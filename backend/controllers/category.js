@@ -16,14 +16,15 @@ const getGameByCategory = (req, res) => {
     });
 };
 
-const createNewCategory = () => {
-  const { categoryName } = req.body;
+const createNewCategory = (req, res) => {
+  const { category } = req.body;
+  console.log(category);
 
-  const category = new categoryModel({
-    categoryName,
+  const newCategory = new categoryModel({
+    category,
   });
 
-  category
+  newCategory
     .save()
     .then((result) => {
       res.status(201);
