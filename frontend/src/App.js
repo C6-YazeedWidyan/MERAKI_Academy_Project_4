@@ -8,7 +8,9 @@ function App() {
 
   return (
     <appContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
-      <Router />
+      <div className="App">
+        <Router />
+      </div>
     </appContext.Provider>
   );
 }

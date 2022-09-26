@@ -1,0 +1,21 @@
+.header-container {
+  padding: 22px 36px;
+  background-color: #2a2a2a;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 8rem;
+}
+.brandName {
+  font-size: 22px;
+}
+.activeTab {
+  color: aqua;
+}
