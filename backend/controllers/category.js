@@ -1,4 +1,5 @@
 const gameModel = require("../models/games");
+const categoryModel = require("../models/category");
 
 const getGameByCategory = (req, res) => {
   const categoryName = req.body.category;
@@ -15,4 +16,51 @@ const getGameByCategory = (req, res) => {
     });
 };
 
-module.exports = { getGameByCategory };
+const createNewCategory = () => {
+  const { categoryName } = req.body;
+
+  const category = new categoryModel({
+    categoryName,
+  });
+
+  category
+    .save()
+    .then((result) => {
+      res.status(201);
+      res.json({
+        success: true,
+        message: "category added",
+        category: result,
+      });
+    })
+    .catch((err) => {
+      res.status(500);
+      res.json({
+        success: false,
+        message: "Server Error",
+        Error: err.message,
+      });
+    });
+};
+
+const getAllCategories = (req, res) => {
+  categoryModel
+    .find({})
+    .then((result) => {
+      res.status(201);
+      res.json({
+        success: true,
+        message: "all category",
+        categories: result,
+      });
+    })
+    .catch((err) => {
+      res.json({
+        success: false,
+        message: "Server Error",
+        Error: err.message,
+      });
+    });
+};
+
+module.exports = { getGameByCategory, createNewCategory, getAllCategories };

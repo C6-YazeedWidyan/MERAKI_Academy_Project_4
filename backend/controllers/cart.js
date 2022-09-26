@@ -2,7 +2,6 @@ const cartModel = require("../models/cart");
 
 const createCartForUser = (req, res) => {
   const { userId } = req.body;
-  console.log(userId);
 
   cartModel
     .findOne({ userId })
@@ -48,6 +47,8 @@ const getCartByUserId = (req, res) => {
 
   cartModel
     .findOne({ userId })
+    .populate("games")
+    .exec()
     .then((result) => {
       if (!result) {
         return res.status(404).json({
@@ -93,6 +94,8 @@ const updateOnUserCart = (req, res) => {
             { $push: { games: gameId } },
             { new: true }
           )
+          .populate("games")
+          .exec()
           .then((result) => {
             res.status(201).json({
               success: true,
