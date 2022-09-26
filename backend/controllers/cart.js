@@ -117,4 +117,29 @@ const updateOnUserCart = (req, res) => {
     });
 };
 
-module.exports = { createCartForUser, getCartByUserId, updateOnUserCart };
+const deleteFromUserCart = (req, res) => {
+  const { userId, gameId } = req.body;
+
+  cartModel
+    .findOneAndUpdate({ userId }, { $pull: { games: gameId } })
+    .then((result) => {
+      if (result) {
+        res.status(200).json({
+          success: true,
+          message: "game deleted from cart",
+        });
+      } else {
+        throw err;
+      }
+    })
+    .catch((err) => {
+      res.json(err.message);
+    });
+};
+
+module.exports = {
+  createCartForUser,
+  getCartByUserId,
+  updateOnUserCart,
+  deleteFromUserCart,
+};

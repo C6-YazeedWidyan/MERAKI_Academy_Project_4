@@ -3,11 +3,13 @@ const {
   createCartForUser,
   getCartByUserId,
   updateOnUserCart,
+  deleteFromUserCart,
 } = require("../controllers/cart");
 const cartRouter = express.Router();
 
 cartRouter.post("/", createCartForUser);
 cartRouter.get("/:id", getCartByUserId);
 cartRouter.put("/", updateOnUserCart);
+cartRouter.delete("/", deleteFromUserCart);
 
 module.exports = cartRouter;
