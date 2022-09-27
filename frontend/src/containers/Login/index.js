@@ -8,17 +8,25 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
+  const [status, setStatus] = useState(false);
+
   const navigate = useNavigate();
 
   const login = () => {
     axios
       .post("http://localhost:5000/login", { email, password })
       .then((res) => {
-        localStorage.setItem("token", JSON.stringify(res.data.token));
+        setMessage("");
+        localStorage.setItem("token", res.data.token);
         navigate("/");
+        setStatus(true);
       })
       .catch((err) => {
-        console.log(err);
+        if (err.response && err.response.data) {
+          setStatus(false);
+          return setMessage(err.response.data.message);
+        }
+        setMessage("Error happened while Login, please try again");
       });
   };
 
@@ -43,7 +51,9 @@ const Login = () => {
         <br />
         <button onClick={login}>Login</button>
         <br />
-        <p>{message}</p>
+        {status
+          ? message && <div className="SuccessMessage">{message}</div>
+          : message && <div className="ErrorMessage">{message}</div>}
       </div>
     </>
   );

@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from "react";
 import axios from "axios";
 import "./style.css";
+import { useNavigate } from "react-router-dom";
 
 const Search = () => {
   const [searchResult, setSearchResult] = useState([]);
@@ -8,10 +9,11 @@ const Search = () => {
   // _.debounce(func, [(wait = 0)], [(options = {})]);
 
   const getData = (keyword) => {
-    console.log(keyword);
-    axios.get(`http://localhost:5000/search?keyword=${keyword}`).then((res) => {
-      setSearchResult(res.data);
-    });
+    axios
+      .get(`http://localhost:5000/games/search?keyword=${keyword}`)
+      .then((res) => {
+        setSearchResult(res.data.slice(0, 3));
+      });
   };
 
   // const debouncedResults = useMemo(() => {

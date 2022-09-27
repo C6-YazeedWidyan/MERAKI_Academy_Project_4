@@ -22,7 +22,6 @@ const Register = () => {
         password,
       })
       .then((res) => {
-        console.log(res.data);
         setMessage(res.data.message);
       })
       .catch((err) => {
