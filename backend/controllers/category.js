@@ -18,7 +18,6 @@ const getGameByCategory = (req, res) => {
 
 const createNewCategory = (req, res) => {
   const { category } = req.body;
-  console.log(category);
 
   const newCategory = new categoryModel({
     category,

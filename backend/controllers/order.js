@@ -1,10 +1,12 @@
 const orderModel = require("../models/order");
 
 const createOrder = (req, res) => {
-  const cartId = req.body;
+  const { userId } = req.body;
+  const cart = req.body.cart;
 
   const order = new orderModel({
-    cartId,
+    userId,
+    cart,
   });
 
   order
@@ -26,10 +28,12 @@ const createOrder = (req, res) => {
 };
 
 const getOrdersByUserId = (req, res) => {
-  const { userId } = req.body;
+  const userId = req.params.id;
 
   orderModel
     .find({ userId })
+    .populate("userId")
+    .exec()
     .then((result) => {
       if (!result) {
         return res.status(404).json({
@@ -40,7 +44,7 @@ const getOrdersByUserId = (req, res) => {
       res.status(200).json({
         success: true,
         message: "The orders is found",
-        cart: result,
+        orders: result,
       });
     })
     .catch((err) => {

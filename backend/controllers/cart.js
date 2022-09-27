@@ -72,7 +72,7 @@ const getCartByUserId = (req, res) => {
 };
 
 const updateOnUserCart = (req, res) => {
-  const { userId, gameId } = req.body;
+  const { userId, gameId, total } = req.body;
 
   cartModel
     .findOne({ userId })
@@ -92,6 +92,7 @@ const updateOnUserCart = (req, res) => {
           .findOneAndUpdate(
             { userId },
             { $push: { games: gameId } },
+            { $set: { total: total } },
             { new: true }
           )
           .populate("games")
@@ -122,10 +123,14 @@ const updateOnUserCart = (req, res) => {
 };
 
 const deleteFromUserCart = (req, res) => {
-  const { userId, gameId } = req.body;
+  const { userId, gameId, total } = req.body;
 
   cartModel
-    .findOneAndUpdate({ userId }, { $pull: { games: gameId } })
+    .findOneAndUpdate(
+      { userId },
+      { $pull: { games: gameId } },
+      { $set: { total: total } }
+    )
     .then((result) => {
       if (result) {
         res.status(200).json({

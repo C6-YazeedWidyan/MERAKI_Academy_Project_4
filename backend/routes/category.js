@@ -4,10 +4,17 @@ const {
   getAllCategories,
   createNewCategory,
 } = require("../controllers/category");
+const authentication = require("../middlewares/authentication");
+const authorization = require("../middlewares/authorization");
 const categoryRouter = express.Router();
 
 categoryRouter.get("/", getGameByCategory);
 categoryRouter.get("/all", getAllCategories);
-categoryRouter.post("/", createNewCategory);
+categoryRouter.post(
+  "/",
+  authentication,
+  authorization("CREATE"),
+  createNewCategory
+);
 
 module.exports = categoryRouter;

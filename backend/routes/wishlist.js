@@ -9,13 +9,18 @@ const authentication = require("../middlewares/authentication");
 const authorization = require("../middlewares/authorization");
 const wishListRouter = express.Router();
 
-wishListRouter.post("/", createWishListToUser);
+wishListRouter.post("/", authentication, createWishListToUser);
 wishListRouter.get("/", authentication, getWishListByUserId);
-wishListRouter.put("/", authentication, authorization, updateOnUserWishList);
+wishListRouter.put(
+  "/",
+  authentication,
+  authorization("UPDATE"),
+  updateOnUserWishList
+);
 wishListRouter.delete(
   "/",
   authentication,
-  authorization,
+  authorization("DELETE"),
   deleteFromUserWishlist
 );
 
