@@ -186,7 +186,7 @@ const searchGameByKeyword = (req, res) => {
   const keyword = req.query.keyword;
 
   gameModel
-    .find({ name: keyword })
+    .find({ name: { $regex: keyword, $options: "i" } })
     .then((result) => {
       res.status(200);
       res.json(result);
