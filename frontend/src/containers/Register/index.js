@@ -32,7 +32,7 @@ const Register = () => {
 
   return (
     <>
-      <div className="register">
+      <div className="register-container">
         <input
           type="text"
           placeholder="First Name"
