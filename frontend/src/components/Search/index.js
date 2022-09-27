@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import axios from "axios";
 import "./style.css";
 
 const Search = () => {
   const [searchResult, setSearchResult] = useState([]);
+
+  // _.debounce(func, [(wait = 0)], [(options = {})]);
 
   const getData = (keyword) => {
     console.log(keyword);
@@ -11,6 +13,10 @@ const Search = () => {
       setSearchResult(res.data);
     });
   };
+
+  // const debouncedResults = useMemo(() => {
+  //   return debouce((e) => getData(e.target.value), 300);
+  // }, []);
 
   return (
     <div className="search-container">
