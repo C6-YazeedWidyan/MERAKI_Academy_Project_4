@@ -6,6 +6,7 @@ const Search = () => {
   const [searchResult, setSearchResult] = useState([]);
 
   const getData = (keyword) => {
+    console.log(keyword);
     axios.get(`http://localhost:5000/search?keyword=${keyword}`).then((res) => {
       setSearchResult(res.data);
     });
