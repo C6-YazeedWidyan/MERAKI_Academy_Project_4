@@ -38,6 +38,7 @@ const login = (req, res) => {
         res.status(200).json({
           success: true,
           message: `Valid login credentials`,
+          userProfile: result,
           token: token,
         });
       } catch (error) {
