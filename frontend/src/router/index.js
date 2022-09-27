@@ -7,6 +7,7 @@ import Home from "../containers/Home";
 import Cart from "../containers/Cart";
 import Wishlist from "../containers/Wishlist";
 import Header from "../components/Header";
+import GameDetails from "../containers/GameDetails";
 
 const Router = () => {
   return (
@@ -15,6 +16,7 @@ const Router = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="browse" element={<Browse />} />
+        <Route path="gameDetails" element={<GameDetails />} />
         <Route path="cart" element={<Cart />} />
         <Route path="wishlist" element={<Wishlist />} />
         <Route path="login" element={<Login />} />

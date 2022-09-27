@@ -1,4 +1,5 @@
 .search-container {
+  position: relative;
   border-radius: 14px;
   width: 30%;
   display: flex;
@@ -17,4 +18,23 @@
 }
 :focus-visible {
   outline: none;
+}
+.search-box {
+  background-color: rgb(55, 55, 55);
+  min-height: 70px;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 38px;
+  border-radius: 14px;
+}
+
+.card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 22px;
+}
+.card-image {
+  width: 60px;
 }

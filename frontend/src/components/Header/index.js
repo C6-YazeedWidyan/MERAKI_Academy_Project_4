@@ -6,7 +6,9 @@ import Search from "../Search";
 const Header = () => {
   return (
     <div className="header-container">
-      <div className="brandName">Store name</div>
+      <Link className="link" to="/">
+        <img className="logo" src="/assets/images/logo.png" alt="" />
+      </Link>
       <Link className="link" to="browse">
         <div className="title">Browse</div>
       </Link>
