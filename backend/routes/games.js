@@ -13,6 +13,7 @@ const authorization = require("../middlewares/authorization");
 const gamesRouter = express.Router();
 
 gamesRouter.post("/", addNewGame);
+gamesRouter.get("/", searchGameByKeyword);
 gamesRouter.get("/", getAllGames);
 gamesRouter.get("/neworold", getGamesByNewOrOld);
 gamesRouter.get("/:id", getGameById);
@@ -28,6 +29,4 @@ gamesRouter.delete(
   authorization("DELETE_GAME"),
   deleteGameById
 );
-gamesRouter.get("/search", searchGameByKeyword);
-
 module.exports = gamesRouter;

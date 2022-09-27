@@ -25,6 +25,7 @@ const orderRouter = require("./routes/order");
 
 app.use("/roles", roleRouter);
 app.use("/users", usersRouter);
+app.use("/search", gamesRouter);
 app.use("/games", gamesRouter);
 app.use("/login", loginRouter);
 app.use("/category", categoryRouter);
