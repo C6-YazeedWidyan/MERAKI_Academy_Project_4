@@ -1,14 +1,17 @@
 import axios from "axios";
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { useState } from "react";
 import "./style.css";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../contexts/AuthContext";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState(false);
+
+  const { isLoggedIn, saveToken } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
@@ -18,6 +21,7 @@ const Login = () => {
       .then((res) => {
         setMessage("");
         localStorage.setItem("token", res.data.token);
+        saveToken(res.data.token, res.data.userProfile.role.role);
         navigate("/");
         setStatus(true);
       })
@@ -29,6 +33,12 @@ const Login = () => {
         setMessage("Error happened while Login, please try again");
       });
   };
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate("/");
+    }
+  });
 
   return (
     <>

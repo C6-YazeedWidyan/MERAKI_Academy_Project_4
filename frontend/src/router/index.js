@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Routes, Route } from "react-router-dom";
 import Login from "../containers/Login";
 import Register from "../containers/Register";
@@ -8,19 +8,24 @@ import Cart from "../containers/Cart";
 import Wishlist from "../containers/Wishlist";
 import Header from "../components/Header";
 import GameDetails from "../containers/GameDetails";
+import Dashboard from "../containers/Dashboard";
+import { AuthContext } from "../contexts/AuthContext";
 
 const Router = () => {
+  const { userType } = useContext(AuthContext);
+
   return (
     <>
-      <Header />
+      {userType === "user" && <Header />}
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="browse" element={<Browse />} />
-        <Route path="gameDetails" element={<GameDetails />} />
-        <Route path="cart" element={<Cart />} />
-        <Route path="wishlist" element={<Wishlist />} />
-        <Route path="login" element={<Login />} />
-        <Route path="register" element={<Register />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/browse" element={<Browse />} />
+        <Route path="/gameDetails" element={<GameDetails />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/wishlist" element={<Wishlist />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route path="*" element={<p>There's nothing here: 404!</p>} />
       </Routes>
     </>

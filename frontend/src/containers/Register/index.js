@@ -1,5 +1,6 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { AuthContext } from "../../contexts/AuthContext";
 import "./style.css";
 
 const Register = () => {
@@ -10,6 +11,8 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
+
+  const { isLoggedIn } = useContext(AuthContext);
 
   const registerNewUser = () => {
     axios
