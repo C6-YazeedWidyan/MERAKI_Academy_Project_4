@@ -184,17 +184,20 @@ const deleteGameById = (req, res) => {
 
 const searchGameByKeyword = (req, res) => {
   const keyword = req.query.keyword;
-
-  gameModel
-    .find({ name: { $regex: keyword, $options: "i" } })
-    .then((result) => {
-      res.status(200);
-      res.json(result);
-    })
-    .catch((err) => {
-      res.status(500);
-      res.json("Server Error");
-    });
+  if (!keyword) {
+    res.json([]);
+  } else {
+    gameModel
+      .find({ name: { $regex: keyword, $options: "i" } })
+      .then((result) => {
+        res.status(200);
+        res.json(result);
+      })
+      .catch((err) => {
+        res.status(500);
+        res.json("Server Error");
+      });
+  }
 };
 
 const getGamesByNewOrOld = (req, res) => {
