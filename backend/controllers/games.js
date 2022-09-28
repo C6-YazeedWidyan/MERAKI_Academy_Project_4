@@ -5,6 +5,7 @@ const addNewGame = (req, res) => {
     name,
     price,
     image,
+    image2,
     category,
     description,
     platform,
@@ -18,6 +19,7 @@ const addNewGame = (req, res) => {
     name,
     price,
     image,
+    image2,
     category,
     description,
     platform,
@@ -48,7 +50,6 @@ const addNewGame = (req, res) => {
 };
 
 const getAllGames = (req, res) => {
-  console.log("asdas");
   const page = req.query.p || 0;
   const gamesPerPage = 3;
 
@@ -184,7 +185,6 @@ const deleteGameById = (req, res) => {
 };
 
 const searchGameByKeyword = (req, res) => {
-  console.log("aaaaaaaaa");
   const keyword = req.query.keyword;
 
   if (!keyword) {
