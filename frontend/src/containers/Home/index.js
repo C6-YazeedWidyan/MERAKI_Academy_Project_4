@@ -14,7 +14,7 @@ const Home = () => {
   }, []);
 
   const goToDetails = (id) => {
-    navigate("gameDetails", {
+    navigate("/gameDetails", {
       state: id,
     });
   };

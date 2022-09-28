@@ -2,11 +2,13 @@ import React from "react";
 import "./style.css";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Browse = () => {
   const [data, setData] = useState([]);
   const [categories, setCategories] = useState([]);
   const [pageNumber, setPageNumber] = useState(0);
+  const navigate = useNavigate();
 
   const getAllGames = () => {
     setPageNumber(pageNumber + 1);
@@ -19,12 +21,29 @@ const Browse = () => {
     axios
       .get("http://localhost:5000/category/all/")
       .then((res) => {
-        console.log(res);
         setCategories(res.data.categories);
       })
       .catch((err) => {
         console.log(err);
       });
+  };
+
+  const getGameByCategory = (title) => {
+    axios
+      .get(`http://localhost:5000/category?title=${title}`)
+      .then((res) => {
+        console.log(res.data);
+        setData(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const goToDetails = (id) => {
+    navigate("/gameDetails", {
+      state: id,
+    });
   };
 
   useEffect(() => {
@@ -35,10 +54,14 @@ const Browse = () => {
   return (
     <>
       <div className="browse-container">
-        <h3>All</h3>
         {data.map((game) => {
           return (
-            <div className="card">
+            <div
+              onClick={() => {
+                goToDetails(game._id);
+              }}
+              className="card"
+            >
               <img className="card-image" src={game.image} alt="" />
               <h3 className="game-name">{game.name}</h3>
               <span className="price"></span>
@@ -46,7 +69,20 @@ const Browse = () => {
           );
         })}
 
-        <div className="category-container"></div>
+        <div className="category-container">
+          <h3 onClick={getAllGames}>All</h3>
+          {categories.map((category) => {
+            return (
+              <h3
+                onClick={() => {
+                  getGameByCategory(category.category);
+                }}
+              >
+                {category.category}
+              </h3>
+            );
+          })}
+        </div>
       </div>
     </>
   );

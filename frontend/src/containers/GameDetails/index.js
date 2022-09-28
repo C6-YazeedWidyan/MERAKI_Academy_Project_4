@@ -61,6 +61,8 @@ const GameDetails = () => {
     <>
       <div className="details-container">
         <div>{game.name}</div>
+        <img className="image" src={game.image} alt="" />
+        <img className="image2" src={game.image2} alt="" />
         <div onClick={addToCart}>add to cart</div>
         <div onClick={addToWishList}>add to wish list</div>
       </div>
