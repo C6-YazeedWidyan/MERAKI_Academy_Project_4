@@ -37,7 +37,6 @@ const Cart = () => {
         },
       })
       .then((res) => {
-        console.log(res);
         const newCart = cart.filter((game) => {
           return id != game._id;
         });

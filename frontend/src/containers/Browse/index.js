@@ -13,10 +13,13 @@ const Browse = () => {
     axios.get(`http://localhost:5000/games?p=${pageNumber}`).then((res) => {
       setData(res.data.games);
     });
+  };
 
+  const getAllCategoriesTitles = () => {
     axios
       .get("http://localhost:5000/category/all/")
       .then((res) => {
+        console.log(res);
         setCategories(res.data.categories);
       })
       .catch((err) => {
@@ -26,11 +29,13 @@ const Browse = () => {
 
   useEffect(() => {
     getAllGames();
+    getAllCategoriesTitles();
   }, []);
 
   return (
     <>
       <div className="browse-container">
+        <h3>All</h3>
         {data.map((game) => {
           return (
             <div className="card">
@@ -40,15 +45,8 @@ const Browse = () => {
             </div>
           );
         })}
-        <div className="category-container">
-          {categories.map((category) => {
-            return (
-              <div>
-                <h2>{category.category}</h2>
-              </div>
-            );
-          })}
-        </div>
+
+        <div className="category-container"></div>
       </div>
     </>
   );
