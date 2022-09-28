@@ -5,6 +5,7 @@ const gameSchema = new mongoose.Schema({
   price: { type: String, required: true },
   image: { type: String },
   image2: { type: String },
+  cover: { type: String },
   category: { type: Array },
   description: { type: String, required: true },
   platform: { type: String },
