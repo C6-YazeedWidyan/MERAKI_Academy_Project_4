@@ -7,6 +7,7 @@ const AuthProvider = (props) => {
   const navigate = useNavigate();
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userProfile, setUserProfile] = useState({});
   const [userType, setUserType] = useState("user");
   const [token, setToken] = useState("");
 
@@ -25,6 +26,13 @@ const AuthProvider = (props) => {
 
   useEffect(() => {
     setToken(localStorage.getItem("token"));
+    setUserProfile(JSON.parse(localStorage.getItem("userProfile")));
+    setUserType(JSON.parse(localStorage.getItem("userProfile"))?.role?.role);
+
+    if (!JSON.parse(localStorage.getItem("userProfile"))?.role?.role) {
+      setUserType("user");
+    }
+
     if (token) {
       saveToken(token, userType);
     }
@@ -34,7 +42,7 @@ const AuthProvider = (props) => {
     if (isLoggedIn && userType === "admin") {
       navigate("/dashboard");
     }
-  }, [token, isLoggedIn, userType]);
+  }, [token, isLoggedIn]);
 
   const state = {
     token,
@@ -44,6 +52,7 @@ const AuthProvider = (props) => {
     setIsLoggedIn,
     userType,
     setUserType,
+    userProfile,
   };
 
   return (

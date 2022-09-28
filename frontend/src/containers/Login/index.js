@@ -21,7 +21,29 @@ const Login = () => {
       .then((res) => {
         setMessage("");
         localStorage.setItem("token", res.data.token);
+        localStorage.setItem(
+          "userProfile",
+          JSON.stringify(res.data.userProfile)
+        );
         saveToken(res.data.token, res.data.userProfile.role.role);
+
+        const data = {
+          userId: res.data.userProfile._id,
+        };
+
+        axios
+          .post("http://localhost:5000/cart", data, {
+            headers: {
+              Authorization: `Bearer ${res.data.token}`,
+            },
+          })
+          .then((res) => {
+            console.log(res);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+
         navigate("/");
         setStatus(true);
       })

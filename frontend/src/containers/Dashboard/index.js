@@ -5,7 +5,7 @@ import axios from "axios";
 import { AuthContext } from "../../contexts/AuthContext";
 
 const Dashboard = () => {
-  const { token } = useContext(AuthContext);
+  const { token, logout } = useContext(AuthContext);
 
   const [games, setGames] = useState("");
   const [show, setShow] = useState(false);
@@ -89,6 +89,7 @@ const Dashboard = () => {
 
   return (
     <>
+      <div onClick={logout}>logout</div>
       <br />
       {show &&
         games.map((game, index) => (
