@@ -9,10 +9,6 @@ const Dashboard = () => {
 
   const [games, setGames] = useState("");
   const [show, setShow] = useState(false);
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [updateBox, setUpdateBox] = useState(false);
-  const [gameId, setGameId] = useState(false);
   const [message, setMessage] = useState("");
   const [userId, setUserId] = useState("");
 
@@ -34,52 +30,6 @@ const Dashboard = () => {
         return setMessage(error.response.data.message);
       }
       setMessage("Error happened while Get Data, please try again");
-    }
-  };
-
-  const handleUpdateClick = (game) => {
-    setUpdateBox(!updateBox);
-    setGameId(game._id);
-    setTitle(game.name);
-    setDescription(game.description);
-    if (updateBox) updateGame(game._id);
-  };
-
-  const updateGame = async (id) => {
-    try {
-      await axios.put(`http://localhost:5000/articles/${id}`, {
-        title,
-        description,
-      });
-      getAllGames();
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const deleteGame = async (id) => {
-    try {
-      await axios.delete(`http://localhost:5000/articles/${id}`);
-      getAllGames();
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const addGame = async (id) => {
-    try {
-      await axios.post(
-        `http://localhost:5000/articles/${id}/comments`,
-        {},
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      getAllGames();
-    } catch (error) {
-      console.log(error.response);
     }
   };
 

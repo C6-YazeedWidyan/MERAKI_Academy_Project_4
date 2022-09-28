@@ -36,11 +36,35 @@ const GameDetails = () => {
       });
   };
 
+  const addToWishList = () => {
+    const data = {
+      userId: userProfile._id,
+      gameId: game._id,
+    };
+
+    axios
+      .put(`http://localhost:5000/wishlist`, data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    console.log("yazeed");
+  };
+
   return (
     <>
       <div className="details-container">
         <div>{game.name}</div>
         <div onClick={addToCart}>add to cart</div>
+        <div onClick={addToWishList}>add to wish list</div>
       </div>
     </>
   );

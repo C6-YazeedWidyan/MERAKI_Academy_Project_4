@@ -16,7 +16,6 @@ const Browse = () => {
       .get("http://localhost:5000/category/all/")
       .then((res) => {
         setCategories(res.data.categories);
-        console.log(res.data.categories);
       })
       .catch((err) => {
         console.log(err);

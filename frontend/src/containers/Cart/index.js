@@ -5,9 +5,10 @@ import { AuthContext } from "../../contexts/AuthContext";
 import "./style.css";
 
 const Cart = () => {
-  const { token, isLoggedIn, userProfile } = useContext(AuthContext);
+  const { token, isLoggedIn, userProfile, cart, setCart } =
+    useContext(AuthContext);
   const navigate = useNavigate();
-  const [cart, setCart] = useState([]);
+
   useEffect(() => {
     if (!isLoggedIn) {
       navigate("/login");
@@ -24,6 +25,29 @@ const Cart = () => {
     }
   }, []);
 
+  const deleteFromCart = (id) => {
+    const data = {
+      userId: userProfile._id,
+      gameId: id,
+    };
+    axios
+      .put(`http://localhost:5000/cart/delete`, data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        const newCart = cart.filter((game) => {
+          return id != game._id;
+        });
+        setCart(newCart);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <>
       <div className="cart-container">
@@ -31,6 +55,13 @@ const Cart = () => {
           return (
             <div key={game._id}>
               <h3>{game.name}</h3>
+              <button
+                onClick={() => {
+                  deleteFromCart(game._id);
+                }}
+              >
+                remove from cart
+              </button>
             </div>
           );
         })}

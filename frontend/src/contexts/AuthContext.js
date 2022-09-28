@@ -10,6 +10,8 @@ const AuthProvider = (props) => {
   const [userProfile, setUserProfile] = useState({});
   const [userType, setUserType] = useState("user");
   const [token, setToken] = useState("");
+  const [cart, setCart] = useState([]);
+  const [wishlist, setWishList] = useState([]);
 
   const saveToken = (token, userType) => {
     setToken(token);
@@ -53,6 +55,10 @@ const AuthProvider = (props) => {
     userType,
     setUserType,
     userProfile,
+    cart,
+    setCart,
+    wishlist,
+    setWishList,
   };
 
   return (

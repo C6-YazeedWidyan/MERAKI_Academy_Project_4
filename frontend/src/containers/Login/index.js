@@ -44,6 +44,19 @@ const Login = () => {
             console.log(err);
           });
 
+        axios
+          .post("http://localhost:5000/wishlist", data, {
+            headers: {
+              Authorization: `Bearer ${res.data.token}`,
+            },
+          })
+          .then((result) => {
+            console.log(result);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+
         navigate("/");
         setStatus(true);
       })
