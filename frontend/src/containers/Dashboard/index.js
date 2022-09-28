@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import "./style.css";
 
 import axios from "axios";
@@ -40,6 +41,9 @@ const Dashboard = () => {
   return (
     <>
       <div onClick={logout}>logout</div>
+      <Link to={"/addnewgame"}>
+        <div className="title">Add New Game</div>
+      </Link>
       <br />
       {show &&
         games.map((game, index) => (

@@ -10,6 +10,7 @@ const Register = () => {
   const [country, setCountry] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [role, setRole] = useState("6330a779bd50d1f79ff6fca6");
   const [message, setMessage] = useState("");
 
   const { isLoggedIn } = useContext(AuthContext);
@@ -23,6 +24,7 @@ const Register = () => {
         country,
         email,
         password,
+        role,
       })
       .then((res) => {
         setMessage(res.data.message);

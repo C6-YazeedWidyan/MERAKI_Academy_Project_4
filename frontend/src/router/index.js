@@ -10,6 +10,7 @@ import Header from "../components/Header";
 import GameDetails from "../containers/GameDetails";
 import Dashboard from "../containers/Dashboard";
 import { AuthContext } from "../contexts/AuthContext";
+import AddNewGame from "../containers/AddNewGame";
 
 const Router = () => {
   const { userType } = useContext(AuthContext);
@@ -20,6 +21,7 @@ const Router = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/addNewGame" element={<AddNewGame />} />
         <Route path="/browse" element={<Browse />} />
         <Route path="/gameDetails" element={<GameDetails />} />
         <Route path="/cart" element={<Cart />} />

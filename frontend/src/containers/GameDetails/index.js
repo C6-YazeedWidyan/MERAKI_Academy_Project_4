@@ -55,8 +55,6 @@ const GameDetails = () => {
       .catch((err) => {
         console.log(err);
       });
-
-    console.log("yazeed");
   };
 
   return (

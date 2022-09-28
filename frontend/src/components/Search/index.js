@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import "./style.css";
 import { useNavigate } from "react-router-dom";
@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 const Search = () => {
   const [searchResult, setSearchResult] = useState([]);
 
-  // _.debounce(func, [(wait = 0)], [(options = {})]);
+  const navigate = useNavigate();
 
   const getData = (keyword) => {
     axios
@@ -16,9 +16,9 @@ const Search = () => {
       });
   };
 
-  // const debouncedResults = useMemo(() => {
-  //   return debouce((e) => getData(e.target.value), 300);
-  // }, []);
+  const goToBrowse = () => {
+    navigate("/browse");
+  };
 
   return (
     <div className="search-container">
@@ -38,6 +38,7 @@ const Search = () => {
               </div>
             );
           })}
+          <button onClick={goToBrowse}>view more games</button>
         </div>
       )}
     </div>

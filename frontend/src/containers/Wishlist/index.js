@@ -1,5 +1,5 @@
 import React from "react";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
@@ -41,7 +41,7 @@ const Wishlist = () => {
         },
       })
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
         const newWishList = wishlist.filter((game) => {
           return id != game._id;
         });
@@ -56,7 +56,6 @@ const Wishlist = () => {
     <>
       <div className="cart-container">
         {wishlist.map((game) => {
-          console.log(wishlist);
           return (
             <div key={game._id}>
               <h3>{game.name}</h3>

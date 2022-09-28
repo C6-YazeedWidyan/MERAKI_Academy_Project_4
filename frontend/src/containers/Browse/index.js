@@ -6,9 +6,11 @@ import { useState, useEffect } from "react";
 const Browse = () => {
   const [data, setData] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [pageNumber, setPageNumber] = useState(0);
 
-  useEffect(() => {
-    axios.get("http://localhost:5000/games/").then((res) => {
+  const getAllGames = () => {
+    setPageNumber(pageNumber + 1);
+    axios.get(`http://localhost:5000/games?p=${pageNumber}`).then((res) => {
       setData(res.data.games);
     });
 
@@ -20,6 +22,10 @@ const Browse = () => {
       .catch((err) => {
         console.log(err);
       });
+  };
+
+  useEffect(() => {
+    getAllGames();
   }, []);
 
   return (
