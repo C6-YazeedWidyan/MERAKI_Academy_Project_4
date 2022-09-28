@@ -43,7 +43,7 @@ const createCartForUser = (req, res) => {
 };
 
 const getCartByUserId = (req, res) => {
-  const { userId } = req.body;
+  const userId = req.params.id;
 
   cartModel
     .findOne({ userId })
@@ -72,7 +72,10 @@ const getCartByUserId = (req, res) => {
 };
 
 const updateOnUserCart = (req, res) => {
-  const { userId, gameId, total } = req.body;
+  const userId = req.body.userId;
+  const gameId = req.body.gameId;
+  console.log(gameId);
+  console.log(userId);
 
   cartModel
     .findOne({ userId })
@@ -92,7 +95,6 @@ const updateOnUserCart = (req, res) => {
           .findOneAndUpdate(
             { userId },
             { $push: { games: gameId } },
-            { $set: { total: total } },
             { new: true }
           )
           .populate("games")
