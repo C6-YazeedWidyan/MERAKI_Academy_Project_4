@@ -2,7 +2,7 @@ const gameModel = require("../models/games");
 const categoryModel = require("../models/category");
 
 const getGameByCategory = (req, res) => {
-  const categoryName = req.body.category;
+  const categoryName = req.query.title;
 
   gameModel
     .find({ category: { $in: [categoryName] } })
