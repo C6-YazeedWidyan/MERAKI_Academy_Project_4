@@ -10,17 +10,17 @@ const authorization = require("../middlewares/authorization");
 const wishListRouter = express.Router();
 
 wishListRouter.post("/", authentication, createWishListToUser);
-wishListRouter.get("/", authentication, getWishListByUserId);
+wishListRouter.get("/:id", authentication, getWishListByUserId);
 wishListRouter.put(
   "/",
   authentication,
-  authorization("UPDATE"),
+  authorization("update"),
   updateOnUserWishList
 );
-wishListRouter.delete(
-  "/",
+wishListRouter.put(
+  "/delete",
   authentication,
-  authorization("DELETE"),
+  authorization("delete"),
   deleteFromUserWishlist
 );
 

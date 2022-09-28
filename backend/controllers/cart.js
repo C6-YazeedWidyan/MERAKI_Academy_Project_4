@@ -125,14 +125,12 @@ const updateOnUserCart = (req, res) => {
 };
 
 const deleteFromUserCart = (req, res) => {
-  const { userId, gameId, total } = req.body;
+  const { userId, gameId } = req.body;
+  console.log(userId);
+  console.log(gameId);
 
   cartModel
-    .findOneAndUpdate(
-      { userId },
-      { $pull: { games: gameId } },
-      { $set: { total: total } }
-    )
+    .findOneAndUpdate({ userId }, { $pull: { games: gameId } })
     .then((result) => {
       if (result) {
         res.status(200).json({

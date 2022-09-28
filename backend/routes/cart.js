@@ -12,8 +12,8 @@ const cartRouter = express.Router();
 cartRouter.post("/", authentication, createCartForUser);
 cartRouter.get("/:id", authentication, getCartByUserId);
 cartRouter.put("/", authentication, authorization("update"), updateOnUserCart);
-cartRouter.delete(
-  "/",
+cartRouter.put(
+  "/delete",
   authentication,
   authorization("delete"),
   deleteFromUserCart

@@ -43,10 +43,12 @@ const createWishListToUser = (req, res) => {
 };
 
 const getWishListByUserId = (req, res) => {
-  const { userId } = req.body;
+  const userId = req.params.id;
 
   wishListModel
     .findOne({ userId })
+    .populate("games")
+    .exec()
     .then((result) => {
       if (!result) {
         return res.status(404).json({
