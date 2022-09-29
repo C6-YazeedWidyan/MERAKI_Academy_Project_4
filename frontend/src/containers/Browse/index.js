@@ -52,24 +52,28 @@ const Browse = () => {
 
   return (
     <>
-      <div className="browse-container">
-        {data.map((game) => {
-          return (
-            <div
-              onClick={() => {
-                goToDetails(game._id);
-              }}
-              className="card"
-            >
-              <img className="card-image" src={game.image} alt="" />
-              <h3 className="game-name">{game.name}</h3>
-              <span className="price"></span>
-            </div>
-          );
-        })}
+      <div className="big">
+        <div className="browse-container">
+          {data.map((game) => {
+            return (
+              <div
+                onClick={() => {
+                  goToDetails(game._id);
+                }}
+                className="game-card"
+              >
+                <img className="game-poster" src={game.poster} alt="" />
+                <h3 className="game-name">{game.name}</h3>
+                <span className="price"></span>
+              </div>
+            );
+          })}
+        </div>
 
         <div className="category-container">
-          <h3 onClick={getAllGames}>All</h3>
+          <h3 className="all-btn" onClick={getAllGames}>
+            All
+          </h3>
           {categories.map((category) => {
             return (
               <h3

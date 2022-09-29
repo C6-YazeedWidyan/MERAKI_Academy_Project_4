@@ -1,0 +1,21 @@
+.big {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-around;
+}
+
+.browse-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.category-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.all-btn {
+  cursor: pointer;
+}
