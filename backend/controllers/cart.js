@@ -5,11 +5,14 @@ const createCartForUser = (req, res) => {
 
   cartModel
     .findOne({ userId })
+    .populate("games")
+    .exec()
     .then((result) => {
       if (result) {
         res.status(200);
         res.json({
           message: "the user have cart",
+          cart: result,
         });
       } else {
         const cart = new cartModel({
@@ -22,6 +25,7 @@ const createCartForUser = (req, res) => {
             res.json({
               success: true,
               message: "Created cart to user",
+              cart: result,
             });
           })
           .catch((err) => {
@@ -131,6 +135,8 @@ const deleteFromUserCart = (req, res) => {
 
   cartModel
     .findOneAndUpdate({ userId }, { $pull: { games: gameId } })
+    .populate("games")
+    .exec()
     .then((result) => {
       if (result) {
         res.status(200).json({

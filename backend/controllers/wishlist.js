@@ -5,11 +5,14 @@ const createWishListToUser = (req, res) => {
 
   wishListModel
     .findOne({ userId })
+    .populate("games")
+    .exec()
     .then((result) => {
       if (result) {
         res.status(200);
         res.json({
           message: "the user have wish list",
+          wishList: result,
         });
       } else {
         const wishList = new wishListModel({
@@ -22,6 +25,7 @@ const createWishListToUser = (req, res) => {
             res.json({
               success: true,
               message: "Created wish lsit to user",
+              wishList: result,
             });
           })
           .catch((err) => {
@@ -94,6 +98,8 @@ const updateOnUserWishList = (req, res) => {
             { $push: { games: gameId } },
             { new: true }
           )
+          .populate("games")
+          .exec()
           .then((result) => {
             res.status(201).json({
               success: true,
@@ -124,6 +130,8 @@ const deleteFromUserWishlist = (req, res) => {
 
   wishListModel
     .findOneAndUpdate({ userId }, { $pull: { games: gameId } })
+    .populate("games")
+    .exec()
     .then((result) => {
       if (result) {
         res.status(200).json({
