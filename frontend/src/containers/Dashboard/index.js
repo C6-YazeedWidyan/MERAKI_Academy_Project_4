@@ -13,8 +13,6 @@ const Dashboard = () => {
   const [show, setShow] = useState(false);
   const [message, setMessage] = useState("");
   const [gameId, setGameId] = useState("");
-  const [userId, setUserId] = useState("");
-  console.log(gameId);
   const [isEdit, setIsEdit] = useState(false);
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
@@ -48,7 +46,6 @@ const Dashboard = () => {
         setGames(res.data.games);
         setMessage("");
         setShow(true);
-        setUserId(res.data.userId);
       } else throw Error;
     } catch (error) {
       if (!error.response.data.success) {
@@ -65,7 +62,6 @@ const Dashboard = () => {
 
   const updateGame = (id) => {
     const category = categories.map((item) => item.value);
-    console.log(id);
     axios
       .put(
         `http://localhost:5000/games/${id}`,
@@ -89,8 +85,24 @@ const Dashboard = () => {
         }
       )
       .then((res) => {
-        getAllGames();
-        console.log(res);
+        console.log(res.data.game);
+        const newGames = games.map((game) => {
+          if (game._id == id) {
+            game.name = res.data.game.name;
+            game.price = res.data.game.name;
+            game.poster = res.data.game.poster;
+            game.logo = res.data.game.logo;
+            game.cover = res.data.game.cover;
+            game.ads = res.data.game.ads;
+            game.category = res.data.game.category;
+            game.description = res.data.game.description;
+            game.platform = res.data.game.platform;
+            game.releaseDate = res.data.game.releaseDate;
+            game.inStock = res.data.game.inStock;
+          }
+          return game;
+        });
+        setGames(newGames);
         setIsEdit(false);
       })
       .catch((err) => {
@@ -107,7 +119,6 @@ const Dashboard = () => {
         },
       })
       .then((res) => {
-        console.log(res);
         const newGames = games.filter((game) => {
           return id != game._id;
         });

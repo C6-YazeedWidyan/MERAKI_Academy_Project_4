@@ -41,7 +41,6 @@ const Wishlist = () => {
         },
       })
       .then((res) => {
-        console.log(res.data);
         const newWishList = wishlist.filter((game) => {
           return id != game._id;
         });

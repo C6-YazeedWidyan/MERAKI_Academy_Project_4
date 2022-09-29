@@ -20,7 +20,6 @@ const Cart = () => {
           },
         })
         .then((res) => {
-          console.log(res);
           setCart(res.data.cart.games);
         });
     }
@@ -38,10 +37,12 @@ const Cart = () => {
         },
       })
       .then((res) => {
-        const newCart = cart.filter((game) => {
-          return id != game._id;
-        });
-        setCart(newCart);
+        if (res.data.success) {
+          const newCart = cart.filter((game) => {
+            return id != game._id;
+          });
+          setCart(newCart);
+        }
       })
       .catch((err) => {
         console.log(err);

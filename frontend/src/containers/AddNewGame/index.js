@@ -6,7 +6,11 @@ import { AuthContext } from "../../contexts/AuthContext";
 import Select from "react-select";
 
 const options = [
-  { label: "action", value: "Action" },
+  { label: "Action", value: "Action" },
+  { label: "Sport", value: "Sport" },
+  { label: "Action-adventure", value: "Action-adventure" },
+  { label: "sport", value: "Sport" },
+  { label: "sport", value: "Sport" },
   { label: "sport", value: "Sport" },
 ];
 
@@ -28,6 +32,7 @@ const AddNewGame = () => {
   const [categories, setCategories] = useState([]);
   const [description, setDescription] = useState("");
   const [platform, setPlatform] = useState("PC");
+  const [state, setState] = useState("Most Popular");
   const [inStock, setinStock] = useState(false);
   const [releaseDate, setReleaseDate] = useState("");
 
@@ -48,6 +53,7 @@ const AddNewGame = () => {
           description,
           platform,
           inStock,
+          state,
           releaseDate,
         },
         config
@@ -126,6 +132,17 @@ const AddNewGame = () => {
           <option value="PlayStation 5">PlayStation 5</option>
           <option value="Xbox One">Xbox One</option>
           <option value="Xbox Series X/S">Xbox Series X/S</option>
+        </select>
+        <br />
+        <select
+          onChange={(e) => {
+            setState(e.target.value);
+          }}
+        >
+          <option value="Most Popular">Most Popular</option>
+          <option value="New Releases">New Releases</option>
+          <option value="Recently Updated">Recently Updated</option>
+          <option value="Games On Sale">Games On Sale</option>``
         </select>
         <br />
         <div>

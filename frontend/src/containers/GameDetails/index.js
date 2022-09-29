@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./style.css";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../../contexts/AuthContext";
 
@@ -83,7 +83,6 @@ const GameDetails = () => {
         },
       })
       .then((res) => {
-        console.log(res.data);
         setWishList(res.data.wishList.games);
       })
       .catch((err) => {

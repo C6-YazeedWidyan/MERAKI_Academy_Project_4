@@ -32,7 +32,6 @@ const Browse = () => {
     axios
       .get(`http://localhost:5000/category?title=${title}`)
       .then((res) => {
-        console.log(res.data);
         setData(res.data);
       })
       .catch((err) => {
