@@ -13,7 +13,7 @@ categoryRouter.get("/all", getAllCategories);
 categoryRouter.post(
   "/",
   authentication,
-  authorization("CREATE"),
+  authorization("create"),
   createNewCategory
 );
 
