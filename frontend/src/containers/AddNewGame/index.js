@@ -21,10 +21,12 @@ const AddNewGame = () => {
 
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
-  const [image, setImage] = useState("");
-  const [image2, setImage2] = useState("");
-  const [description, setDescription] = useState("");
+  const [poster, setPoster] = useState("");
+  const [logo, setLogo] = useState("");
+  const [cover, setCover] = useState("");
+  const [ads, setAds] = useState(false);
   const [categories, setCategories] = useState([]);
+  const [description, setDescription] = useState("");
   const [platform, setPlatform] = useState("PC");
   const [inStock, setinStock] = useState(false);
   const [releaseDate, setReleaseDate] = useState("");
@@ -38,13 +40,15 @@ const AddNewGame = () => {
         {
           name,
           price,
-          image,
-          image2,
-          description,
-          releaseDate,
-          platform,
+          poster,
+          logo,
+          cover,
+          ads,
           category,
+          description,
+          platform,
           inStock,
+          releaseDate,
         },
         config
       )
@@ -81,17 +85,25 @@ const AddNewGame = () => {
         <br />
         <input
           type="text"
-          placeholder="Image"
+          placeholder="Poster"
           onChange={(e) => {
-            setImage(e.target.value);
+            setPoster(e.target.value);
           }}
         />
         <br />
         <input
           type="text"
-          placeholder="Image 2"
+          placeholder="Logo"
           onChange={(e) => {
-            setImage2(e.target.value);
+            setLogo(e.target.value);
+          }}
+        />
+        <br />
+        <input
+          type="text"
+          placeholder="Cover"
+          onChange={(e) => {
+            setCover(e.target.value);
           }}
         />
         <br />
@@ -124,7 +136,6 @@ const AddNewGame = () => {
             value={categories}
           />
         </div>
-
         <br />
         <label>
           <input
@@ -135,6 +146,17 @@ const AddNewGame = () => {
             }}
           />
           in Stock
+        </label>
+        <br />
+        <label>
+          <input
+            type="checkbox"
+            checked={ads}
+            onChange={() => {
+              setAds(!ads);
+            }}
+          />
+          Ads?
         </label>
         <br />
         <input

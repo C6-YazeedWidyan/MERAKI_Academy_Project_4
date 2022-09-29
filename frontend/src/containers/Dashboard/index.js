@@ -34,6 +34,25 @@ const Dashboard = () => {
     }
   };
 
+  const deleteGame = (id) => {
+    axios
+      .delete(`http://localhost:5000/games/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        const newGames = games.filter((game) => {
+          return id != game._id;
+        });
+        setGames(newGames);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   useEffect(() => {
     getAllGames();
   }, []);
@@ -49,6 +68,14 @@ const Dashboard = () => {
         games.map((game, index) => (
           <div key={index} className="game">
             <div>{game.name}</div>
+            <button
+              className="delete-btn"
+              onClick={() => {
+                deleteGame(game._id);
+              }}
+            >
+              Delete Game
+            </button>
           </div>
         ))}
       {message && <div>{message}</div>}
