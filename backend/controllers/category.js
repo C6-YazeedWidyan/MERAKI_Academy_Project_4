@@ -3,7 +3,6 @@ const categoryModel = require("../models/category");
 
 const getGameByCategory = (req, res) => {
   const categoryName = req.query.title;
-  console.log(categoryName);
 
   gameModel
     .find({ category: { $in: [categoryName] } })
@@ -45,7 +44,6 @@ const createNewCategory = (req, res) => {
 };
 
 const getAllCategories = (req, res) => {
-  console.log("zzzzzzz");
   categoryModel
     .find({})
     .then((result) => {

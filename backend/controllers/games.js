@@ -13,7 +13,7 @@ const addNewGame = (req, res) => {
     platform,
     inStock,
     rating,
-    newOrOld,
+    state,
     releaseDate,
   } = req.body;
 
@@ -29,7 +29,7 @@ const addNewGame = (req, res) => {
     platform,
     inStock,
     rating,
-    newOrOld,
+    state,
     releaseDate,
   });
 
@@ -121,7 +121,7 @@ const updateGameById = (req, res) => {
     platform,
     inStock,
     rating,
-    newOrOld,
+    state,
     releaseDate,
   } = req.body;
 
@@ -140,7 +140,7 @@ const updateGameById = (req, res) => {
         platform,
         inStock,
         rating,
-        newOrOld,
+        state,
         releaseDate,
       },
       { new: true }
@@ -169,8 +169,6 @@ const updateGameById = (req, res) => {
 
 const deleteGameById = (req, res) => {
   const id = req.params.id;
-  console.log(id);
-  console.log("yazeed");
 
   gameModel
     .findByIdAndDelete({ _id: id })

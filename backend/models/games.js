@@ -12,7 +12,7 @@ const gameSchema = new mongoose.Schema({
   platform: { type: String },
   inStock: { type: Boolean },
   rating: { type: Number },
-  newOrOld: { type: String },
+  state: { type: String },
   releaseDate: { type: String },
 });
 
