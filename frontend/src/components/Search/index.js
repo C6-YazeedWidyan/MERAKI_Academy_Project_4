@@ -33,7 +33,7 @@ const Search = () => {
           {searchResult.map((game) => {
             return (
               <div key={game._id} className="card">
-                <img className="card-image" src={game.image} alt="game" />
+                <img className="card-image" src={game.poster} alt="game" />
                 <div>{game.name}</div>
               </div>
             );

@@ -28,7 +28,7 @@ const Home = () => {
             return (
               <div onClick={() => goToDetails(game._id)} key={game._id}>
                 <div key={game.name}>{game.name}</div>
-                <img className="card-image" src={game.image} alt="game" />
+                <img className="card-image" src={game.poster} alt="game" />
               </div>
             );
           })}

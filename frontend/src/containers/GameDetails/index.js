@@ -116,8 +116,8 @@ const GameDetails = () => {
     <>
       <div className="details-container">
         <div>{game.name}</div>
-        <img className="image" src={game.image} alt="" />
-        <img className="image2" src={game.image2} alt="" />
+        <img className="image" src={game.cover} alt="" />
+        <img className="image2" src={game.logo} alt="" />
         {inCart ? (
           <div
             onClick={() => {

@@ -53,11 +53,15 @@ const Wishlist = () => {
 
   return (
     <>
-      <div className="cart-container">
+      <div className="wishlist-container">
         {wishlist.map((game) => {
           return (
             <div key={game._id}>
-              <h3>{game.name}</h3>
+              <img className="game-poster" src={game.poster} alt={game.name} />
+              <div>
+                <h3>{game.name}</h3>
+                <h3>{game.price}</h3>
+              </div>
               <button
                 onClick={() => {
                   deleteFromWishList(game._id);

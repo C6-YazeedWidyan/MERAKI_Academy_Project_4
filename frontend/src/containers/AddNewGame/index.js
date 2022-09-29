@@ -7,11 +7,28 @@ import Select from "react-select";
 
 const options = [
   { label: "Action", value: "Action" },
-  { label: "Sport", value: "Sport" },
   { label: "Action-adventure", value: "Action-adventure" },
-  { label: "sport", value: "Sport" },
-  { label: "sport", value: "Sport" },
-  { label: "sport", value: "Sport" },
+  { label: "Adventure", value: "Adventure" },
+  { label: "Card Game", value: "Card Game" },
+  { label: "Casual", value: "Casual" },
+  { label: "City Builder", value: "City Builder" },
+  { label: "Comedy", value: "Comedy" },
+  { label: "Exploration", value: "Exploration" },
+  { label: "Fighting", value: "Fighting" },
+  { label: "First Person", value: "First Person" },
+  { label: "Horror", value: "Horror" },
+  { label: "Music", value: "Music" },
+  { label: "Open World ", value: "Open World" },
+  { label: "Puzzle", value: "Puzzle" },
+  { label: "Racing", value: "Racing" },
+  { label: "Retro", value: "Retro" },
+  { label: "RPG", value: "RPG" },
+  { label: "Shooter", value: "Shooter" },
+  { label: "Simulation", value: "Simulation" },
+  { label: "Space", value: "Space" },
+  { label: "Sports", value: "Sports" },
+  { label: "Strategy", value: "Strategy" },
+  { label: "Survival", value: "Survival" },
 ];
 
 const AddNewGame = () => {
@@ -35,6 +52,7 @@ const AddNewGame = () => {
   const [state, setState] = useState("Most Popular");
   const [inStock, setinStock] = useState(false);
   const [releaseDate, setReleaseDate] = useState("");
+  const [message, setMessage] = useState("");
 
   const addNewGame = () => {
     const category = categories.map((item) => item.value);
@@ -59,7 +77,8 @@ const AddNewGame = () => {
         config
       )
       .then((res) => {
-        console.log(res);
+        console.log(res.data.message);
+        setMessage(res.data.message);
       })
       .catch((err) => {
         console.log(err);
@@ -147,6 +166,7 @@ const AddNewGame = () => {
         <br />
         <div>
           <Select
+            className="category-select"
             isMulti
             onChange={onChange}
             options={options}
@@ -185,6 +205,8 @@ const AddNewGame = () => {
         />
         <br />
         <button onClick={addNewGame}>Add New Game</button>
+        <br />
+        <h3>{message}</h3>
       </div>
     </>
   );

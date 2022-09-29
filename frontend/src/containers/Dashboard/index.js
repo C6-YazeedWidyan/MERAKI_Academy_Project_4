@@ -27,8 +27,29 @@ const Dashboard = () => {
   const [releaseDate, setReleaseDate] = useState("");
 
   const options = [
-    { label: "action", value: "Action" },
-    { label: "sport", value: "Sport" },
+    { label: "Action", value: "Action" },
+    { label: "Action-adventure", value: "Action-adventure" },
+    { label: "Adventure", value: "Adventure" },
+    { label: "Card Game", value: "Card Game" },
+    { label: "Casual", value: "Casual" },
+    { label: "City Builder", value: "City Builder" },
+    { label: "Comedy", value: "Comedy" },
+    { label: "Exploration", value: "Exploration" },
+    { label: "Fighting", value: "Fighting" },
+    { label: "First Person", value: "First Person" },
+    { label: "Horror", value: "Horror" },
+    { label: "Music", value: "Music" },
+    { label: "Open World ", value: "Open World" },
+    { label: "Puzzle", value: "Puzzle" },
+    { label: "Racing", value: "Racing" },
+    { label: "Retro", value: "Retro" },
+    { label: "RPG", value: "RPG" },
+    { label: "Shooter", value: "Shooter" },
+    { label: "Simulation", value: "Simulation" },
+    { label: "Space", value: "Space" },
+    { label: "Sports", value: "Sports" },
+    { label: "Strategy", value: "Strategy" },
+    { label: "Survival", value: "Survival" },
   ];
 
   const onChange = (opt) => {
@@ -219,6 +240,7 @@ const Dashboard = () => {
                     <br />
                     <div>
                       <Select
+                        className="category-select"
                         isMulti
                         onChange={onChange}
                         options={options}

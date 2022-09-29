@@ -1,3 +1,11 @@
 .wishlist-container {
   padding: 36px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.game-poster {
+  width: 240px;
+  height: 310px;
 }
