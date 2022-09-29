@@ -47,7 +47,7 @@ const createCartForUser = (req, res) => {
 };
 
 const getCartByUserId = (req, res) => {
-  const userId = req.params.id;
+  const userId = req.token.userId;
 
   cartModel
     .findOne({ userId })

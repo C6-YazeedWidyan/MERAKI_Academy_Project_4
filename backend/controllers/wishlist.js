@@ -47,7 +47,7 @@ const createWishListToUser = (req, res) => {
 };
 
 const getWishListByUserId = (req, res) => {
-  const userId = req.params.id;
+  const userId = req.token.userId;
 
   wishListModel
     .findOne({ userId })
