@@ -6,14 +6,27 @@ import { AuthContext } from "../../contexts/AuthContext";
 
 const GameDetails = () => {
   const location = useLocation();
-  const { token, userProfile } = useContext(AuthContext);
+  const { token, userProfile, wishlist, setWishList, cart, setCart } =
+    useContext(AuthContext);
   const [game, setGame] = useState({});
+  const [inCart, setInCart] = useState(false);
+  const [inWishlist, setInWishlist] = useState(false);
 
   useEffect(() => {
     axios.get(`http://localhost:5000/games/${location.state}`).then((res) => {
       setGame(res.data.game);
     });
-  }, []);
+
+    const foundInCart = cart.find((item) => {
+      return item._id === location.state;
+    });
+
+    const foundInWish = wishlist.find((item) => {
+      return item._id === location.state;
+    });
+    setInCart(foundInCart);
+    setInWishlist(foundInWish);
+  }, [cart, wishlist]);
 
   const addToCart = () => {
     const data = {
@@ -28,8 +41,29 @@ const GameDetails = () => {
         },
       })
       .then((res) => {
-        console.log(res.data);
-        console.log(res);
+        setCart(res.data.cart.games);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const deleteFromCart = (id) => {
+    const data = {
+      userId: userProfile._id,
+      gameId: id,
+    };
+    axios
+      .put(`http://localhost:5000/cart/delete`, data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        const newCart = cart.filter((game) => {
+          return id != game._id;
+        });
+        setCart(newCart);
       })
       .catch((err) => {
         console.log(err);
@@ -50,7 +84,29 @@ const GameDetails = () => {
       })
       .then((res) => {
         console.log(res.data);
-        console.log(res);
+        setWishList(res.data.wishList.games);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const deleteFromWishList = (id) => {
+    const data = {
+      userId: userProfile._id,
+      gameId: id,
+    };
+    axios
+      .put(`http://localhost:5000/wishlist/delete`, data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        const newWishList = wishlist.filter((game) => {
+          return id != game._id;
+        });
+        setWishList(newWishList);
       })
       .catch((err) => {
         console.log(err);
@@ -63,8 +119,29 @@ const GameDetails = () => {
         <div>{game.name}</div>
         <img className="image" src={game.image} alt="" />
         <img className="image2" src={game.image2} alt="" />
-        <div onClick={addToCart}>add to cart</div>
-        <div onClick={addToWishList}>add to wish list</div>
+        {inCart ? (
+          <div
+            onClick={() => {
+              deleteFromCart(game._id);
+            }}
+          >
+            remove from cart
+          </div>
+        ) : (
+          <div onClick={addToCart}>add to cart</div>
+        )}
+
+        {inWishlist ? (
+          <div
+            onClick={() => {
+              deleteFromWishList(game._id);
+            }}
+          >
+            remove from Wishlist
+          </div>
+        ) : (
+          <div onClick={addToWishList}>add to wish list</div>
+        )}
       </div>
     </>
   );

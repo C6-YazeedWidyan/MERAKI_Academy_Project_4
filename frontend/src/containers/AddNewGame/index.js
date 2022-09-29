@@ -3,6 +3,12 @@ import "./style.css";
 import { useState } from "react";
 import axios from "axios";
 import { AuthContext } from "../../contexts/AuthContext";
+import Select from "react-select";
+
+const options = [
+  { label: "action", value: "Action" },
+  { label: "sport", value: "Sport" },
+];
 
 const AddNewGame = () => {
   const { token } = useContext(AuthContext);
@@ -18,11 +24,14 @@ const AddNewGame = () => {
   const [image, setImage] = useState("");
   const [image2, setImage2] = useState("");
   const [description, setDescription] = useState("");
-  const [platform, setPlatform] = useState("");
-  const [inStock, setinStock] = useState("");
+  const [categories, setCategories] = useState([]);
+  const [platform, setPlatform] = useState("PC");
+  const [inStock, setinStock] = useState(false);
   const [releaseDate, setReleaseDate] = useState("");
 
   const addNewGame = () => {
+    const category = categories.map((item) => item.value);
+
     axios
       .post(
         "http://localhost:5000/games",
@@ -33,6 +42,9 @@ const AddNewGame = () => {
           image2,
           description,
           releaseDate,
+          platform,
+          category,
+          inStock,
         },
         config
       )
@@ -42,6 +54,10 @@ const AddNewGame = () => {
       .catch((err) => {
         console.log(err);
       });
+  };
+
+  const onChange = (opt) => {
+    setCategories([...opt]);
   };
 
   return (
@@ -87,7 +103,11 @@ const AddNewGame = () => {
           }}
         />
         <br />
-        <select name="cars" id="cars">
+        <select
+          onChange={(e) => {
+            setPlatform(e.target.value);
+          }}
+        >
           <option value="PC">PC</option>
           <option value="Nintendo Switch">Nintendo Switch</option>
           <option value="PlayStation 4">PlayStation 4</option>
@@ -96,10 +116,26 @@ const AddNewGame = () => {
           <option value="Xbox Series X/S">Xbox Series X/S</option>
         </select>
         <br />
-        <select>
-          <option value="In Stock">In Stock</option>
-          <option value="Out of Stock">Out of Stock</option>
-        </select>
+        <div>
+          <Select
+            isMulti
+            onChange={onChange}
+            options={options}
+            value={categories}
+          />
+        </div>
+
+        <br />
+        <label>
+          <input
+            type="checkbox"
+            checked={inStock}
+            onChange={() => {
+              setinStock(!inStock);
+            }}
+          />
+          in Stock
+        </label>
         <br />
         <input
           type="text"

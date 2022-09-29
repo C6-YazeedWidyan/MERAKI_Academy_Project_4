@@ -20,6 +20,7 @@ const Cart = () => {
           },
         })
         .then((res) => {
+          console.log(res);
           setCart(res.data.cart.games);
         });
     }

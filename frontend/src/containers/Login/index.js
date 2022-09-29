@@ -11,7 +11,8 @@ const Login = () => {
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState(false);
 
-  const { isLoggedIn, saveToken } = useContext(AuthContext);
+  const { isLoggedIn, saveToken, setCart, setWishList } =
+    useContext(AuthContext);
 
   const navigate = useNavigate();
 
@@ -38,7 +39,7 @@ const Login = () => {
             },
           })
           .then((res) => {
-            console.log(res);
+            setCart(res.data.cart.games);
           })
           .catch((err) => {
             console.log(err);
@@ -51,7 +52,7 @@ const Login = () => {
             },
           })
           .then((result) => {
-            console.log(result);
+            setWishList(result.data.wishList.games);
           })
           .catch((err) => {
             console.log(err);
