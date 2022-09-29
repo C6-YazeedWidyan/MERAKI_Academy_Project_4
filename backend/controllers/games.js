@@ -52,8 +52,8 @@ const addNewGame = (req, res) => {
 };
 
 const getAllGames = (req, res) => {
-  const page = req.query.p || 0;
-  const gamesPerPage = 3;
+  const page = req.query.page || 0;
+  const gamesPerPage = req.query.limit || 5;
 
   gameModel
     .find({})
@@ -161,6 +161,8 @@ const updateGameById = (req, res) => {
 
 const deleteGameById = (req, res) => {
   const id = req.params.id;
+  console.log(id);
+  console.log("yazeed");
 
   gameModel
     .findByIdAndDelete({ _id: id })

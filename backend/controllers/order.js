@@ -59,6 +59,8 @@ const getOrdersByUserId = (req, res) => {
 const getAllOrders = (req, res) => {
   orderModel
     .find({})
+    .populate("userId")
+    .exec()
     .then((result) => {
       res.status(200).json({
         orders: result,

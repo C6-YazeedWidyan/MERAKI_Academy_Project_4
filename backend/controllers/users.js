@@ -16,18 +16,25 @@ const register = (req, res) => {
   user
     .save()
     .then((result) => {
-      res.status(201);
-      res.json({
+      res.status(201).json({
         success: true,
-        message: "Account Created Successfully",
-        user: result,
+        message: `Account Created Successfully`,
+        author: result,
       });
     })
     .catch((err) => {
-      res.status(409);
-      res.json({
+      if (err.keyPattern) {
+        console.log(err);
+        console.log(err.keyPattern);
+        return res.status(409).json({
+          success: false,
+          message: `The email already exists`,
+        });
+      }
+      res.status(500).json({
         success: false,
-        message: "The email already exists",
+        message: `Server Error`,
+        err: err.message,
       });
     });
 };
