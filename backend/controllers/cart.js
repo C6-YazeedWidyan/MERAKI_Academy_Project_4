@@ -148,9 +148,32 @@ const deleteFromUserCart = (req, res) => {
     });
 };
 
+const makeCartEmptyAfterOrder = (req, res) => {
+  const { userId } = req.body;
+
+  cartModel
+    .findOneAndUpdate({ userId }, { $set: { games: [] } })
+    .then((result) => {
+      console.log(result);
+      res.status(201).json({
+        success: true,
+        message: "Empty the cart",
+        cart: result,
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        success: false,
+        message: "Server Error",
+        Error: err.message,
+      });
+    });
+};
+
 module.exports = {
   createCartForUser,
   getCartByUserId,
   updateOnUserCart,
   deleteFromUserCart,
+  makeCartEmptyAfterOrder,
 };
