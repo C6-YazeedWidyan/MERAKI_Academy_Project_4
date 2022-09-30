@@ -23,6 +23,7 @@ const Dashboard = () => {
   const [categories, setCategories] = useState([]);
   const [description, setDescription] = useState("");
   const [platform, setPlatform] = useState("PC");
+  const [state, setState] = useState("Most Popular");
   const [inStock, setinStock] = useState(false);
   const [releaseDate, setReleaseDate] = useState("");
 
@@ -96,6 +97,7 @@ const Dashboard = () => {
           category,
           description,
           platform,
+          state,
           inStock,
           releaseDate,
         },
@@ -118,6 +120,7 @@ const Dashboard = () => {
             game.category = res.data.game.category;
             game.description = res.data.game.description;
             game.platform = res.data.game.platform;
+            game.state = res.data.game.state;
             game.releaseDate = res.data.game.releaseDate;
             game.inStock = res.data.game.inStock;
           }
@@ -236,6 +239,17 @@ const Dashboard = () => {
                       <option value="PlayStation 5">PlayStation 5</option>
                       <option value="Xbox One">Xbox One</option>
                       <option value="Xbox Series X/S">Xbox Series X/S</option>
+                    </select>
+                    <br />
+                    <select
+                      onChange={(e) => {
+                        setState(e.target.value);
+                      }}
+                    >
+                      <option value="Most Popular">Most Popular</option>
+                      <option value="New Releases">New Releases</option>
+                      <option value="Recently Updated">Recently Updated</option>
+                      <option value="Games On Sale">Games On Sale</option>``
                     </select>
                     <br />
                     <div>

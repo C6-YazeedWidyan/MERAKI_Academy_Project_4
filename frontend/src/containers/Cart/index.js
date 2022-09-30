@@ -49,23 +49,33 @@ const Cart = () => {
       });
   };
 
+  const goToCheckout = () => {
+    navigate("/checkout");
+  };
+
   return (
     <>
-      <div className="cart-container">
-        {cart.map((game) => {
-          return (
-            <div key={game._id}>
-              <h3>{game.name}</h3>
-              <button
-                onClick={() => {
-                  deleteFromCart(game._id);
-                }}
-              >
-                remove from cart
-              </button>
-            </div>
-          );
-        })}
+      <div className="big-container">
+        <div className="cart-container">
+          {cart.map((game) => {
+            return (
+              <div key={game._id}>
+                <h3>{game.name}</h3>
+                <button
+                  onClick={() => {
+                    deleteFromCart(game._id);
+                  }}
+                >
+                  remove from cart
+                </button>
+              </div>
+            );
+          })}
+        </div>
+        <div className="order-summary">
+          <h3>total</h3>
+          <button onClick={() => goToCheckout()}>continue to chechout</button>
+        </div>
       </div>
     </>
   );

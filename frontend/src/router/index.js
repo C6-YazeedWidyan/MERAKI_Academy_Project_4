@@ -11,6 +11,7 @@ import GameDetails from "../containers/GameDetails";
 import Dashboard from "../containers/Dashboard";
 import { AuthContext } from "../contexts/AuthContext";
 import AddNewGame from "../containers/AddNewGame";
+import Checkout from "../containers/Checkout";
 
 const Router = () => {
   const { userType } = useContext(AuthContext);
@@ -25,6 +26,7 @@ const Router = () => {
         <Route path="/browse" element={<Browse />} />
         <Route path="/gameDetails" element={<GameDetails />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/checkout" element={<Checkout />} />
         <Route path="/wishlist" element={<Wishlist />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
