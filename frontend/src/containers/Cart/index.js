@@ -8,6 +8,7 @@ const Cart = () => {
   const { token, isLoggedIn, userProfile, cart, setCart } =
     useContext(AuthContext);
   const navigate = useNavigate();
+  console.log(cart);
 
   useEffect(() => {
     if (!isLoggedIn) {
