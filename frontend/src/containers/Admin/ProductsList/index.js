@@ -1,13 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./style.css";
 
 import axios from "axios";
-import { AuthContext } from "../../contexts/AuthContext";
+import { AuthContext } from "../../../contexts/AuthContext";
 import Select from "react-select";
 
-const Dashboard = () => {
-  const { token, logout } = useContext(AuthContext);
+const ProductsList = () => {
+  const { token } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const [games, setGames] = useState("");
   const [show, setShow] = useState(false);
@@ -159,10 +160,9 @@ const Dashboard = () => {
 
   return (
     <>
-      <div onClick={logout}>logout</div>
-      <Link to={"/addnewgame"}>
+      <div onClick={() => navigate("addNewGame")}>
         <div className="title">Add New Game</div>
-      </Link>
+      </div>
       <br />
       {show &&
         games.map((game, index) => (
@@ -322,4 +322,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default ProductsList;

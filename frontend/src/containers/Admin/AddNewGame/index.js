@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import "./style.css";
 import { useState } from "react";
 import axios from "axios";
-import { AuthContext } from "../../contexts/AuthContext";
+import { AuthContext } from "../../../contexts/AuthContext";
 import Select from "react-select";
 
 const options = [

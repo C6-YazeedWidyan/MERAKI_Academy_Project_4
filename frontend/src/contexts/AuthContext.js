@@ -42,7 +42,7 @@ const AuthProvider = (props) => {
       navigate("/");
     }
     if (isLoggedIn && userType === "admin") {
-      navigate("/dashboard");
+      navigate("/admin/dashboard");
     }
   }, [token, isLoggedIn]);
 
