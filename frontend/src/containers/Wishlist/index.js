@@ -42,7 +42,7 @@ const Wishlist = () => {
       })
       .then((res) => {
         const newWishList = wishlist.filter((game) => {
-          return id != game._id;
+          return id !== game._id;
         });
         setWishList(newWishList);
       })

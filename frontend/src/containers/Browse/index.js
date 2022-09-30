@@ -102,7 +102,7 @@ const Browse = () => {
       })
       .then((res) => {
         const newWishList = wishlist.filter((game) => {
-          return game_id != game._id;
+          return game_id !== game._id;
         });
         setWishList(newWishList);
       })

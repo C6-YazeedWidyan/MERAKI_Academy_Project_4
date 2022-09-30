@@ -19,7 +19,7 @@ const Admin = () => {
   };
 
   return (
-    <div class="admin-container">
+    <div className="admin-container">
       <div className="admin-navbar">
         <div>
           <div>hello , username</div>
@@ -31,7 +31,7 @@ const Admin = () => {
         <Outlet />
       </main>
       <div className="sidebar">
-        <div class="sidebar-img">
+        <div className="sidebar-img">
           <img src="/assets/images/logo.png" alt="logo" />
           <div style={{ color: "white" }}>Admin Dashboard</div>
         </div>

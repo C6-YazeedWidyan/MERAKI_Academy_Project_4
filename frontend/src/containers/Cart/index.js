@@ -30,6 +30,7 @@ const Cart = () => {
     const data = {
       userId: userProfile._id,
       gameId: id,
+      total: 30,
     };
     axios
       .put(`http://localhost:5000/cart/delete`, data, {
@@ -40,7 +41,7 @@ const Cart = () => {
       .then((res) => {
         if (res.data.success) {
           const newCart = cart.filter((game) => {
-            return id != game._id;
+            return id !== game._id;
           });
           setCart(newCart);
         }

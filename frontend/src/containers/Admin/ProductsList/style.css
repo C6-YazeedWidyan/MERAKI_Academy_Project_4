@@ -79,3 +79,7 @@ table th {
   display: flex;
   justify-content: center;
 }
+.edit-btn {
+  margin-right: 8px;
+  cursor: pointer;
+}

@@ -14,6 +14,7 @@ const Checkout = () => {
     const data = {
       userId: userProfile._id,
       cart: cart,
+      total: 50,
     };
     const data2 = { userId: userProfile._id };
     axios

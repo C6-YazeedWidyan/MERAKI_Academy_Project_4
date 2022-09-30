@@ -32,6 +32,7 @@ const GameDetails = () => {
     const data = {
       userId: userProfile._id,
       gameId: game._id,
+      total: 88,
     };
 
     axios
@@ -52,6 +53,7 @@ const GameDetails = () => {
     const data = {
       userId: userProfile._id,
       gameId: id,
+      total: 44,
     };
     axios
       .put(`http://localhost:5000/cart/delete`, data, {
@@ -61,7 +63,7 @@ const GameDetails = () => {
       })
       .then((res) => {
         const newCart = cart.filter((game) => {
-          return id != game._id;
+          return id !== game._id;
         });
         setCart(newCart);
       })
@@ -103,7 +105,7 @@ const GameDetails = () => {
       })
       .then((res) => {
         const newWishList = wishlist.filter((game) => {
-          return id != game._id;
+          return id !== game._id;
         });
         setWishList(newWishList);
       })
