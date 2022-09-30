@@ -5,19 +5,8 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import GameCard from "../../components/GameCard";
 import { AuthContext } from "../../contexts/AuthContext";
-
-const Dropdown = ({ label, value, categories, onChange }) => {
-  return (
-    <label>
-      {label}
-      <select className="browse-select" value={value} onChange={onChange}>
-        {categories.map((category) => (
-          <option value={category.category}>{category.category}</option>
-        ))}
-      </select>
-    </label>
-  );
-};
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 
 const Browse = () => {
   const { wishlist, userProfile, isLoggedIn, token, setWishList } =
@@ -25,11 +14,13 @@ const Browse = () => {
   const [data, setData] = useState([]);
   const [categories, setCategories] = useState([]);
   const [pageNumber, setPageNumber] = useState(0);
+  const [keyword, setKeyword] = useState("");
+  const [showOption, setShowOption] = useState(false);
   const navigate = useNavigate();
-  const [value, setValue] = useState("");
 
   const getAllGames = () => {
     setPageNumber(pageNumber + 1);
+    setKeyword("");
     axios.get(`http://localhost:5000/games?p=${pageNumber}`).then((res) => {
       setData(res.data.games);
     });
@@ -39,17 +30,17 @@ const Browse = () => {
     axios
       .get("http://localhost:5000/category/all/")
       .then((res) => {
-        setCategories([{ _id: 1, category: "Genre" }, ...res.data.categories]);
+        setCategories(res.data.categories);
       })
       .catch((err) => {
         console.log(err);
       });
   };
 
-  const getGameByCategory = (e) => {
-    setValue(e.target.value);
+  const getGameByCategory = (keyword) => {
+    setKeyword(keyword);
     axios
-      .get(`http://localhost:5000/category?title=${e.target.value}`)
+      .get(`http://localhost:5000/category?title=${keyword}`)
       .then((res) => {
         setData(res.data);
       })
@@ -119,21 +110,11 @@ const Browse = () => {
   return (
     <>
       <div className="browse-container">
-        <div className="browse-left-wrapper">
-          <h3 className="all-btn" onClick={getAllGames}>
-            All
-          </h3>
-          <Dropdown
-            label=""
-            categories={categories}
-            value={value}
-            onChange={getGameByCategory}
-          />
-        </div>
         <div className="browse-grid">
           {data.map((game) => {
             return (
               <GameCard
+                key={game._id}
                 title={game.name}
                 price={game.price}
                 image={game.poster}
@@ -147,6 +128,45 @@ const Browse = () => {
               />
             );
           })}
+        </div>
+        <div className="browse-left-wrapper">
+          <h3 className="all-btn" onClick={getAllGames}>
+            All
+          </h3>
+          <div>
+            <h3
+              className="genre-btn"
+              onClick={() => setShowOption(!showOption)}
+            >
+              <div>Genre</div>
+              <div>
+                {showOption ? (
+                  <FontAwesomeIcon icon={faChevronUp} />
+                ) : (
+                  <FontAwesomeIcon icon={faChevronDown} />
+                )}
+              </div>
+            </h3>
+            {showOption &&
+              categories.map((category) => (
+                <div
+                  style={
+                    keyword == category.category
+                      ? {
+                          borderRadius: "4px",
+                          padding: "12px",
+                          backgroundColor: "rgb(32, 32, 32)",
+                          color: "white",
+                        }
+                      : { borderRadius: "4px", padding: "12px", color: "white" }
+                  }
+                  class="category-item"
+                  onClick={() => getGameByCategory(category.category)}
+                >
+                  {category.category}
+                </div>
+              ))}
+          </div>
         </div>
       </div>
     </>

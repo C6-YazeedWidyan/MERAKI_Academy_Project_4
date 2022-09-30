@@ -9,13 +9,29 @@ import { AuthContext } from "../../contexts/AuthContext";
 const Home = () => {
   const { token, isLoggedIn, userProfile, wishlist, setWishList } =
     useContext(AuthContext);
-  const [data, setData] = useState([]);
+  const [mostPopularGames, setMostPopularGames] = useState([]);
+  const [gamesOnSale, setGamesOnSale] = useState([]);
+  const [newReleasesGames, setnewReleasesGames] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/games/neworold/${"New"}`).then((res) => {
-      setData(res.data);
-    });
+    axios
+      .get(`http://localhost:5000/games/state/${"Most Popular"}`)
+      .then((res) => {
+        setMostPopularGames(res.data);
+      });
+
+    axios
+      .get(`http://localhost:5000/games/state/${"Games On Sale"}`)
+      .then((res) => {
+        setGamesOnSale(res.data);
+      });
+
+    axios
+      .get(`http://localhost:5000/games/state/${"New Releases"}`)
+      .then((res) => {
+        setnewReleasesGames(res.data);
+      });
   }, []);
 
   const addToWishList = (e, game_id) => {
@@ -75,9 +91,48 @@ const Home = () => {
     <>
       <div className="home-container">
         <div className="home-grid">
-          {data.map((game) => {
+          {mostPopularGames.map((game) => {
             return (
               <GameCard
+                key={game._id}
+                title={game.name}
+                price={game.price}
+                image={game.poster}
+                gameID={game._id}
+                addOrRemoveWishList={
+                  wishlist.find((item) => item._id === game._id)
+                    ? (e) => deleteFromWishList(e, game._id)
+                    : (e) => addToWishList(e, game._id)
+                }
+                onClick={() => goToDetails(game._id)}
+              />
+            );
+          })}
+        </div>
+        <div className="home-grid">
+          {gamesOnSale.map((game) => {
+            return (
+              <GameCard
+                key={game._id}
+                title={game.name}
+                price={game.price}
+                image={game.poster}
+                gameID={game._id}
+                addOrRemoveWishList={
+                  wishlist.find((item) => item._id === game._id)
+                    ? (e) => deleteFromWishList(e, game._id)
+                    : (e) => addToWishList(e, game._id)
+                }
+                onClick={() => goToDetails(game._id)}
+              />
+            );
+          })}
+        </div>
+        <div className="home-grid">
+          {newReleasesGames.map((game) => {
+            return (
+              <GameCard
+                key={game._id}
                 title={game.name}
                 price={game.price}
                 image={game.poster}

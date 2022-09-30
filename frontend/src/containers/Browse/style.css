@@ -14,6 +14,9 @@
   border-radius: 4px;
   padding: 12px;
 }
+.category-item {
+  cursor: pointer;
+}
 
 .browse-left-wrapper {
   flex: 1;
@@ -38,6 +41,16 @@
   grid-gap: 16px;
   padding: 16px;
   align-self: flex-start;
+}
+
+.genre-btn {
+  cursor: pointer;
+  border: solid 1px gray;
+  border-radius: 4px;
+  padding: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 @media (min-width: 768px) {

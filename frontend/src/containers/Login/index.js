@@ -4,6 +4,7 @@ import { useState } from "react";
 import "./style.css";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
+import SnackBar from "../../components/SnackBar";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -100,10 +101,8 @@ const Login = () => {
           Login
         </div>
         <br />
-        {status
-          ? message && <div className="SuccessMessage">{message}</div>
-          : message && <div className="ErrorMessage">{message}</div>}
       </div>
+      {message && <SnackBar message={message} setMessage={setMessage} />}
     </>
   );
 };
