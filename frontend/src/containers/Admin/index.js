@@ -6,12 +6,17 @@ import "./style.css";
 const Admin = () => {
   const { logout } = useContext(AuthContext);
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState("dashboard");
+  const [activeTab, setActiveTab] = useState(0);
   const [tabs, setTabs] = useState([
     { name: "Dashboard", route: "dashboard" },
     { name: "Products", route: "productsList" },
     { name: "Add new game", route: "addNewGame" },
   ]);
+
+  const handleTabs = (tab, index) => {
+    setActiveTab(index);
+    navigate(tab);
+  };
 
   return (
     <div class="admin-container">
@@ -28,11 +33,25 @@ const Admin = () => {
       <div className="sidebar">
         <div class="sidebar-img">
           <img src="/assets/images/logo.png" alt="logo" />
+          <div style={{ color: "white" }}>Admin Dashboard</div>
         </div>
-        <div>
-          {tabs.map((tab) => {
+        <div className="tabs-container">
+          {tabs.map((tab, i) => {
             return (
-              <div onClick={() => navigate(tab.route)} className="sidebar-tab">
+              <div
+                onClick={() => handleTabs(tab.route, i)}
+                className="sidebar-tab"
+                style={
+                  activeTab == i
+                    ? {
+                        borderRadius: "4px",
+                        padding: "12px",
+                        backgroundColor: "#c62828",
+                        color: "white",
+                      }
+                    : { borderRadius: "4px", padding: "12px", color: "white" }
+                }
+              >
                 {tab.name}
               </div>
             );

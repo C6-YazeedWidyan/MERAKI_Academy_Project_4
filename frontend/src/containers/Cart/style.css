@@ -77,3 +77,6 @@
   cursor: pointer;
   text-transform: uppercase;
 }
+.tabs-container {
+  margin-top: 50px;
+}

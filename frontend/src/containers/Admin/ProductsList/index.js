@@ -160,162 +160,187 @@ const ProductsList = () => {
 
   return (
     <>
-      <div onClick={() => navigate("addNewGame")}>
-        <div className="title">Add New Game</div>
-      </div>
-      <br />
-      {show &&
-        games.map((game, index) => (
-          <div key={game._id} className="game">
-            <div>{game.name}</div>
-            <button
-              className="delete-btn"
-              onClick={() => {
-                deleteGame(game._id);
-              }}
-            >
-              Delete Game
-            </button>
-            <div className="update">
-              {isEdit && gameId == game._id ? (
-                <>
-                  <div>
-                    <input
-                      type="text"
-                      placeholder="Name"
-                      onChange={(e) => {
-                        setName(e.target.value);
-                      }}
-                    />
-                    <br />
-                    <input
-                      type="number"
-                      placeholder="Price"
-                      onChange={(e) => {
-                        setPrice(e.target.value);
-                      }}
-                    />
-                    <br />
-                    <input
-                      type="text"
-                      placeholder="Poster"
-                      onChange={(e) => {
-                        setPoster(e.target.value);
-                      }}
-                    />
-                    <br />
-                    <input
-                      type="text"
-                      placeholder="Logo"
-                      onChange={(e) => {
-                        setLogo(e.target.value);
-                      }}
-                    />
-                    <br />
-                    <input
-                      type="text"
-                      placeholder="Cover"
-                      onChange={(e) => {
-                        setCover(e.target.value);
-                      }}
-                    />
-                    <br />
-                    <input
-                      type="text"
-                      placeholder="Description"
-                      onChange={(e) => {
-                        setDescription(e.target.value);
-                      }}
-                    />
-                    <br />
-                    <select
-                      onChange={(e) => {
-                        setPlatform(e.target.value);
-                      }}
-                    >
-                      <option value="PC">PC</option>
-                      <option value="Nintendo Switch">Nintendo Switch</option>
-                      <option value="PlayStation 4">PlayStation 4</option>
-                      <option value="PlayStation 5">PlayStation 5</option>
-                      <option value="Xbox One">Xbox One</option>
-                      <option value="Xbox Series X/S">Xbox Series X/S</option>
-                    </select>
-                    <br />
-                    <select
-                      onChange={(e) => {
-                        setState(e.target.value);
-                      }}
-                    >
-                      <option value="Most Popular">Most Popular</option>
-                      <option value="New Releases">New Releases</option>
-                      <option value="Recently Updated">Recently Updated</option>
-                      <option value="Games On Sale">Games On Sale</option>``
-                    </select>
-                    <br />
-                    <div>
-                      <Select
-                        className="category-select"
-                        isMulti
-                        onChange={onChange}
-                        options={options}
-                        value={categories}
-                      />
-                    </div>
-                    <br />
-                    <label>
-                      <input
-                        type="checkbox"
-                        checked={inStock}
-                        onChange={() => {
-                          setinStock(!inStock);
-                        }}
-                      />
-                      in Stock
-                    </label>
-                    <br />
-                    <label>
-                      <input
-                        type="checkbox"
-                        checked={ads}
-                        onChange={() => {
-                          setAds(!ads);
-                        }}
-                      />
-                      Ads?
-                    </label>
-                    <br />
-                    <input
-                      type="text"
-                      placeholder="Release Date"
-                      onChange={(e) => {
-                        setReleaseDate(e.target.value);
-                      }}
-                    />
+      <table>
+        <caption>Products List</caption>
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Platform</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {show &&
+            games.map((game) => (
+              <tr>
+                <td data-label="Name">{game.name}</td>
+                <td data-label="Price">${game.price}</td>
+                <td data-label="Platform">{game.platform}</td>
+                <td data-label="Actions">
+                  <div className="actions-btns">
+                    <div>Edit</div>
+                    <div>Remove</div>
                   </div>
-                </>
-              ) : null}
-              {!isEdit ? (
-                <button
-                  className="update-btn-1"
-                  onClick={() => {
-                    showEdit(game._id);
-                  }}
-                >
-                  Update
-                </button>
-              ) : null}
-              {isEdit && gameId == game._id ? (
-                <button
-                  className="update-btn-2"
-                  onClick={() => {
-                    updateGame(game._id);
-                  }}
-                >
-                  Update
-                </button>
-              ) : null}
-            </div>
-          </div>
+                </td>
+              </tr>
+            ))}
+        </tbody>
+      </table>
+      {show &&
+        games.map((game) => (
+          <div></div>
+
+          // <div key={game._id} className="game">
+          //   <div>{game.name}</div>
+          //   <button
+          //     className="delete-btn"
+          //     onClick={() => {
+          //       deleteGame(game._id);
+          //     }}
+          //   >
+          //     Delete Game
+          //   </button>
+          //   <div className="update">
+          //     {isEdit && gameId == game._id ? (
+          //       <>
+          //         <div>
+          //           <input
+          //             type="text"
+          //             placeholder="Name"
+          //             onChange={(e) => {
+          //               setName(e.target.value);
+          //             }}
+          //           />
+          //           <br />
+          //           <input
+          //             type="number"
+          //             placeholder="Price"
+          //             onChange={(e) => {
+          //               setPrice(e.target.value);
+          //             }}
+          //           />
+          //           <br />
+          //           <input
+          //             type="text"
+          //             placeholder="Poster"
+          //             onChange={(e) => {
+          //               setPoster(e.target.value);
+          //             }}
+          //           />
+          //           <br />
+          //           <input
+          //             type="text"
+          //             placeholder="Logo"
+          //             onChange={(e) => {
+          //               setLogo(e.target.value);
+          //             }}
+          //           />
+          //           <br />
+          //           <input
+          //             type="text"
+          //             placeholder="Cover"
+          //             onChange={(e) => {
+          //               setCover(e.target.value);
+          //             }}
+          //           />
+          //           <br />
+          //           <input
+          //             type="text"
+          //             placeholder="Description"
+          //             onChange={(e) => {
+          //               setDescription(e.target.value);
+          //             }}
+          //           />
+          //           <br />
+          //           <select
+          //             onChange={(e) => {
+          //               setPlatform(e.target.value);
+          //             }}
+          //           >
+          //             <option value="PC">PC</option>
+          //             <option value="Nintendo Switch">Nintendo Switch</option>
+          //             <option value="PlayStation 4">PlayStation 4</option>
+          //             <option value="PlayStation 5">PlayStation 5</option>
+          //             <option value="Xbox One">Xbox One</option>
+          //             <option value="Xbox Series X/S">Xbox Series X/S</option>
+          //           </select>
+          //           <br />
+          //           <select
+          //             onChange={(e) => {
+          //               setState(e.target.value);
+          //             }}
+          //           >
+          //             <option value="Most Popular">Most Popular</option>
+          //             <option value="New Releases">New Releases</option>
+          //             <option value="Recently Updated">Recently Updated</option>
+          //             <option value="Games On Sale">Games On Sale</option>``
+          //           </select>
+          //           <br />
+          //           <div>
+          //             <Select
+          //               className="category-select"
+          //               isMulti
+          //               onChange={onChange}
+          //               options={options}
+          //               value={categories}
+          //             />
+          //           </div>
+          //           <br />
+          //           <label>
+          //             <input
+          //               type="checkbox"
+          //               checked={inStock}
+          //               onChange={() => {
+          //                 setinStock(!inStock);
+          //               }}
+          //             />
+          //             in Stock
+          //           </label>
+          //           <br />
+          //           <label>
+          //             <input
+          //               type="checkbox"
+          //               checked={ads}
+          //               onChange={() => {
+          //                 setAds(!ads);
+          //               }}
+          //             />
+          //             Ads?
+          //           </label>
+          //           <br />
+          //           <input
+          //             type="text"
+          //             placeholder="Release Date"
+          //             onChange={(e) => {
+          //               setReleaseDate(e.target.value);
+          //             }}
+          //           />
+          //         </div>
+          //       </>
+          //     ) : null}
+          //     {!isEdit ? (
+          //       <button
+          //         className="update-btn-1"
+          //         onClick={() => {
+          //           showEdit(game._id);
+          //         }}
+          //       >
+          //         Update
+          //       </button>
+          //     ) : null}
+          //     {isEdit && gameId == game._id ? (
+          //       <button
+          //         className="update-btn-2"
+          //         onClick={() => {
+          //           updateGame(game._id);
+          //         }}
+          //       >
+          //         Update
+          //       </button>
+          //     ) : null}
+          //   </div>
+          // </div>
         ))}
       {message && <div>{message}</div>}
     </>
