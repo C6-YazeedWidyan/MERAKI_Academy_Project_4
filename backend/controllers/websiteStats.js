@@ -28,7 +28,6 @@ const getAllGamesWithTotal = (req, res) => {
   gameModel
     .find({})
     .then((result) => {
-      console.log(result);
       res.status(200);
       res.json({
         success: true,
@@ -38,7 +37,6 @@ const getAllGamesWithTotal = (req, res) => {
       });
     })
     .catch((err) => {
-      console.log(err);
       res.status(500);
       res.json({
         success: false,
@@ -48,9 +46,13 @@ const getAllGamesWithTotal = (req, res) => {
     });
 };
 const getAllOrdersWithTotal = (req, res) => {
-  gameModel
+  orderModel
     .find({})
     .then((result) => {
+      const totalAmount = result.reduce((accumulator, element, index) => {
+        return accumulator + element.total;
+      }, 0);
+      console.log(totalAmount);
       console.log(result);
       res.status(200);
       res.json({
@@ -58,6 +60,7 @@ const getAllOrdersWithTotal = (req, res) => {
         message: "All the orders",
         orders: result,
         ordersTotal: result.length,
+        totalAmount: totalAmount,
       });
     })
     .catch((err) => {

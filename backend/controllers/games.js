@@ -213,11 +213,12 @@ const searchGameByKeyword = (req, res) => {
   }
 };
 
-const getGamesByNewOrOld = (req, res) => {
-  const newOrOld = req.params.key;
+const getGamesByState = (req, res) => {
+  const key = req.params.key;
+  console.log(key);
 
   gameModel
-    .find({ newOrOld })
+    .find({ state: key })
     .then((result) => {
       res.status(200);
       res.json(result);
@@ -236,5 +237,5 @@ module.exports = {
   updateGameById,
   deleteGameById,
   searchGameByKeyword,
-  getGamesByNewOrOld,
+  getGamesByState,
 };

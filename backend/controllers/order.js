@@ -3,10 +3,12 @@ const orderModel = require("../models/order");
 const createOrder = (req, res) => {
   const { userId } = req.body;
   const cart = req.body.cart;
+  const total = req.body.total;
 
   const order = new orderModel({
     userId,
     cart,
+    total,
   });
 
   order
