@@ -5,7 +5,7 @@ import Search from "../Search";
 import { AuthContext } from "../../contexts/AuthContext";
 
 const Header = () => {
-  const { logout, isLoggedIn } = useContext(AuthContext);
+  const { logout, isLoggedIn, cart } = useContext(AuthContext);
 
   return (
     <div className="header-container">
@@ -21,7 +21,10 @@ const Header = () => {
           <div className="title">Wishlist</div>
         </Link>
         <Link className="link" to="/cart">
-          <div className="title">Cart</div>
+          <div className="title">
+            Cart{" "}
+            <span className="cart-circle">{isLoggedIn && cart.length}</span>
+          </div>
         </Link>
       </div>
       {isLoggedIn ? (

@@ -79,23 +79,26 @@ const Login = () => {
   return (
     <>
       <div className="login-container">
+        <div className="login-text">Welcome Back</div>
         <input
+          className="auth-input"
           type="text"
           placeholder="Email"
           onChange={(e) => {
             setEmail(e.target.value);
           }}
         />
-        <br />
         <input
+          className="auth-input"
           type="text"
           placeholder="Password"
           onChange={(e) => {
             setPassword(e.target.value);
           }}
         />
-        <br />
-        <button onClick={login}>Login</button>
+        <div className="login-btn" onClick={login}>
+          Login
+        </div>
         <br />
         {status
           ? message && <div className="SuccessMessage">{message}</div>

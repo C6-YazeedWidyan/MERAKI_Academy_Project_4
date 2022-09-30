@@ -1,6 +1,6 @@
 .header-container {
-  padding: 22px 36px;
-  background-color: #2a2a2a;
+  padding: 16px 36px;
+  background-color: rgb(32, 32, 32);
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -16,9 +16,10 @@
 .brandName {
   font-size: 22px;
 }
-.activeTab {
-  color: aqua;
-}
 .logo {
-  width: 85px;
+  width: 55px;
+  margin-bottom: -6px;
+}
+.cart-circle {
+  border-bottom: solid 1px #c62828;
 }

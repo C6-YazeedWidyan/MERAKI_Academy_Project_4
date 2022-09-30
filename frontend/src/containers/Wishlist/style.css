@@ -1,15 +1,14 @@
 .wishlist-container {
-  padding: 36px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
+  margin: 0 auto;
+  width: 75%;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
 .game-poster {
   width: 240px;
   height: 310px;
-  border-radius: 20px;
+  border-radius: 4px;
   cursor: pointer;
 }
 
@@ -19,7 +18,7 @@
 }
 
 .remove-from-wish-list-btn {
-  border-radius: 6px;
+  border-radius: 4px;
   font-size: 16px;
   background-color: transparent;
   color: gray;
@@ -28,4 +27,32 @@
 .remove-from-wish-list-btn:hover {
   color: white;
   cursor: pointer;
+}
+
+.wishlist-grid {
+  display: grid;
+  grid-gap: 16px;
+  padding: 16px;
+}
+
+@media (min-width: 768px) {
+  .wishlist-grid {
+    grid-template-columns: repeat(1, 4fr);
+  }
+}
+@media (min-width: 960px) {
+  .wishlist-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 1200px) {
+  .wishlist-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1400px) {
+  .wishlist-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }

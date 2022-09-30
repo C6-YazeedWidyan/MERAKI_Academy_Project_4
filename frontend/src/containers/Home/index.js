@@ -74,7 +74,7 @@ const Home = () => {
   return (
     <>
       <div className="home-container">
-        <>
+        <div className="home-grid">
           {data.map((game) => {
             return (
               <GameCard
@@ -91,7 +91,7 @@ const Home = () => {
               />
             );
           })}
-        </>
+        </div>
       </div>
       <Footer />
     </>

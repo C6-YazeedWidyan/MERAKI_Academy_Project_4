@@ -1,11 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import "./style.css";
 
 const GameCard = ({ image, title, price, onClick, addOrRemoveWishList }) => {
+  const [display, setDisplay] = useState("notdisplayed");
+
   return (
-    <div onClick={onClick} className="card-container">
+    <div
+      onMouseEnter={() => setDisplay("")}
+      onMouseLeave={() => setDisplay("notdisplayed")}
+      className="card-container"
+      onClick={onClick}
+    >
       <div className="card-image-container">
-        <div onClick={addOrRemoveWishList} className="add-to-watchlist-btn">
+        <div
+          onClick={addOrRemoveWishList}
+          className={`${display} add-to-watchlist-btn`}
+        >
           {addOrRemoveWishList.toString().includes("delete") ? "-" : "+"}
         </div>
         <img className="card-image" src={image} alt="game" />

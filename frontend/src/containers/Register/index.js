@@ -40,58 +40,61 @@ const Register = () => {
   return (
     <>
       <div className="register-container">
+        <div className="login-text">Create Account</div>
+
         {!isLoggedIn ? (
           <>
             <input
+              className="auth-input"
               type="text"
               placeholder="First Name"
               onChange={(e) => {
                 setFirstName(e.target.value);
               }}
             />
-            <br />
             <input
+              className="auth-input"
               type="text"
               placeholder="Last Name"
               onChange={(e) => {
                 setLastName(e.target.value);
               }}
             />
-            <br />
             <input
+              className="auth-input"
               type="text"
               placeholder="Age"
               onChange={(e) => {
                 setAge(e.target.value);
               }}
             />
-            <br />
             <input
+              className="auth-input"
               type="text"
               placeholder="Country"
               onChange={(e) => {
                 setCountry(e.target.value);
               }}
             />
-            <br />
             <input
+              className="auth-input"
               type="email"
               placeholder="Email"
               onChange={(e) => {
                 setEmail(e.target.value);
               }}
             />
-            <br />
             <input
+              className="auth-input"
               type="password"
               placeholder="Password"
               onChange={(e) => {
                 setPassword(e.target.value);
               }}
             />
-            <br />
-            <button onClick={registerNewUser}>Register</button>
-            <br />
+            <div className="register-btn" onClick={registerNewUser}>
+              Register
+            </div>
             {status
               ? message && <div className="succes-msg">{message}</div>
               : message && <div className="error-msg">{message}</div>}

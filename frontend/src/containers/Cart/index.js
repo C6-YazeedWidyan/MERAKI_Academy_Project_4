@@ -57,26 +57,51 @@ const Cart = () => {
   return (
     <>
       <div className="cart-container">
-        <div className="cart-left-wrapper">
-          {cart.map((game) => {
-            return (
-              <div className="cart-card" key={game._id}>
-                <h3>{game.name}</h3>
-                <button
-                  onClick={() => {
-                    deleteFromCart(game._id);
-                  }}
-                >
-                  remove from cart
-                </button>
+        {cart.length ? (
+          <>
+            <div className="cart-left-wrapper">
+              {cart.map((game) => {
+                return (
+                  <div className="cart-card" key={game._id}>
+                    <div className="left-cart-card">
+                      <img
+                        className="cart-card-image"
+                        src={game.poster}
+                        alt="game"
+                      />
+                      <div className="cart-card-text">
+                        <div className="cart-card-title">{game.name}</div>
+                        <div className="cart-card-price">{game.price}</div>
+                      </div>
+                    </div>
+
+                    <div
+                      className="cart-outline-btn"
+                      onClick={() => {
+                        deleteFromCart(game._id);
+                      }}
+                    >
+                      Remove
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            <div className="cart-right-wrapper">
+              <div className="cart-summary-title">Games Summary</div>
+              <div className="cart-total-details">
+                <div>Total</div>
+                <div>$000</div>
               </div>
-            );
-          })}
-        </div>
-        <div className="cart-right-wrapper">
-          <h3>total</h3>
-          <button onClick={() => goToCheckout()}>continue to chechout</button>
-        </div>
+              <div className="cart-checkout-btn" onClick={() => goToCheckout()}>
+                continue to chechout
+              </div>
+            </div>
+          </>
+        ) : (
+          <div>no data</div>
+        )}
       </div>
     </>
   );

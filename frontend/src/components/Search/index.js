@@ -5,10 +5,12 @@ import { useNavigate } from "react-router-dom";
 
 const Search = () => {
   const [searchResult, setSearchResult] = useState([]);
+  const [keyword, setKeyword] = useState("");
 
   const navigate = useNavigate();
 
   const getData = (keyword) => {
+    setKeyword(keyword);
     axios
       .get(`http://localhost:5000/games/search?keyword=${keyword}`)
       .then((res) => {
@@ -16,8 +18,18 @@ const Search = () => {
       });
   };
 
+  const goToDetails = (id) => {
+    navigate("/gameDetails", {
+      state: id,
+    });
+    setSearchResult([]);
+    setKeyword("");
+  };
+
   const goToBrowse = () => {
     navigate("/browse");
+    setSearchResult([]);
+    setKeyword("");
   };
 
   return (
@@ -27,19 +39,41 @@ const Search = () => {
         className="search-input"
         type="text"
         placeholder="Search"
+        value={keyword}
       />
-      {!!searchResult.length && (
+      {!!searchResult.length && keyword ? (
         <div className="search-box">
           {searchResult.map((game) => {
             return (
-              <div key={game._id} className="card">
-                <img src={game.poster} alt="game" />
-                <div>{game.name}</div>
+              <div
+                onClick={() => goToDetails(game._id)}
+                key={game._id}
+                className="card"
+              >
+                <img
+                  className="search-card-image"
+                  src={game.poster}
+                  alt="game"
+                />
+                <div className="search-card-title">{game.name}</div>
               </div>
             );
           })}
-          <button onClick={goToBrowse}>view more games</button>
+          {searchResult.length >= 3 && (
+            <div className="search-view-more-btn" onClick={goToBrowse}>
+              view more
+            </div>
+          )}
         </div>
+      ) : (
+        keyword && (
+          <div className="search-box">
+            <div className="no-matching-found">No matching titles found</div>
+            <div className="search-view-more-btn" onClick={goToBrowse}>
+              Browse all
+            </div>
+          </div>
+        )
       )}
     </div>
   );

@@ -1,7 +1,11 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins");
+
 body {
-  background-color: rgb(31, 31, 32);
+  background-color: rgb(18, 18, 18);
   color: white;
   margin: 0;
+  font-family: Poppins, Arial;
+  font-size: 14px;
 }
 .App {
 }

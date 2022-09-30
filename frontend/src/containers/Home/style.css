@@ -2,5 +2,35 @@
   margin: 0 auto;
   width: 75%;
   display: flex;
+  margin-top: 30px;
+  margin-bottom: 30px;
   flex-wrap: wrap;
+}
+
+.home-grid {
+  display: grid;
+  grid-gap: 16px;
+  padding: 16px;
+}
+
+@media (min-width: 768px) {
+  .home-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 960px) {
+  .home-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (min-width: 1200px) {
+  .home-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (min-width: 1400px) {
+  .home-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
 }

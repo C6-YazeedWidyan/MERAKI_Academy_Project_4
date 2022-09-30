@@ -6,6 +6,19 @@ import { useNavigate } from "react-router-dom";
 import GameCard from "../../components/GameCard";
 import { AuthContext } from "../../contexts/AuthContext";
 
+const Dropdown = ({ label, value, categories, onChange }) => {
+  return (
+    <label>
+      {label}
+      <select className="browse-select" value={value} onChange={onChange}>
+        {categories.map((category) => (
+          <option value={category.category}>{category.category}</option>
+        ))}
+      </select>
+    </label>
+  );
+};
+
 const Browse = () => {
   const { wishlist, userProfile, isLoggedIn, token, setWishList } =
     useContext(AuthContext);
@@ -13,6 +26,7 @@ const Browse = () => {
   const [categories, setCategories] = useState([]);
   const [pageNumber, setPageNumber] = useState(0);
   const navigate = useNavigate();
+  const [value, setValue] = useState("");
 
   const getAllGames = () => {
     setPageNumber(pageNumber + 1);
@@ -25,16 +39,17 @@ const Browse = () => {
     axios
       .get("http://localhost:5000/category/all/")
       .then((res) => {
-        setCategories(res.data.categories);
+        setCategories([{ _id: 1, category: "Genre" }, ...res.data.categories]);
       })
       .catch((err) => {
         console.log(err);
       });
   };
 
-  const getGameByCategory = (title) => {
+  const getGameByCategory = (e) => {
+    setValue(e.target.value);
     axios
-      .get(`http://localhost:5000/category?title=${title}`)
+      .get(`http://localhost:5000/category?title=${e.target.value}`)
       .then((res) => {
         setData(res.data);
       })
@@ -108,19 +123,14 @@ const Browse = () => {
           <h3 className="all-btn" onClick={getAllGames}>
             All
           </h3>
-          {categories.map((category) => {
-            return (
-              <h3
-                onClick={() => {
-                  getGameByCategory(category.category);
-                }}
-              >
-                {category.category}
-              </h3>
-            );
-          })}
+          <Dropdown
+            label=""
+            categories={categories}
+            value={value}
+            onChange={getGameByCategory}
+          />
         </div>
-        <div className="browse-right-wrapper">
+        <div className="browse-grid">
           {data.map((game) => {
             return (
               <GameCard
