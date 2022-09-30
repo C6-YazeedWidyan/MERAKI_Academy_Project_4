@@ -103,8 +103,24 @@ const Browse = () => {
 
   return (
     <>
-      <div className="big">
-        <div className="browse-container">
+      <div className="browse-container">
+        <div className="browse-left-wrapper">
+          <h3 className="all-btn" onClick={getAllGames}>
+            All
+          </h3>
+          {categories.map((category) => {
+            return (
+              <h3
+                onClick={() => {
+                  getGameByCategory(category.category);
+                }}
+              >
+                {category.category}
+              </h3>
+            );
+          })}
+        </div>
+        <div className="browse-right-wrapper">
           {data.map((game) => {
             return (
               <GameCard
@@ -119,23 +135,6 @@ const Browse = () => {
                 }
                 onClick={() => goToDetails(game._id)}
               />
-            );
-          })}
-        </div>
-
-        <div className="category-container">
-          <h3 className="all-btn" onClick={getAllGames}>
-            All
-          </h3>
-          {categories.map((category) => {
-            return (
-              <h3
-                onClick={() => {
-                  getGameByCategory(category.category);
-                }}
-              >
-                {category.category}
-              </h3>
             );
           })}
         </div>

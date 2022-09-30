@@ -1,19 +1,22 @@
-.big {
+.browse-container {
   display: flex;
-  flex-direction: row-reverse;
-  justify-content: space-around;
+  margin: 0 auto;
+  width: 75%;
+  margin-top: 30px;
 }
 
-.browse-container {
+.browse-left-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.browse-right-wrapper {
+  flex: 4;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   gap: 20px;
-}
-
-.category-container {
-  display: flex;
-  flex-direction: column;
 }
 
 .all-btn {

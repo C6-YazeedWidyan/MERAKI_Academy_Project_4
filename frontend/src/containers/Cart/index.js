@@ -55,11 +55,11 @@ const Cart = () => {
 
   return (
     <>
-      <div className="big-container">
-        <div className="cart-container">
+      <div className="cart-container">
+        <div className="cart-left-wrapper">
           {cart.map((game) => {
             return (
-              <div key={game._id}>
+              <div className="cart-card" key={game._id}>
                 <h3>{game.name}</h3>
                 <button
                   onClick={() => {
@@ -72,7 +72,7 @@ const Cart = () => {
             );
           })}
         </div>
-        <div className="order-summary">
+        <div className="cart-right-wrapper">
           <h3>total</h3>
           <button onClick={() => goToCheckout()}>continue to chechout</button>
         </div>

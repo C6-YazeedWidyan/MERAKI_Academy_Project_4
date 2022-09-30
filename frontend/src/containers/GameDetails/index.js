@@ -113,36 +113,60 @@ const GameDetails = () => {
   };
 
   return (
-    <>
-      <div className="details-container">
-        <div>{game.name}</div>
-        <img className="image" src={game.cover} alt="" />
-        <img className="image2" src={game.logo} alt="" />
-        {inCart ? (
-          <div
-            onClick={() => {
-              deleteFromCart(game._id);
-            }}
-          >
-            remove from cart
+    <div className="details-container">
+      <div className="game-details-title">{game.name}</div>
+      <div className="details-wrapper">
+        <div className="left-wrapper">
+          <img className="details-cover-image" src={game.cover} alt="" />
+          <div>{game.description}</div>
+        </div>
+        <div className="right-wrapper">
+          <img className="details-logo-image" src={game.logo} alt="" />
+          {inCart ? (
+            <div
+              className="cart-details-btn"
+              onClick={() => {
+                deleteFromCart(game._id);
+              }}
+            >
+              remove from cart
+            </div>
+          ) : (
+            <div className="cart-details-btn" onClick={addToCart}>
+              add to cart
+            </div>
+          )}
+          {inWishlist ? (
+            <div
+              className="wishlist-details-btn"
+              onClick={() => {
+                deleteFromWishList(game._id);
+              }}
+            >
+              remove from Wishlist
+            </div>
+          ) : (
+            <div className="wishlist-details-btn" onClick={addToWishList}>
+              add to wish list
+            </div>
+          )}
+          <div className="info-wrapper">
+            <div className="info-details">
+              <div>release Date</div>
+              <div>09/29/22</div>
+            </div>
+            <div className="info-details">
+              <div>release Date</div>
+              <div>09/29/22</div>
+            </div>
+            <div className="info-details">
+              <div>release Date</div>
+              <div>09/29/22</div>
+            </div>
           </div>
-        ) : (
-          <div onClick={addToCart}>add to cart</div>
-        )}
-
-        {inWishlist ? (
-          <div
-            onClick={() => {
-              deleteFromWishList(game._id);
-            }}
-          >
-            remove from Wishlist
-          </div>
-        ) : (
-          <div onClick={addToWishList}>add to wish list</div>
-        )}
+        </div>
       </div>
-    </>
+    </div>
   );
 };
 
