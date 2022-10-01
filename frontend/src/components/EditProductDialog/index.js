@@ -35,9 +35,9 @@ const EditProductDialog = ({ gameDetails, setIsEdit, games, setGames }) => {
 
   const [name, setName] = useState(gameDetails.name);
   const [price, setPrice] = useState(gameDetails.price);
-  const [poster, setPoster] = useState("");
-  const [logo, setLogo] = useState("");
-  const [cover, setCover] = useState("");
+  const [poster, setPoster] = useState(gameDetails.poster);
+  const [logo, setLogo] = useState(gameDetails.logo);
+  const [cover, setCover] = useState(gameDetails.cover);
   const [ads, setAds] = useState(false);
   const [categories, setCategories] = useState([
     { label: gameDetails.category[0], value: gameDetails.category[0] },
@@ -125,75 +125,128 @@ const EditProductDialog = ({ gameDetails, setIsEdit, games, setGames }) => {
             handleSubmit(e);
           }}
         >
-          <label>Name:</label>
-          <br />
-          <input
-            className="input-field"
-            type="text"
-            value={name}
-            required
-            onChange={(e) => {
-              setName(e.target.value);
-            }}
-          />
-          <br />
-          <label>Price:</label>
-          <br />
-          <input
-            className="input-field"
-            type="text"
-            value={price}
-            required
-            onChange={(e) => {
-              setPrice(e.target.value);
-            }}
-          />
-          <br />
-          <label>Release date:</label>
-          <br />
-          <input
-            className="input-field"
-            type="text"
-            value={releaseDate}
-            required
-            onChange={(e) => {
-              setReleaseDate(e.target.value);
-            }}
-          />
-          <br />
-          <label>description:</label>
-          <br />
-          <textarea
-            className="input-textarea"
-            type="text"
-            value={description}
-            required
-            onChange={(e) => {
-              setDescription(e.target.value);
-            }}
-          />
-          <br />
-          <label>Category:</label>
-          <br />
-          <Select
-            className="category-select"
-            isMulti
-            onChange={onChange}
-            options={options}
-            value={categories}
-          />
-          <br />
-          <label>
-            <input
-              type="checkbox"
-              checked={inStock}
-              onChange={() => {
-                setinStock(!inStock);
-              }}
-            />
-            in Stock
-          </label>
-          <br />
+          <div className="product-form-wrapper">
+            <div className="product-form-left">
+              <label>Name:</label>
+              <br />
+              <input
+                className="input-field"
+                type="text"
+                value={name}
+                required
+                onChange={(e) => {
+                  setName(e.target.value);
+                }}
+              />
+              <br />
+              <label>Price:</label>
+              <br />
+              <input
+                className="input-field"
+                type="text"
+                value={price}
+                required
+                onChange={(e) => {
+                  setPrice(e.target.value);
+                }}
+              />
+              <br />
+              <label>Release date:</label>
+              <br />
+              <input
+                className="input-field"
+                type="text"
+                value={releaseDate}
+                required
+                onChange={(e) => {
+                  setReleaseDate(e.target.value);
+                }}
+              />
+              <br />
+              <label>description:</label>
+              <br />
+              <textarea
+                className="input-textarea"
+                type="text"
+                value={description}
+                required
+                onChange={(e) => {
+                  setDescription(e.target.value);
+                }}
+              />
+              <br />
+              <label>Category:</label>
+              <br />
+              <Select
+                className="category-select"
+                isMulti
+                onChange={onChange}
+                options={options}
+                value={categories}
+              />
+              <br />
+              <label>
+                <input
+                  type="checkbox"
+                  checked={inStock}
+                  onChange={() => {
+                    setinStock(!inStock);
+                  }}
+                />
+                in Stock
+              </label>
+              <br />
+              <br />
+              <label>
+                <input
+                  type="checkbox"
+                  checked={ads}
+                  onChange={() => {
+                    setAds(!ads);
+                  }}
+                />
+                Ads?
+              </label>
+              <br />
+            </div>
+            <div className="product-form-right">
+              <label>poster:</label>
+              <br />
+              <input
+                className="input-field"
+                type="text"
+                value={poster}
+                required
+                onChange={(e) => {
+                  setPoster(e.target.value);
+                }}
+              />
+              <br />
+              <label>Logo:</label>
+              <br />
+              <input
+                className="input-field"
+                type="text"
+                value={logo}
+                required
+                onChange={(e) => {
+                  setLogo(e.target.value);
+                }}
+              />
+              <br />
+              <label>Cover:</label>
+              <br />
+              <input
+                className="input-field"
+                type="text"
+                value={cover}
+                required
+                onChange={(e) => {
+                  setCover(e.target.value);
+                }}
+              />
+            </div>
+          </div>
           <input className="update-btn" type="submit" value="Update" />
         </form>
       </div>

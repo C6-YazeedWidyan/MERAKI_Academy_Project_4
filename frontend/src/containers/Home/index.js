@@ -11,10 +11,17 @@ const Home = () => {
     useContext(AuthContext);
   const [mostPopularGames, setMostPopularGames] = useState([]);
   const [gamesOnSale, setGamesOnSale] = useState([]);
-  const [newReleasesGames, setnewReleasesGames] = useState([]);
+  const [newReleasesGames, setNewReleasesGames] = useState([]);
+  const [adsGames, setAdsGames] = useState([]);
+  const [ads, setAds] = useState(true);
+
   const navigate = useNavigate();
 
   useEffect(() => {
+    axios.get(`http://localhost:5000/games/ads/${ads}`).then((res) => {
+      console.log(res.data);
+      setAdsGames(res.data);
+    });
     axios
       .get(`http://localhost:5000/games/state/${"Most Popular"}`)
       .then((res) => {
@@ -30,7 +37,7 @@ const Home = () => {
     axios
       .get(`http://localhost:5000/games/state/${"New Releases"}`)
       .then((res) => {
-        setnewReleasesGames(res.data);
+        setNewReleasesGames(res.data);
       });
   }, []);
 
@@ -90,6 +97,27 @@ const Home = () => {
   return (
     <>
       <div className="home-container">
+        <div className="home-subtitle">ads</div>
+        <div className="home-grid">
+          {adsGames.map((game) => {
+            return (
+              <GameCard
+                key={game._id}
+                title={game.name}
+                price={game.price}
+                image={game.poster}
+                gameID={game._id}
+                addOrRemoveWishList={
+                  wishlist.find((item) => item._id === game._id)
+                    ? (e) => deleteFromWishList(e, game._id)
+                    : (e) => addToWishList(e, game._id)
+                }
+                onClick={() => goToDetails(game._id)}
+              />
+            );
+          })}
+        </div>
+        <div className="home-subtitle">Most Popular Games</div>
         <div className="home-grid">
           {mostPopularGames.map((game) => {
             return (
@@ -109,6 +137,7 @@ const Home = () => {
             );
           })}
         </div>
+        <div className="home-subtitle">Games On Sale</div>
         <div className="home-grid">
           {gamesOnSale.map((game) => {
             return (
@@ -128,6 +157,7 @@ const Home = () => {
             );
           })}
         </div>
+        <div className="home-subtitle">New Releases Games</div>
         <div className="home-grid">
           {newReleasesGames.map((game) => {
             return (

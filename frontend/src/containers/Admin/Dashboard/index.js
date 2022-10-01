@@ -65,32 +65,44 @@ const Dashboard = () => {
           <div className="total-text">Live Users</div>
           <div className="total-number">{usersTotal}</div>
         </div>
-        <div className="dashboard-card-image">image</div>
-        {/* <img src="./asses" alt=""> */}
+        <img
+          className="dashboard-card-image"
+          src="../assets/images/polling.png"
+          alt=""
+        />
       </div>
       <div className="dashboard-card">
         <div>
           <div className="total-text">Items Total</div>
           <div className="total-number">{gamesTotal}</div>
         </div>
-        <div className="dashboard-card-image">image</div>
-        {/* <img src="./asses" alt=""> */}
+        <img
+          className="dashboard-card-image"
+          src="../assets/images/deal.png"
+          alt=""
+        />
       </div>
       <div className="dashboard-card">
         <div>
           <div className="total-text">Orders Total</div>
           <div className="total-number">{ordersTotal}</div>
         </div>
-        <div className="dashboard-card-image">image</div>
-        {/* <img src="./asses" alt=""> */}
+        <img
+          className="dashboard-card-image"
+          src="../assets/images/growth.png"
+          alt=""
+        />
       </div>
       <div className="dashboard-card">
         <div>
           <div className="total-text">Total Sales profit</div>
           <div className="total-number">${grandTotal(orderTotalAmount)}</div>
         </div>
-        <div className="dashboard-card-image">image</div>
-        {/* <img src="./asses" alt=""> */}
+        <img
+          className="dashboard-card-image"
+          src="../assets/images/money-tree.png"
+          alt=""
+        />
       </div>
     </div>
   );

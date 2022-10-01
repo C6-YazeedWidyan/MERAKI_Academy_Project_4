@@ -26,13 +26,19 @@ const GameDetails = () => {
     });
     setInCart(foundInCart);
     setInWishlist(foundInWish);
-  }, [cart, wishlist]);
+  }, [cart, wishlist, location]);
+
+  const grandTotal = (arr) => {
+    return arr.reduce((sum, i) => {
+      return sum + i.price;
+    }, 0);
+  };
 
   const addToCart = () => {
     const data = {
       userId: userProfile._id,
       gameId: game._id,
-      total: 88,
+      total: grandTotal(cart) + game.price,
     };
 
     axios
@@ -117,7 +123,7 @@ const GameDetails = () => {
   return (
     <div className="details-container">
       <div className="game-details-title">{game.name}</div>
-      <div className="details-wrapper">
+      <div className="game-details-grid">
         <div className="left-wrapper">
           <img className="details-cover-image" src={game.cover} alt="" />
           <div>{game.description}</div>

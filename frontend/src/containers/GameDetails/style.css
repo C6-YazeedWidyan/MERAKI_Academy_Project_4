@@ -24,12 +24,14 @@
 .details-cover-image {
   width: 100%;
   height: 450px;
+  object-fit: cover;
 }
 
 .details-logo-image {
   width: 100%;
   height: 200px;
   margin-bottom: 12px;
+  object-fit: contain;
 }
 
 .cart-details-btn {
@@ -68,4 +70,36 @@
   padding-top: 12px;
   text-transform: capitalize;
   border-bottom: solid 1px rgba(245, 245, 245, 0.6);
+}
+
+.game-details-grid {
+  display: flex;
+  flex-direction: column;
+  grid-gap: 40px;
+  padding: 16px;
+}
+
+@media (min-width: 768px) {
+  .game-details-grid {
+    flex-direction: column;
+  }
+}
+@media (min-width: 960px) {
+  .game-details-grid {
+    display: flex;
+    flex-direction: row;
+  }
+}
+@media (min-width: 1200px) {
+  .game-details-grid {
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+@media (min-width: 1400px) {
+  .game-details-grid {
+    display: flex;
+    flex-direction: row;
+  }
 }

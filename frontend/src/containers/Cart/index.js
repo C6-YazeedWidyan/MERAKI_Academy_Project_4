@@ -8,6 +8,8 @@ const Cart = () => {
   const { token, isLoggedIn, userProfile, cart, setCart } =
     useContext(AuthContext);
   const navigate = useNavigate();
+  const [orderTotalAmount, setOrderTotalAmount] = useState([]);
+
   console.log(cart);
 
   useEffect(() => {
@@ -26,11 +28,17 @@ const Cart = () => {
     }
   }, []);
 
-  const deleteFromCart = (id) => {
+  const grandTotal = (arr) => {
+    return arr.reduce((sum, i) => {
+      return sum + i.price;
+    }, 0);
+  };
+
+  const deleteFromCart = (id, gamePrice) => {
     const data = {
       userId: userProfile._id,
       gameId: id,
-      total: 30,
+      total: grandTotal(cart) - gamePrice,
     };
     axios
       .put(`http://localhost:5000/cart/delete`, data, {
@@ -56,8 +64,9 @@ const Cart = () => {
   };
 
   return (
-    <>
-      <div className="cart-container">
+    <div className="cart-container">
+      <div className="page-title">Cart</div>
+      <div className="cart-grid">
         {cart.length ? (
           <>
             <div className="cart-left-wrapper">
@@ -79,7 +88,7 @@ const Cart = () => {
                     <div
                       className="cart-outline-btn"
                       onClick={() => {
-                        deleteFromCart(game._id);
+                        deleteFromCart(game._id, game.price);
                       }}
                     >
                       Remove
@@ -93,18 +102,26 @@ const Cart = () => {
               <div className="cart-summary-title">Games Summary</div>
               <div className="cart-total-details">
                 <div>Total</div>
-                <div>$000</div>
+                <div>${grandTotal(cart)}</div>
               </div>
               <div className="cart-checkout-btn" onClick={() => goToCheckout()}>
-                continue to chechout
+                continue to checkout
               </div>
             </div>
           </>
-        ) : (
-          <div>no data</div>
-        )}
+        ) : null}
       </div>
-    </>
+      {!cart.length && (
+        <div className="empty-list">
+          <img
+            className="empty-list-image"
+            src="./assets/images/bankrupt.png"
+            alt="empty"
+          />
+          <div className="empty-list-text">Your cart is empty.</div>
+        </div>
+      )}
+    </div>
   );
 };
 

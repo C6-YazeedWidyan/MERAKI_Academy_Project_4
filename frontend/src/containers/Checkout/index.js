@@ -7,14 +7,18 @@ import "./style.css";
 const Checkout = () => {
   const { token, isLoggedIn, userProfile, cart, setCart } =
     useContext(AuthContext);
-  console.log(userProfile._id);
-  console.log(cart);
+
+  const grandTotal = (arr) => {
+    return arr.reduce((sum, i) => {
+      return sum + i.price;
+    }, 0);
+  };
 
   const makeOrder = () => {
     const data = {
       userId: userProfile._id,
       cart: cart,
-      total: 50,
+      total: grandTotal(cart),
     };
     const data2 = { userId: userProfile._id };
     axios

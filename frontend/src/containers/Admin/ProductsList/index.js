@@ -13,17 +13,24 @@ const ProductsList = () => {
   const { token } = useContext(AuthContext);
   const [games, setGames] = useState("");
   const [show, setShow] = useState(false);
+  const [limit, setLimit] = useState(4);
+  const [pageNumber, setPageNumber] = useState(0);
   const [message, setMessage] = useState("");
   const [gameDetails, setGameDetails] = useState({});
   const [isEdit, setIsEdit] = useState(false);
 
   const getAllGames = async () => {
+    setPageNumber(pageNumber + 1);
+    setLimit(limit * 2);
     try {
-      const res = await axios.get("http://localhost:5000/games", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const res = await axios.get(
+        `http://localhost:5000/games?limit=${limit}&?page=${pageNumber}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       if (res.data.success) {
         setGames(res.data.games);
         setMessage("");
@@ -111,6 +118,7 @@ const ProductsList = () => {
         />
       )}
       {message && <div>{message}</div>}
+      <button onClick={getAllGames}>get more games</button>
     </>
   );
 };

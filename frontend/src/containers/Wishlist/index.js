@@ -59,36 +59,47 @@ const Wishlist = () => {
 
   return (
     <div className="wishlist-container">
+      <div className="page-title">Wishlist</div>
       <div className="wishlist-grid">
-        {wishlist.length ? (
-          wishlist.map((game) => {
-            return (
-              <div className="game-card" key={game._id}>
-                <img
-                  onClick={() => goToDetails(game._id)}
-                  className="game-poster"
-                  src={game.poster}
-                  alt={game.name}
-                />
-                <div>
-                  <h3>{game.name}</h3>
-                  <h3>{game.price}</h3>
+        {wishlist.length
+          ? wishlist.map((game) => {
+              return (
+                <div className="game-card" key={game._id}>
+                  <img
+                    onClick={() => goToDetails(game._id)}
+                    className="game-poster"
+                    src={game.poster}
+                    alt={game.name}
+                  />
+                  <div>
+                    <h3>{game.name}</h3>
+                    <h3>{game.price}</h3>
+                  </div>
+                  <button
+                    className="remove-from-wish-list-btn"
+                    onClick={() => {
+                      deleteFromWishList(game._id);
+                    }}
+                  >
+                    Remove from wish list
+                  </button>
                 </div>
-                <button
-                  className="remove-from-wish-list-btn"
-                  onClick={() => {
-                    deleteFromWishList(game._id);
-                  }}
-                >
-                  Remove from wish list
-                </button>
-              </div>
-            );
-          })
-        ) : (
-          <div>no data</div>
-        )}
+              );
+            })
+          : null}
       </div>
+      {!wishlist.length && (
+        <div className="empty-list">
+          <img
+            className="empty-list-image"
+            src="./assets/images/bankrupt.png"
+            alt="empty"
+          />
+          <div className="empty-list-text">
+            You haven't added anything to your wishlist yet.
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -1,3 +1,30 @@
 .category-select {
   color: black;
 }
+.add-product-content {
+  border-radius: 4px;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 90%;
+  margin-top: 40px;
+}
+.product-form-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+.product-form-left {
+  flex: 1;
+}
+.product-form-right {
+  flex: 1;
+}
+.add-btn {
+  background-color: #c62828;
+  border: none;
+  border-radius: 4px;
+  padding: 12px;
+  color: white;
+  min-width: 21%;
+}

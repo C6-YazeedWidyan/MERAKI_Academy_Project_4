@@ -4,6 +4,19 @@
   margin-top: 30px;
   margin-bottom: 30px;
 }
+.page-title {
+  font-size: 40px;
+}
+.empty-list {
+  text-align: center;
+}
+.empty-list-text {
+  font-size: 25px;
+}
+.empty-list-image {
+  width: 80px;
+  margin-bottom: 20px;
+}
 
 .game-poster {
   width: 240px;

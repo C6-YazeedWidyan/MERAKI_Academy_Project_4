@@ -35,14 +35,6 @@
   cursor: pointer;
 }
 
-.browse-grid {
-  flex: 4;
-  display: grid;
-  grid-gap: 16px;
-  padding: 16px;
-  align-self: flex-start;
-}
-
 .genre-btn {
   cursor: pointer;
   border: solid 1px gray;
@@ -51,6 +43,14 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.browse-grid {
+  flex: 4;
+  display: grid;
+  grid-gap: 16px;
+  padding: 16px;
+  align-self: flex-start;
 }
 
 @media (min-width: 768px) {

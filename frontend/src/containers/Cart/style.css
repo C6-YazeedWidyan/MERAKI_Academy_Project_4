@@ -3,6 +3,9 @@
   width: 75%;
   margin-top: 30px;
   margin-bottom: 30px;
+}
+
+.cart-wrapper {
   display: flex;
   gap: 40px;
 }
@@ -79,4 +82,36 @@
 }
 .tabs-container {
   margin-top: 50px;
+}
+
+.cart-grid {
+  display: flex;
+  flex-direction: column;
+  grid-gap: 16px;
+  padding: 16px;
+}
+
+@media (min-width: 768px) {
+  .cart-grid {
+    flex-direction: column;
+  }
+}
+@media (min-width: 960px) {
+  .cart-grid {
+    display: flex;
+    flex-direction: row;
+  }
+}
+@media (min-width: 1200px) {
+  .cart-grid {
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+@media (min-width: 1400px) {
+  .cart-grid {
+    display: flex;
+    flex-direction: row;
+  }
 }

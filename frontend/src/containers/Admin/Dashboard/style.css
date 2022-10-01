@@ -28,3 +28,8 @@
   font-size: 24px;
   font-weight: 700;
 }
+
+.dashboard-card-image {
+  width: 60px;
+  object-fit: contain;
+}

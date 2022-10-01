@@ -14,16 +14,24 @@ const Browse = () => {
   const [data, setData] = useState([]);
   const [categories, setCategories] = useState([]);
   const [pageNumber, setPageNumber] = useState(0);
+  const [limit, setLimit] = useState(4);
   const [keyword, setKeyword] = useState("");
   const [showOption, setShowOption] = useState(false);
   const navigate = useNavigate();
 
+  const getMoreGames = () => {
+    console.log(pageNumber);
+  };
+
   const getAllGames = () => {
     setPageNumber(pageNumber + 1);
+    setLimit(limit * 2);
     setKeyword("");
-    axios.get(`http://localhost:5000/games?p=${pageNumber}`).then((res) => {
-      setData(res.data.games);
-    });
+    axios
+      .get(`http://localhost:5000/games?limit=${limit}&?page=${pageNumber}`)
+      .then((res) => {
+        setData(res.data.games);
+      });
   };
 
   const getAllCategoriesTitles = () => {
@@ -169,6 +177,7 @@ const Browse = () => {
           </div>
         </div>
       </div>
+      <button onClick={getAllGames}>get more games</button>
     </>
   );
 };
