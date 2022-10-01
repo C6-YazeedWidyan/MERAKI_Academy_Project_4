@@ -7,6 +7,7 @@ const {
   deleteGameById,
   searchGameByKeyword,
   getGamesByState,
+  getGamesByIsAds,
 } = require("../controllers/games");
 const authentication = require("../middlewares/authentication");
 const authorization = require("../middlewares/authorization");
@@ -16,6 +17,7 @@ gamesRouter.post("/", authentication, authorization("ADD_GAME"), addNewGame);
 gamesRouter.get("/", getAllGames);
 gamesRouter.get("/search", searchGameByKeyword);
 gamesRouter.get("/state/:key", getGamesByState);
+gamesRouter.get("/ads/:ads", getGamesByIsAds);
 gamesRouter.get("/:id", getGameById);
 gamesRouter.put(
   "/:id",

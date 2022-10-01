@@ -55,7 +55,7 @@ const addNewGame = (req, res) => {
 
 const getAllGames = (req, res) => {
   const page = req.query.page || 0;
-  const gamesPerPage = req.query.limit || 5;
+  const gamesPerPage = req.query.limit || 4;
 
   gameModel
     .find({})
@@ -215,10 +215,13 @@ const searchGameByKeyword = (req, res) => {
 
 const getGamesByState = (req, res) => {
   const key = req.params.key;
-  console.log(key);
+  const page = req.query.page || 0;
+  const gamesPerPage = req.query.limit || 2;
 
   gameModel
     .find({ state: key })
+    .skip(page * gamesPerPage)
+    .limit(gamesPerPage)
     .then((result) => {
       res.status(200);
       res.json(result);
@@ -228,7 +231,22 @@ const getGamesByState = (req, res) => {
       res.json(err);
     });
 };
-``;
+
+const getGamesByIsAds = (req, res) => {
+  const ads = req.params.ads;
+  console.log(ads);
+
+  gameModel
+    .find({ ads: ads })
+    .then((result) => {
+      res.status(200);
+      res.json(result);
+    })
+    .catch((err) => {
+      res.status(500);
+      res.json(err);
+    });
+};
 
 module.exports = {
   addNewGame,
@@ -238,4 +256,5 @@ module.exports = {
   deleteGameById,
   searchGameByKeyword,
   getGamesByState,
+  getGamesByIsAds,
 };

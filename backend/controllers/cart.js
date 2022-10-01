@@ -79,6 +79,7 @@ const updateOnUserCart = (req, res) => {
   const userId = req.body.userId;
   const gameId = req.body.gameId;
   const total = req.body.total;
+  console.log(total);
 
   cartModel
     .findOne({ userId })
@@ -129,6 +130,7 @@ const updateOnUserCart = (req, res) => {
 
 const deleteFromUserCart = (req, res) => {
   const { userId, gameId, total } = req.body;
+  console.log(total);
 
   cartModel
     .findOneAndUpdate({ userId }, { $pull: { games: gameId }, total: total })
