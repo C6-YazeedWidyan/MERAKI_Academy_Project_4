@@ -38,7 +38,7 @@ const Search = () => {
         onChange={(e) => getData(e.target.value)}
         className="search-input"
         type="text"
-        placeholder="Search"
+        placeholder="Search store"
         value={keyword}
       />
       {!!searchResult.length && keyword ? (

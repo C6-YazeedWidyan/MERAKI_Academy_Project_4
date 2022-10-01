@@ -1,22 +1,55 @@
 .home-container {
   margin: 0 auto;
   width: 75%;
-  display: flex;
   margin-top: 30px;
   margin-bottom: 30px;
-  flex-wrap: wrap;
 }
 
 .home-subtitle {
   font-size: 18px;
-  margin-left: 14px;
   margin-bottom: 12px;
+}
+
+.ads-cards {
+  font-weight: 500;
+  display: flex;
+  gap: 12px;
+  border-radius: 4px;
+  overflow: hidden;
+  outline: none;
+  margin-bottom: 40px;
+}
+.ad-image-big-item {
+  width: 282px;
+  height: 500px;
+  object-fit: cover;
+  flex: 5 1;
+  border-radius: 14px;
+}
+.card-list-item {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin-bottom: 16px;
+}
+.ads-card-list {
+  flex: 1;
+  flex-direction: column;
+  display: flex;
+}
+.ad-image-list-item {
+  width: 50px;
+  height: 60px;
+  border-radius: 14px;
+  margin: 0 12px;
+}
+.ads-game-name {
+  width: 100px;
 }
 
 .home-grid {
   display: grid;
   grid-gap: 16px;
-  padding: 16px;
 }
 
 @media (min-width: 768px) {

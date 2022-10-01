@@ -13,6 +13,7 @@ const Home = () => {
   const [gamesOnSale, setGamesOnSale] = useState([]);
   const [newReleasesGames, setNewReleasesGames] = useState([]);
   const [adsGames, setAdsGames] = useState([]);
+  const [ADImage, setADImage] = useState("");
   const [ads, setAds] = useState(true);
 
   const navigate = useNavigate();
@@ -21,6 +22,7 @@ const Home = () => {
     axios.get(`http://localhost:5000/games/ads/${ads}`).then((res) => {
       console.log(res.data);
       setAdsGames(res.data);
+      setADImage(res.data[0].cover);
     });
     axios
       .get(`http://localhost:5000/games/state/${"Most Popular"}`)
@@ -97,25 +99,25 @@ const Home = () => {
   return (
     <>
       <div className="home-container">
-        <div className="home-subtitle">ads</div>
-        <div className="home-grid">
-          {adsGames.map((game) => {
-            return (
-              <GameCard
-                key={game._id}
-                title={game.name}
-                price={game.price}
-                image={game.poster}
-                gameID={game._id}
-                addOrRemoveWishList={
-                  wishlist.find((item) => item._id === game._id)
-                    ? (e) => deleteFromWishList(e, game._id)
-                    : (e) => addToWishList(e, game._id)
-                }
-                onClick={() => goToDetails(game._id)}
-              />
-            );
-          })}
+        <div className="ads-cards">
+          <img className="ad-image-big-item" src={ADImage} alt="" />
+          <div className="ads-card-list">
+            {adsGames.map((game) => {
+              return (
+                <div
+                  onClick={() => setADImage(game.cover)}
+                  className="card-list-item"
+                >
+                  <img
+                    className="ad-image-list-item"
+                    src={game.poster}
+                    alt=""
+                  />
+                  <div className="ads-game-name">{game.name}</div>
+                </div>
+              );
+            })}
+          </div>
         </div>
         <div className="home-subtitle">Most Popular Games</div>
         <div className="home-grid">

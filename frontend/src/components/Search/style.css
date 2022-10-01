@@ -19,6 +19,9 @@
 :focus-visible {
   outline: none;
 }
+.search-input::placeholder {
+  color: #cccc;
+}
 .search-box {
   z-index: 999;
   background-color: rgb(55, 55, 55);
