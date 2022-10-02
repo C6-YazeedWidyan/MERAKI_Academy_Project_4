@@ -78,8 +78,7 @@ const getCartByUserId = (req, res) => {
 const updateOnUserCart = (req, res) => {
   const userId = req.body.userId;
   const gameId = req.body.gameId;
-  const total = req.body.total;
-  console.log(total);
+  const total = Math.ceil(req.body.total);
 
   cartModel
     .findOne({ userId })

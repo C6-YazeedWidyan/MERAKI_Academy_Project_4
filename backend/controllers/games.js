@@ -234,7 +234,6 @@ const getGamesByState = (req, res) => {
 
 const getGamesByIsAds = (req, res) => {
   const ads = req.params.ads;
-  console.log(ads);
 
   gameModel
     .find({ ads: ads })
