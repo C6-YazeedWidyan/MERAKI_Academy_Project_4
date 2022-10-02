@@ -44,6 +44,7 @@ const AddNewGame = () => {
   const [price, setPrice] = useState(0);
   const [poster, setPoster] = useState("");
   const [logo, setLogo] = useState("");
+  console.log(logo);
   const [cover, setCover] = useState("");
   const [ads, setAds] = useState(false);
   const [categories, setCategories] = useState([]);
@@ -53,6 +54,37 @@ const AddNewGame = () => {
   const [inStock, setinStock] = useState(false);
   const [releaseDate, setReleaseDate] = useState("");
   const [message, setMessage] = useState("");
+
+  const uploadPoster = async (e) => {
+    const file = e.target.files[0];
+    const base64 = await convertBase64(file);
+    setPoster(base64);
+  };
+
+  const uploadLogo = async (e) => {
+    const file = e.target.files[0];
+    const base64 = await convertBase64(file);
+    setLogo(base64);
+  };
+
+  const uploadCover = async (e) => {
+    const file = e.target.files[0];
+    const base64 = await convertBase64(file);
+    setCover(base64);
+  };
+
+  const convertBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+      fileReader.onload = () => {
+        resolve(fileReader.result);
+      };
+      fileReader.onerror = (error) => {
+        reject(error);
+      };
+    });
+  };
 
   const handleSubmit = (e) => {
     const category = categories.map((item) => item.value);
@@ -78,6 +110,7 @@ const AddNewGame = () => {
       )
       .then((res) => {
         console.log(res.data.message);
+        console.log(res.data);
         setMessage(res.data.message);
       })
       .catch((err) => {
@@ -218,11 +251,10 @@ const AddNewGame = () => {
             <br />
             <input
               className="input-field"
-              type="text"
-              value={poster}
+              type="file"
               required
               onChange={(e) => {
-                setPoster(e.target.value);
+                uploadPoster(e);
               }}
             />
             <br />
@@ -230,11 +262,10 @@ const AddNewGame = () => {
             <br />
             <input
               className="input-field"
-              type="text"
-              value={logo}
+              type="file"
               required
               onChange={(e) => {
-                setLogo(e.target.value);
+                setLogo(e.target.files[0].name);
               }}
             />
             <br />
@@ -242,17 +273,19 @@ const AddNewGame = () => {
             <br />
             <input
               className="input-field"
-              type="text"
-              value={cover}
+              type="file"
               required
               onChange={(e) => {
-                setCover(e.target.value);
+                uploadCover(e);
               }}
             />
           </div>
         </div>
         <input className="add-btn" type="submit" value="Save" />
       </form>
+      <img src={cover} alt="sss" height="200px" />
+      <img src={poster} alt="sss" height="200px" />
+      <img src={logo} alt="sss" height="200px" />
     </div>
   );
 };
