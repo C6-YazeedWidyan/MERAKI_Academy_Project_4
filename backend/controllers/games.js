@@ -216,7 +216,7 @@ const searchGameByKeyword = (req, res) => {
 const getGamesByState = (req, res) => {
   const key = req.params.key;
   const page = req.query.page || 0;
-  const gamesPerPage = req.query.limit || 2;
+  const gamesPerPage = req.query.limit || 5;
 
   gameModel
     .find({ state: key })
