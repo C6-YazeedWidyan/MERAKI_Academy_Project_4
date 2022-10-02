@@ -9,6 +9,7 @@ const GameDetails = () => {
   const { token, userProfile, wishlist, setWishList, cart, setCart } =
     useContext(AuthContext);
   const [game, setGame] = useState({});
+  console.log(game);
   const [inCart, setInCart] = useState(false);
   const [inWishlist, setInWishlist] = useState(false);
 
@@ -171,6 +172,7 @@ const GameDetails = () => {
               <div>release Date</div>
               <div>09/29/22</div>
             </div>
+            {game.inStock ? <div>in Stock</div> : <div>Out of stock</div>}
           </div>
         </div>
       </div>

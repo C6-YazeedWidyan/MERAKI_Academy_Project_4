@@ -19,10 +19,6 @@ const Browse = () => {
   const [showOption, setShowOption] = useState(false);
   const navigate = useNavigate();
 
-  const getMoreGames = () => {
-    console.log(pageNumber);
-  };
-
   const getAllGames = () => {
     setPageNumber(pageNumber + 1);
     setLimit(limit * 2);

@@ -265,7 +265,7 @@ const AddNewGame = () => {
               type="file"
               required
               onChange={(e) => {
-                setLogo(e.target.files[0].name);
+                uploadLogo(e);
               }}
             />
             <br />
