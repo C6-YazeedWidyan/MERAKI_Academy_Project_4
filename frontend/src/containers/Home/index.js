@@ -20,7 +20,6 @@ const Home = () => {
 
   useEffect(() => {
     axios.get(`http://localhost:5000/games/ads/${ads}`).then((res) => {
-      console.log(res.data);
       setAdsGames(res.data);
       setADImage(res.data[0].cover);
     });

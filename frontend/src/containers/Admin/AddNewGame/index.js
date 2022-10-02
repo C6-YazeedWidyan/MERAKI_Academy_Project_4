@@ -44,7 +44,6 @@ const AddNewGame = () => {
   const [price, setPrice] = useState(0);
   const [poster, setPoster] = useState("");
   const [logo, setLogo] = useState("");
-  console.log(logo);
   const [cover, setCover] = useState("");
   const [ads, setAds] = useState(false);
   const [categories, setCategories] = useState([]);
@@ -109,8 +108,6 @@ const AddNewGame = () => {
         config
       )
       .then((res) => {
-        console.log(res.data.message);
-        console.log(res.data);
         setMessage(res.data.message);
       })
       .catch((err) => {

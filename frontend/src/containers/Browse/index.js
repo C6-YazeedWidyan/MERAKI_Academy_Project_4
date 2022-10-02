@@ -173,7 +173,7 @@ const Browse = () => {
           </div>
         </div>
       </div>
-      <button onClick={getAllGames}>get more games</button>
+      <button onClick={getAllGames}>Get More Games</button>
     </>
   );
 };

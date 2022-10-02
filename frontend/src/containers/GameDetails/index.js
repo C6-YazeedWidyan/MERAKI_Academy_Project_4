@@ -9,7 +9,6 @@ const GameDetails = () => {
   const { token, userProfile, wishlist, setWishList, cart, setCart } =
     useContext(AuthContext);
   const [game, setGame] = useState({});
-  console.log(game);
   const [inCart, setInCart] = useState(false);
   const [inWishlist, setInWishlist] = useState(false);
 
@@ -162,17 +161,20 @@ const GameDetails = () => {
           <div className="info-wrapper">
             <div className="info-details">
               <div>release Date</div>
-              <div>09/29/22</div>
+              <div>{game.releaseDate}</div>
             </div>
             <div className="info-details">
-              <div>release Date</div>
-              <div>09/29/22</div>
+              <div>Genre</div>
+              <div>{game.category?.join(" , ")}</div>
             </div>
             <div className="info-details">
-              <div>release Date</div>
-              <div>09/29/22</div>
+              <div>Platform</div>
+              <div>{game.platform}</div>
             </div>
-            {game.inStock ? <div>in Stock</div> : <div>Out of stock</div>}
+            <div className="info-details">
+              <div>In Stock</div>
+              {game.inStock ? <div>in Stock</div> : <div>Out of stock</div>}
+            </div>
           </div>
         </div>
       </div>
