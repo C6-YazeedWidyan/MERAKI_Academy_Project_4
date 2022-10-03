@@ -4,19 +4,23 @@
 const stripe = require("stripe")(process.env.STRIPE_KEY);
 
 const paymentCheckout = async (req, res) => {
-  const line_items = req.body.cart.map((item) => {
+  const cart = req.body.cart;
+
+  const line_items = cart.map((item) => {
     return {
       price_data: {
         currency: "usd",
         product_data: {
           name: item.name,
           images: [item.poster],
+          description: item.description,
         },
-        unit_amount: 500,
+        unit_amount: Math.ceil(item.price * 100),
       },
       quantity: 1,
     };
   });
+
   const session = await stripe.checkout.sessions.create({
     line_items,
     mode: "payment",
