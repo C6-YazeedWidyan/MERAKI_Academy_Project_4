@@ -21,6 +21,7 @@ const cartRouter = require("./routes/cart");
 const wishListRouter = require("./routes/wishlist");
 const orderRouter = require("./routes/order");
 const websiteStatsRouter = require("./routes/websiteStats");
+const googleRouter = require("./routes/googleLogin");
 
 // Routes Middleware
 
@@ -33,6 +34,7 @@ app.use("/cart", cartRouter);
 app.use("/wishlist", wishListRouter);
 app.use("/order", orderRouter);
 app.use("/adminpanel", websiteStatsRouter);
+app.use("/googlelogin", googleRouter);
 
 // Handles any other endpoints [unassigned - endpoints]
 app.use("*", (req, res) => res.status(404).json("NO content at this path"));
