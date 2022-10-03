@@ -1,18 +1,41 @@
 import axios from "axios";
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import "./style.css";
 
 const Checkout = () => {
   const { token, isLoggedIn, userProfile, cart, setCart } =
     useContext(AuthContext);
+  const navigate = useNavigate();
 
   const grandTotal = (arr) => {
     return arr.reduce((sum, i) => {
       return sum + i.price;
     }, 0);
   };
+
+  const handleCheckout = () => {
+    const data = {
+      cart: cart,
+      userId: userProfile._id,
+    };
+    axios
+      .post("http://localhost:5000/payment/create-checkout-session", data)
+      .then((res) => {
+        if (res.data.url) {
+          window.location.href = res.data.url;
+        }
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
+
+  useEffect(() => {
+    handleCheckout();
+  }, []);
 
   const makeOrder = () => {
     const data = {
