@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import "./style.css";
 
@@ -103,6 +103,7 @@ const Register = () => {
           <p>Logout First</p>
         )}
       </div>
+      <div id="signInDiv"></div>
     </>
   );
 };

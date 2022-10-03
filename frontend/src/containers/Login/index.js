@@ -5,6 +5,8 @@ import "./style.css";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 import SnackBar from "../../components/SnackBar";
+import { GoogleLogin } from "@react-oauth/google";
+import jwt_decode from "jwt-decode";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -16,6 +18,26 @@ const Login = () => {
     useContext(AuthContext);
 
   const navigate = useNavigate();
+
+  const responseSuccessGoogle = (response) => {
+    console.log(response);
+    const data = {
+      tokenId: response.credential,
+    };
+    console.log(response.credential);
+    axios
+      .post("http://localhost:5000/googlelogin", data)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const responseErrorGoogle = (response) => {
+    console.log(response);
+  };
 
   const login = () => {
     axios
@@ -103,6 +125,10 @@ const Login = () => {
         <br />
       </div>
       {message && <SnackBar message={message} setMessage={setMessage} />}
+      <GoogleLogin
+        onSuccess={responseSuccessGoogle}
+        onError={responseErrorGoogle}
+      />
     </>
   );
 };
