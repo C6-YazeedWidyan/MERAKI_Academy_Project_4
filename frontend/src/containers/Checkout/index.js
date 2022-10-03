@@ -6,10 +6,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 import "./style.css";
 
 const Checkout = () => {
-  const { token, isLoggedIn, userProfile, cart, setCart } =
-    useContext(AuthContext);
-  const navigate = useNavigate();
-
+  const { token, userProfile, cart, setCart } = useContext(AuthContext);
   const grandTotal = (arr) => {
     return arr.reduce((sum, i) => {
       return sum + i.price;
@@ -31,21 +28,15 @@ const Checkout = () => {
       .catch((err) => {
         console.log(err.message);
       });
-  };
 
-  useEffect(() => {
-    handleCheckout();
-  }, []);
-
-  const makeOrder = () => {
-    const data = {
+    const data2 = {
       userId: userProfile._id,
       cart: cart,
       total: grandTotal(cart),
     };
-    const data2 = { userId: userProfile._id };
+    const data3 = { userId: userProfile._id };
     axios
-      .post("http://localhost:5000/order", data, {
+      .post("http://localhost:5000/order", data2, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -58,7 +49,7 @@ const Checkout = () => {
       });
 
     axios
-      .put("http://localhost:5000/cart/emptycart/", data2, {
+      .put("http://localhost:5000/cart/emptycart/", data3, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -70,6 +61,12 @@ const Checkout = () => {
         console.log(err);
       });
   };
+
+  useEffect(() => {
+    handleCheckout();
+  }, []);
+
+  const makeOrder = () => {};
 
   return (
     <div>
