@@ -104,6 +104,7 @@ const Home = () => {
             {adsGames.map((game) => {
               return (
                 <div
+                  key={game._id}
                   onClick={() => setADImage(game.cover)}
                   className="card-list-item"
                 >
