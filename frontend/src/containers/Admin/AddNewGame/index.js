@@ -8,7 +8,7 @@ import SnackBar from "../../../components/SnackBar";
 
 const options = [
   { label: "Action", value: "Action" },
-  { label: "Action-adventure", value: "Action-adventure" },
+  { label: "Action-Adventure", value: "Action-Adventure" },
   { label: "Adventure", value: "Adventure" },
   { label: "Card Game", value: "Card Game" },
   { label: "Casual", value: "Casual" },

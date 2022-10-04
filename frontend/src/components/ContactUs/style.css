@@ -1,4 +1,5 @@
 .contact-us-container {
+  margin-top: 50px;
   display: flex;
   flex-direction: column;
 }
@@ -8,8 +9,43 @@
   flex-direction: column;
   width: 500px;
   margin: 0 auto;
+  text-align: center;
+  border: solid 2px white;
+  border-radius: 5px;
 }
 
 .contact-message {
   text-align: center;
+}
+
+.contact-us-name-label {
+  margin-top: 20px;
+}
+
+.contact-us-email-field,
+.contact-us-name-field {
+  border-radius: 5px;
+  width: 300px;
+  margin: 0 auto;
+}
+
+.contact-us-message-field {
+  border-radius: 5px;
+  width: 300px;
+  height: 100px;
+  margin: 0 auto;
+}
+
+.contact-us-send-btn {
+  width: 60px;
+  margin: 0 auto;
+  border-radius: 5px;
+  margin-top: 20px;
+  cursor: pointer;
+  background-color: #c62828;
+  color: white;
+}
+
+.contact-us-send-btn:hover {
+  background-color: #711c1c;
 }

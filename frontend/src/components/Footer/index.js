@@ -13,7 +13,9 @@ const Footer = () => {
     <div className="footer-container">
       <img className="logo" src="/assets/images/logo.png" alt="" />
       <div>footer</div>
-      <div onClick={goToContactUs}>Contact Us</div>
+      <div className="contact-us-btn" onClick={goToContactUs}>
+        Contact Us
+      </div>
     </div>
   );
 };
