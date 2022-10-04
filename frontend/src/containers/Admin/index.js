@@ -22,7 +22,7 @@ const Admin = () => {
     <div className="admin-container">
       <div className="admin-navbar">
         <div>
-          <div>hello , username</div>
+          <div>hello </div>
           <div>Welcome to your admin dashboard</div>
         </div>
         <div onClick={logout}>Logout</div>

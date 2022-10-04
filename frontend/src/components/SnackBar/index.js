@@ -4,7 +4,7 @@ const SnackBar = ({ message, setMessage }) => {
   useEffect(() => {
     setTimeout(() => {
       setMessage("");
-    }, 2500);
+    }, 3000);
   }, []);
 
   return <>{message && <div className="snack-bar"> {message}</div>}</>;

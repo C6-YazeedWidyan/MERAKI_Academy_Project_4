@@ -28,7 +28,7 @@ const paymentCheckout = async (req, res) => {
     cancel_url: `${process.env.CLIENT_URL}/cart`,
   });
 
-  res.send({ url: session.url });
+  res.json({ url: session.url });
 };
 
 module.exports = { paymentCheckout };

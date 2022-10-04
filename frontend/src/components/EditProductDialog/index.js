@@ -3,6 +3,7 @@ import "./EditProductDialog.css";
 import Select from "react-select";
 import axios from "axios";
 import { AuthContext } from "../../contexts/AuthContext";
+import SnackBar from "../SnackBar";
 
 const options = [
   { label: "Action", value: "Action" },
@@ -47,6 +48,7 @@ const EditProductDialog = ({ gameDetails, setIsEdit, games, setGames }) => {
   const [state, setState] = useState(gameDetails.state);
   const [inStock, setinStock] = useState(gameDetails.inStock);
   const [releaseDate, setReleaseDate] = useState(gameDetails.releaseDate);
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
     const result = gameDetails.category.map((item) => ({
@@ -104,7 +106,7 @@ const EditProductDialog = ({ gameDetails, setIsEdit, games, setGames }) => {
         setIsEdit(false);
       })
       .catch((err) => {
-        console.log(err);
+        setMessage(err.message);
         setIsEdit(false);
       });
     e.preventDefault();
@@ -115,172 +117,175 @@ const EditProductDialog = ({ gameDetails, setIsEdit, games, setGames }) => {
   };
 
   return (
-    <div className="edit-dialog">
-      <div className="edit-dialog-content">
-        <span onClick={() => setIsEdit(false)} className="close-edit-dialog">
-          &times;
-        </span>
-        <form
-          onSubmit={(e) => {
-            handleSubmit(e);
-          }}
-        >
-          <div className="product-form-wrapper">
-            <div className="product-form-left">
-              <label>Name:</label>
-              <br />
-              <input
-                className="input-field"
-                type="text"
-                value={name}
-                required
-                onChange={(e) => {
-                  setName(e.target.value);
-                }}
-              />
-              <br />
-              <label>Price:</label>
-              <br />
-              <input
-                className="input-field"
-                type="text"
-                value={price}
-                required
-                onChange={(e) => {
-                  setPrice(e.target.value);
-                }}
-              />
-              <br />
-              <label>Platform:</label>
-              <br />
-              <select
-                className="input-field-select"
-                onChange={(e) => {
-                  setPlatform(e.target.value);
-                }}
-              >
-                <option value="PC">PC</option>
-                <option value="Nintendo Switch">Nintendo Switch</option>
-                <option value="PlayStation 4">PlayStation 4</option>
-                <option value="PlayStation 5">PlayStation 5</option>
-                <option value="Xbox One">Xbox One</option>
-                <option value="Xbox Series X/S">Xbox Series X/S</option>
-              </select>
-              <br />
-              <label>State:</label>
-              <br />
-              <select
-                className="input-field-select"
-                onChange={(e) => {
-                  setState(e.target.value);
-                }}
-              >
-                <option value="Most Popular">Most Popular</option>
-                <option value="New Releases">New Releases</option>
-                <option value="Recently Updated">Recently Updated</option>
-                <option value="Games On Sale">Games On Sale</option>``
-              </select>
-              <br />
-              <label>Release date:</label>
-              <br />
-              <input
-                className="input-field"
-                type="text"
-                value={releaseDate}
-                required
-                onChange={(e) => {
-                  setReleaseDate(e.target.value);
-                }}
-              />
-              <br />
-              <label>description:</label>
-              <br />
-              <textarea
-                className="input-textarea"
-                type="text"
-                value={description}
-                required
-                onChange={(e) => {
-                  setDescription(e.target.value);
-                }}
-              />
-              <br />
-              <label>Category:</label>
-              <br />
-              <Select
-                className="category-select"
-                isMulti
-                onChange={onChange}
-                options={options}
-                value={categories}
-              />
-              <br />
-              <label>
+    <>
+      <div className="edit-dialog">
+        <div className="edit-dialog-content">
+          <span onClick={() => setIsEdit(false)} className="close-edit-dialog">
+            &times;
+          </span>
+          <form
+            onSubmit={(e) => {
+              handleSubmit(e);
+            }}
+          >
+            <div className="product-form-wrapper">
+              <div className="product-form-left">
+                <label>Name:</label>
+                <br />
                 <input
-                  type="checkbox"
-                  checked={inStock}
-                  onChange={() => {
-                    setinStock(!inStock);
+                  className="input-field"
+                  type="text"
+                  value={name}
+                  required
+                  onChange={(e) => {
+                    setName(e.target.value);
                   }}
                 />
-                in Stock
-              </label>
-              <br />
-              <br />
-              <label>
+                <br />
+                <label>Price:</label>
+                <br />
                 <input
-                  type="checkbox"
-                  checked={ads}
-                  onChange={() => {
-                    setAds(!ads);
+                  className="input-field"
+                  type="text"
+                  value={price}
+                  required
+                  onChange={(e) => {
+                    setPrice(e.target.value);
                   }}
                 />
-                Ads?
-              </label>
-              <br />
+                <br />
+                <label>Platform:</label>
+                <br />
+                <select
+                  className="input-field-select"
+                  onChange={(e) => {
+                    setPlatform(e.target.value);
+                  }}
+                >
+                  <option value="PC">PC</option>
+                  <option value="Nintendo Switch">Nintendo Switch</option>
+                  <option value="PlayStation 4">PlayStation 4</option>
+                  <option value="PlayStation 5">PlayStation 5</option>
+                  <option value="Xbox One">Xbox One</option>
+                  <option value="Xbox Series X/S">Xbox Series X/S</option>
+                </select>
+                <br />
+                <label>State:</label>
+                <br />
+                <select
+                  className="input-field-select"
+                  onChange={(e) => {
+                    setState(e.target.value);
+                  }}
+                >
+                  <option value="Most Popular">Most Popular</option>
+                  <option value="New Releases">New Releases</option>
+                  <option value="Recently Updated">Recently Updated</option>
+                  <option value="Games On Sale">Games On Sale</option>``
+                </select>
+                <br />
+                <label>Release date:</label>
+                <br />
+                <input
+                  className="input-field"
+                  type="text"
+                  value={releaseDate}
+                  required
+                  onChange={(e) => {
+                    setReleaseDate(e.target.value);
+                  }}
+                />
+                <br />
+                <label>description:</label>
+                <br />
+                <textarea
+                  className="input-textarea"
+                  type="text"
+                  value={description}
+                  required
+                  onChange={(e) => {
+                    setDescription(e.target.value);
+                  }}
+                />
+                <br />
+                <label>Category:</label>
+                <br />
+                <Select
+                  className="category-select"
+                  isMulti
+                  onChange={onChange}
+                  options={options}
+                  value={categories}
+                />
+                <br />
+                <label>
+                  <input
+                    type="checkbox"
+                    checked={inStock}
+                    onChange={() => {
+                      setinStock(!inStock);
+                    }}
+                  />
+                  in Stock
+                </label>
+                <br />
+                <br />
+                <label>
+                  <input
+                    type="checkbox"
+                    checked={ads}
+                    onChange={() => {
+                      setAds(!ads);
+                    }}
+                  />
+                  Ads?
+                </label>
+                <br />
+              </div>
+              <div className="product-form-right">
+                <label>poster:</label>
+                <br />
+                <input
+                  className="input-field"
+                  type="text"
+                  value={poster}
+                  required
+                  onChange={(e) => {
+                    setPoster(e.target.value);
+                  }}
+                />
+                <br />
+                <label>Logo:</label>
+                <br />
+                <input
+                  className="input-field"
+                  type="text"
+                  value={logo}
+                  required
+                  onChange={(e) => {
+                    setLogo(e.target.value);
+                  }}
+                />
+                <br />
+                <label>Cover:</label>
+                <br />
+                <input
+                  className="input-field"
+                  type="text"
+                  value={cover}
+                  required
+                  onChange={(e) => {
+                    setCover(e.target.value);
+                  }}
+                />
+              </div>
             </div>
-            <div className="product-form-right">
-              <label>poster:</label>
-              <br />
-              <input
-                className="input-field"
-                type="text"
-                value={poster}
-                required
-                onChange={(e) => {
-                  setPoster(e.target.value);
-                }}
-              />
-              <br />
-              <label>Logo:</label>
-              <br />
-              <input
-                className="input-field"
-                type="text"
-                value={logo}
-                required
-                onChange={(e) => {
-                  setLogo(e.target.value);
-                }}
-              />
-              <br />
-              <label>Cover:</label>
-              <br />
-              <input
-                className="input-field"
-                type="text"
-                value={cover}
-                required
-                onChange={(e) => {
-                  setCover(e.target.value);
-                }}
-              />
-            </div>
-          </div>
-          <input className="update-btn" type="submit" value="Update" />
-        </form>
+            <input className="update-btn" type="submit" value="Update" />
+          </form>
+        </div>
       </div>
-    </div>
+      {message && <SnackBar message={message} setMessage={setMessage} />}
+    </>
   );
 };
 

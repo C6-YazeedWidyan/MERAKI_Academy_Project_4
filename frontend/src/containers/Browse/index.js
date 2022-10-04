@@ -7,6 +7,7 @@ import GameCard from "../../components/GameCard";
 import { AuthContext } from "../../contexts/AuthContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
+import SnackBar from "../../components/SnackBar";
 
 const Browse = () => {
   const { wishlist, userProfile, isLoggedIn, token, setWishList } =
@@ -16,6 +17,7 @@ const Browse = () => {
   const [page, setPage] = useState(0);
   const [limit, setLimit] = useState(4);
   const [keyword, setKeyword] = useState("");
+  const [message, setMessage] = useState("");
   const [showOption, setShowOption] = useState(false);
   const navigate = useNavigate();
 
@@ -27,6 +29,9 @@ const Browse = () => {
       .get(`http://localhost:5000/games?page=${page}&limit=${limit}`)
       .then((res) => {
         setData(res.data.games);
+      })
+      .catch((err) => {
+        setMessage(err.message);
       });
   };
 
@@ -37,7 +42,7 @@ const Browse = () => {
         setCategories(res.data.categories);
       })
       .catch((err) => {
-        console.log(err);
+        setMessage(err.message);
       });
   };
 
@@ -49,7 +54,7 @@ const Browse = () => {
         setData(res.data);
       })
       .catch((err) => {
-        console.log(err);
+        setMessage(err.message);
       });
   };
 
@@ -76,7 +81,7 @@ const Browse = () => {
           setWishList(res.data.wishList.games);
         })
         .catch((err) => {
-          console.log(err);
+          setMessage(err.message);
         });
     } else {
       navigate("/login");
@@ -102,7 +107,7 @@ const Browse = () => {
         setWishList(newWishList);
       })
       .catch((err) => {
-        console.log(err);
+        setMessage(err.message);
       });
   };
 
@@ -176,6 +181,7 @@ const Browse = () => {
           </div>
         </div>
       </div>
+      {message && <SnackBar message={message} setMessage={setMessage} />}
     </>
   );
 };

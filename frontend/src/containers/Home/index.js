@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Footer from "../../components/Footer";
 import GameCard from "../../components/GameCard";
 import { AuthContext } from "../../contexts/AuthContext";
+import SnackBar from "../../components/SnackBar";
 
 const Home = () => {
   const { token, isLoggedIn, userProfile, wishlist, setWishList } =
@@ -15,30 +16,45 @@ const Home = () => {
   const [adsGames, setAdsGames] = useState([]);
   const [ADImage, setADImage] = useState("");
   const [ads, setAds] = useState(true);
+  const [message, setMessage] = useState("");
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/games/ads/${ads}`).then((res) => {
-      setAdsGames(res.data);
-      setADImage(res.data[0].cover);
-    });
+    axios
+      .get(`http://localhost:5000/games/ads/${ads}`)
+      .then((res) => {
+        setAdsGames(res.data);
+        setADImage(res.data[0].cover);
+      })
+      .catch((err) => {
+        setMessage(err.message);
+      });
     axios
       .get(`http://localhost:5000/games/state/${"Most Popular"}`)
       .then((res) => {
         setMostPopularGames(res.data);
+      })
+      .catch((err) => {
+        setMessage(err.message);
       });
 
     axios
       .get(`http://localhost:5000/games/state/${"Games On Sale"}`)
       .then((res) => {
         setGamesOnSale(res.data);
+      })
+      .catch((err) => {
+        setMessage(err.message);
       });
 
     axios
       .get(`http://localhost:5000/games/state/${"New Releases"}`)
       .then((res) => {
         setNewReleasesGames(res.data);
+      })
+      .catch((err) => {
+        setMessage(err.message);
       });
   }, []);
 
@@ -59,7 +75,7 @@ const Home = () => {
           setWishList(res.data.wishList.games);
         })
         .catch((err) => {
-          console.log(err);
+          setMessage(err.message);
         });
     } else {
       navigate("/login");
@@ -85,7 +101,7 @@ const Home = () => {
         setWishList(newWishList);
       })
       .catch((err) => {
-        console.log(err);
+        setMessage(err.message);
       });
   };
 
@@ -181,6 +197,7 @@ const Home = () => {
         </div>
       </div>
       <Footer />
+      {message && <SnackBar message={message} setMessage={setMessage} />}
     </>
   );
 };

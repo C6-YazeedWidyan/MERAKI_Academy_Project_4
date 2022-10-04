@@ -3,8 +3,10 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 import "./style.css";
+import SnackBar from "../../components/SnackBar";
 
 const Cart = () => {
+  const [message, setMessage] = useState("");
   const { token, isLoggedIn, userProfile, cart, setCart } =
     useContext(AuthContext);
   const navigate = useNavigate();
@@ -21,6 +23,9 @@ const Cart = () => {
         })
         .then((res) => {
           setCart(res.data.cart.games);
+        })
+        .catch((err) => {
+          setMessage(err.message);
         });
     }
   }, []);
@@ -52,7 +57,7 @@ const Cart = () => {
         }
       })
       .catch((err) => {
-        console.log(err);
+        setMessage(err.message);
       });
   };
 
@@ -61,64 +66,70 @@ const Cart = () => {
   };
 
   return (
-    <div className="cart-container">
-      <div className="page-title">Cart</div>
-      <div className="cart-grid">
-        {cart.length ? (
-          <>
-            <div className="cart-left-wrapper">
-              {cart.map((game) => {
-                return (
-                  <div className="cart-card" key={game._id}>
-                    <div className="left-cart-card">
-                      <img
-                        className="cart-card-image"
-                        src={game.poster}
-                        alt="game"
-                      />
-                      <div className="cart-card-text">
-                        <div className="cart-card-title">{game.name}</div>
-                        <div className="cart-card-price">{game.price}</div>
+    <>
+      <div className="cart-container">
+        <div className="page-title">Cart</div>
+        <div className="cart-grid">
+          {cart.length ? (
+            <>
+              <div className="cart-left-wrapper">
+                {cart.map((game) => {
+                  return (
+                    <div className="cart-card" key={game._id}>
+                      <div className="left-cart-card">
+                        <img
+                          className="cart-card-image"
+                          src={game.poster}
+                          alt="game"
+                        />
+                        <div className="cart-card-text">
+                          <div className="cart-card-title">{game.name}</div>
+                          <div className="cart-card-price">{game.price}</div>
+                        </div>
+                      </div>
+
+                      <div
+                        className="cart-outline-btn"
+                        onClick={() => {
+                          deleteFromCart(game._id, game.price);
+                        }}
+                      >
+                        Remove
                       </div>
                     </div>
-
-                    <div
-                      className="cart-outline-btn"
-                      onClick={() => {
-                        deleteFromCart(game._id, game.price);
-                      }}
-                    >
-                      Remove
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-
-            <div className="cart-right-wrapper">
-              <div className="cart-summary-title">Games Summary</div>
-              <div className="cart-total-details">
-                <div>Total</div>
-                <div>${grandTotal(cart)}</div>
+                  );
+                })}
               </div>
-              <div className="cart-checkout-btn" onClick={() => goToCheckout()}>
-                continue to checkout
+
+              <div className="cart-right-wrapper">
+                <div className="cart-summary-title">Games Summary</div>
+                <div className="cart-total-details">
+                  <div>Total</div>
+                  <div>${grandTotal(cart)}</div>
+                </div>
+                <div
+                  className="cart-checkout-btn"
+                  onClick={() => goToCheckout()}
+                >
+                  continue to checkout
+                </div>
               </div>
-            </div>
-          </>
-        ) : null}
-      </div>
-      {!cart.length && (
-        <div className="empty-list">
-          <img
-            className="empty-list-image"
-            src="./assets/images/bankrupt.png"
-            alt="empty"
-          />
-          <div className="empty-list-text">Your cart is empty.</div>
+            </>
+          ) : null}
         </div>
-      )}
-    </div>
+        {!cart.length && (
+          <div className="empty-list">
+            <img
+              className="empty-list-image"
+              src="./assets/images/bankrupt.png"
+              alt="empty"
+            />
+            <div className="empty-list-text">Your cart is empty.</div>
+          </div>
+        )}
+      </div>
+      {message && <SnackBar message={message} setMessage={setMessage} />}
+    </>
   );
 };
 

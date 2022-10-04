@@ -1,10 +1,12 @@
 import axios from "axios";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useEffect } from "react";
+import SnackBar from "../../components/SnackBar";
 import { AuthContext } from "../../contexts/AuthContext";
 import "./style.css";
 
 const Checkout = () => {
+  const [message, setMessage] = useState("");
   const { token, userProfile, cart, setCart } = useContext(AuthContext);
   const grandTotal = (arr) => {
     return arr.reduce((sum, i) => {
@@ -25,39 +27,7 @@ const Checkout = () => {
         }
       })
       .catch((err) => {
-        console.log(err.message);
-      });
-
-    const data2 = {
-      userId: userProfile._id,
-      cart: cart,
-      total: grandTotal(cart),
-    };
-    const data3 = { userId: userProfile._id };
-    axios
-      .post("http://localhost:5000/order", data2, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
-    axios
-      .put("http://localhost:5000/cart/emptycart/", data3, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
+        setMessage(err.message);
       });
   };
 
@@ -65,12 +35,11 @@ const Checkout = () => {
     handleCheckout();
   }, []);
 
-  const makeOrder = () => {};
-
   return (
-    <div>
-      <button onClick={makeOrder}>pay</button>
-    </div>
+    <>
+      <div></div>;
+      {message && <SnackBar message={message} setMessage={setMessage} />}
+    </>
   );
 };
 

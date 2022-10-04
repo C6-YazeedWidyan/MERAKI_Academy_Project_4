@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
+import SnackBar from "../../../components/SnackBar";
 import { AuthContext } from "../../../contexts/AuthContext";
 import "./style.css";
 
@@ -9,6 +10,7 @@ const Dashboard = () => {
   const [gamesTotal, setGamesTotal] = useState(0);
   const [ordersTotal, setOrdersTotal] = useState(0);
   const [orderTotalAmount, setOrderTotalAmount] = useState([]);
+  const [message, setMessage] = useState("");
 
   const grandTotal = (arr) => {
     return arr.reduce((sum, i) => {
@@ -27,7 +29,7 @@ const Dashboard = () => {
         setUsersTotal(res.data.usersTotal);
       })
       .catch((err) => {
-        console.log(err);
+        setMessage(err.message);
       });
 
     axios
@@ -40,7 +42,7 @@ const Dashboard = () => {
         setGamesTotal(res.data.gamesTotal);
       })
       .catch((err) => {
-        console.log(err);
+        setMessage(err.message);
       });
 
     axios
@@ -54,57 +56,60 @@ const Dashboard = () => {
         setOrderTotalAmount(res.data.orders);
       })
       .catch((err) => {
-        console.log(err);
+        setMessage(err.message);
       });
   }, []);
 
   return (
-    <div className="dashboard-container">
-      <div className="dashboard-card">
-        <div>
-          <div className="total-text">Live Users</div>
-          <div className="total-number">{usersTotal}</div>
+    <>
+      <div className="dashboard-container">
+        <div className="dashboard-card">
+          <div>
+            <div className="total-text">Live Users</div>
+            <div className="total-number">{usersTotal}</div>
+          </div>
+          <img
+            className="dashboard-card-image"
+            src="../assets/images/polling.png"
+            alt=""
+          />
         </div>
-        <img
-          className="dashboard-card-image"
-          src="../assets/images/polling.png"
-          alt=""
-        />
-      </div>
-      <div className="dashboard-card">
-        <div>
-          <div className="total-text">Items Total</div>
-          <div className="total-number">{gamesTotal}</div>
+        <div className="dashboard-card">
+          <div>
+            <div className="total-text">Items Total</div>
+            <div className="total-number">{gamesTotal}</div>
+          </div>
+          <img
+            className="dashboard-card-image"
+            src="../assets/images/deal.png"
+            alt=""
+          />
         </div>
-        <img
-          className="dashboard-card-image"
-          src="../assets/images/deal.png"
-          alt=""
-        />
-      </div>
-      <div className="dashboard-card">
-        <div>
-          <div className="total-text">Orders Total</div>
-          <div className="total-number">{ordersTotal}</div>
+        <div className="dashboard-card">
+          <div>
+            <div className="total-text">Orders Total</div>
+            <div className="total-number">{ordersTotal}</div>
+          </div>
+          <img
+            className="dashboard-card-image"
+            src="../assets/images/growth.png"
+            alt=""
+          />
         </div>
-        <img
-          className="dashboard-card-image"
-          src="../assets/images/growth.png"
-          alt=""
-        />
-      </div>
-      <div className="dashboard-card">
-        <div>
-          <div className="total-text">Total Sales profit</div>
-          <div className="total-number">${grandTotal(orderTotalAmount)}</div>
+        <div className="dashboard-card">
+          <div>
+            <div className="total-text">Total Sales profit</div>
+            <div className="total-number">${grandTotal(orderTotalAmount)}</div>
+          </div>
+          <img
+            className="dashboard-card-image"
+            src="../assets/images/money-tree.png"
+            alt=""
+          />
         </div>
-        <img
-          className="dashboard-card-image"
-          src="../assets/images/money-tree.png"
-          alt=""
-        />
       </div>
-    </div>
+      {message && <SnackBar message={message} setMessage={setMessage} />}
+    </>
   );
 };
 

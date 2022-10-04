@@ -55,7 +55,9 @@ const addNewGame = (req, res) => {
 
 const getAllGames = (req, res) => {
   const page = req.query.page || 0;
+  console.log(page);
   const gamesPerPage = req.query.limit || 4;
+  console.log(gamesPerPage);
 
   gameModel
     .find({})

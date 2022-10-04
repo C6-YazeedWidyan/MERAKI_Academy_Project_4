@@ -4,6 +4,7 @@ import { useState } from "react";
 import axios from "axios";
 import { AuthContext } from "../../../contexts/AuthContext";
 import Select from "react-select";
+import SnackBar from "../../../components/SnackBar";
 
 const options = [
   { label: "Action", value: "Action" },
@@ -52,6 +53,7 @@ const AddNewGame = () => {
   const [state, setState] = useState("Most Popular");
   const [inStock, setinStock] = useState(false);
   const [releaseDate, setReleaseDate] = useState("");
+  const [addNewGameMsg, setAddNewGameMsg] = useState("");
   const [message, setMessage] = useState("");
 
   const uploadPoster = async (e) => {
@@ -108,7 +110,7 @@ const AddNewGame = () => {
         config
       )
       .then((res) => {
-        setMessage(res.data.message);
+        setAddNewGameMsg(res.data.message);
       })
       .catch((err) => {
         console.log(err);
@@ -121,173 +123,178 @@ const AddNewGame = () => {
   };
 
   return (
-    <div className="add-product-content">
-      <form
-        onSubmit={(e) => {
-          handleSubmit(e);
-        }}
-      >
-        <div className="product-form-wrapper">
-          <div className="product-form-left">
-            <label>Name:</label>
-            <br />
-            <input
-              className="input-field"
-              type="text"
-              value={name}
-              required
-              onChange={(e) => {
-                setName(e.target.value);
-              }}
-            />
-            <br />
-            <label>Price:</label>
-            <br />
-            <input
-              className="input-field"
-              type="text"
-              value={price}
-              required
-              onChange={(e) => {
-                setPrice(e.target.value);
-              }}
-            />
-
-            <br />
-            <label>Platform:</label>
-            <br />
-            <select
-              className="input-field-select"
-              onChange={(e) => {
-                setPlatform(e.target.value);
-              }}
-            >
-              <option value="PC">PC</option>
-              <option value="Nintendo Switch">Nintendo Switch</option>
-              <option value="PlayStation 4">PlayStation 4</option>
-              <option value="PlayStation 5">PlayStation 5</option>
-              <option value="Xbox One">Xbox One</option>
-              <option value="Xbox Series X/S">Xbox Series X/S</option>
-            </select>
-            <br />
-            <label>State:</label>
-            <br />
-            <select
-              className="input-field-select"
-              onChange={(e) => {
-                setState(e.target.value);
-              }}
-            >
-              <option value="Most Popular">Most Popular</option>
-              <option value="New Releases">New Releases</option>
-              <option value="Recently Updated">Recently Updated</option>
-              <option value="Games On Sale">Games On Sale</option>``
-            </select>
-            <br />
-            <label>Release date:</label>
-            <br />
-            <input
-              className="input-field"
-              type="text"
-              value={releaseDate}
-              required
-              onChange={(e) => {
-                setReleaseDate(e.target.value);
-              }}
-            />
-            <br />
-            <label>description:</label>
-            <br />
-            <textarea
-              className="input-textarea"
-              type="text"
-              value={description}
-              required
-              onChange={(e) => {
-                setDescription(e.target.value);
-              }}
-            />
-            <br />
-            <label>Category:</label>
-            <br />
-            <Select
-              className="category-select"
-              isMulti
-              onChange={onChange}
-              options={options}
-              value={categories}
-            />
-            <br />
-            <label>
+    <>
+      <div className="add-product-content">
+        <form
+          onSubmit={(e) => {
+            handleSubmit(e);
+          }}
+        >
+          <div className="product-form-wrapper">
+            <div className="product-form-left">
+              <label>Name:</label>
+              <br />
               <input
-                type="checkbox"
-                checked={inStock}
-                onChange={() => {
-                  setinStock(!inStock);
+                className="input-field"
+                type="text"
+                value={name}
+                required
+                onChange={(e) => {
+                  setName(e.target.value);
                 }}
               />
-              in Stock
-            </label>
-            <br />
-
-            <label>
+              <br />
+              <label>Price:</label>
+              <br />
               <input
-                type="checkbox"
-                checked={ads}
-                onChange={() => {
-                  setAds(!ads);
+                className="input-field"
+                type="text"
+                value={price}
+                required
+                onChange={(e) => {
+                  setPrice(e.target.value);
                 }}
               />
-              Ads?
-            </label>
-            <br />
-          </div>
 
-          <div className="product-form-right">
-            <label>poster:</label>
-            <br />
-            <input
-              className="input-field"
-              type="file"
-              required
-              onChange={(e) => {
-                uploadPoster(e);
-              }}
-            />
-            <br />
-            <label>Logo:</label>
-            <br />
-            <input
-              className="input-field"
-              type="file"
-              required
-              onChange={(e) => {
-                uploadLogo(e);
-              }}
-            />
-            <br />
-            <label>Cover:</label>
-            <br />
-            <input
-              className="input-field"
-              type="file"
-              required
-              onChange={(e) => {
-                uploadCover(e);
-              }}
-            />
-            {!!logo && !!cover && !!poster ? (
-              <div className="photos-div">
-                <img src={cover} alt="cover" height="125px" />
-                <img src={poster} alt="poster" height="125px" />
-                <img src={logo} alt="logo" height="125px" />
-              </div>
-            ) : null}
+              <br />
+              <label>Platform:</label>
+              <br />
+              <select
+                className="input-field-select"
+                onChange={(e) => {
+                  setPlatform(e.target.value);
+                }}
+              >
+                <option value="PC">PC</option>
+                <option value="Nintendo Switch">Nintendo Switch</option>
+                <option value="PlayStation 4">PlayStation 4</option>
+                <option value="PlayStation 5">PlayStation 5</option>
+                <option value="Xbox One">Xbox One</option>
+                <option value="Xbox Series X/S">Xbox Series X/S</option>
+              </select>
+              <br />
+              <label>State:</label>
+              <br />
+              <select
+                className="input-field-select"
+                onChange={(e) => {
+                  setState(e.target.value);
+                }}
+              >
+                <option value="Most Popular">Most Popular</option>
+                <option value="New Releases">New Releases</option>
+                <option value="Recently Updated">Recently Updated</option>
+                <option value="Games On Sale">Games On Sale</option>``
+              </select>
+              <br />
+              <label>Release date:</label>
+              <br />
+              <input
+                className="input-field"
+                type="text"
+                value={releaseDate}
+                required
+                onChange={(e) => {
+                  setReleaseDate(e.target.value);
+                }}
+              />
+              <br />
+              <label>description:</label>
+              <br />
+              <textarea
+                className="input-textarea"
+                type="text"
+                value={description}
+                required
+                onChange={(e) => {
+                  setDescription(e.target.value);
+                }}
+              />
+              <br />
+              <label>Category:</label>
+              <br />
+              <Select
+                className="category-select"
+                isMulti
+                onChange={onChange}
+                options={options}
+                value={categories}
+              />
+              <br />
+              <label>
+                <input
+                  type="checkbox"
+                  checked={inStock}
+                  onChange={() => {
+                    setinStock(!inStock);
+                  }}
+                />
+                in Stock
+              </label>
+              <br />
+
+              <label>
+                <input
+                  type="checkbox"
+                  checked={ads}
+                  onChange={() => {
+                    setAds(!ads);
+                  }}
+                />
+                Ads?
+              </label>
+              <br />
+              <h3>{addNewGameMsg}</h3>
+              <br />
+            </div>
+
+            <div className="product-form-right">
+              <label>poster:</label>
+              <br />
+              <input
+                className="input-field"
+                type="file"
+                required
+                onChange={(e) => {
+                  uploadPoster(e);
+                }}
+              />
+              <br />
+              <label>Logo:</label>
+              <br />
+              <input
+                className="input-field"
+                type="file"
+                required
+                onChange={(e) => {
+                  uploadLogo(e);
+                }}
+              />
+              <br />
+              <label>Cover:</label>
+              <br />
+              <input
+                className="input-field"
+                type="file"
+                required
+                onChange={(e) => {
+                  uploadCover(e);
+                }}
+              />
+              {!!logo && !!cover && !!poster ? (
+                <div className="photos-div">
+                  <img src={cover} alt="cover" height="125px" />
+                  <img src={poster} alt="poster" height="125px" />
+                  <img src={logo} alt="logo" height="125px" />
+                </div>
+              ) : null}
+            </div>
           </div>
-        </div>
-        <input className="add-btn" type="submit" value="Save" />
-      </form>
-    </div>
+          <input className="add-btn" type="submit" value="Save" />
+        </form>
+      </div>
+      {message && <SnackBar message={message} setMessage={setMessage} />}
+    </>
   );
 };
 
