@@ -53,6 +53,19 @@
   align-self: flex-start;
 }
 
+.get-more-games-btn {
+  background-color: red;
+  width: 200px;
+  margin: 0 auto;
+  text-align: center;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.get-more-games-btn:hover {
+  background-color: rgba(255, 255, 255, 0.127);
+}
+
 @media (min-width: 768px) {
   .browse-grid {
     grid-template-columns: repeat(1, 4fr);

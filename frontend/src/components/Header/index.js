@@ -28,7 +28,9 @@ const Header = () => {
         </Link>
       </div>
       {isLoggedIn ? (
-        <div onClick={logout}>Logout</div>
+        <div className="logout-btn" onClick={logout}>
+          Logout
+        </div>
       ) : (
         <div className="wrapper">
           <Link className="link" to="/register">

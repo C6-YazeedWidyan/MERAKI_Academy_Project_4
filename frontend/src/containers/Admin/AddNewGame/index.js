@@ -276,13 +276,17 @@ const AddNewGame = () => {
                 uploadCover(e);
               }}
             />
+            {!!logo && !!cover && !!poster ? (
+              <div className="photos-div">
+                <img src={cover} alt="cover" height="125px" />
+                <img src={poster} alt="poster" height="125px" />
+                <img src={logo} alt="logo" height="125px" />
+              </div>
+            ) : null}
           </div>
         </div>
         <input className="add-btn" type="submit" value="Save" />
       </form>
-      <img src={cover} alt="sss" height="200px" />
-      <img src={poster} alt="sss" height="200px" />
-      <img src={logo} alt="sss" height="200px" />
     </div>
   );
 };

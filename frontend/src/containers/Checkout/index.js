@@ -54,7 +54,7 @@ const Checkout = () => {
         },
       })
       .then((res) => {
-        setCart([]);
+        console.log(res);
       })
       .catch((err) => {
         console.log(err);

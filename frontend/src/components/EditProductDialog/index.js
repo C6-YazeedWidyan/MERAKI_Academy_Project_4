@@ -43,8 +43,8 @@ const EditProductDialog = ({ gameDetails, setIsEdit, games, setGames }) => {
     { label: gameDetails.category[0], value: gameDetails.category[0] },
   ]);
   const [description, setDescription] = useState(gameDetails.description);
-  const [platform, setPlatform] = useState("PC");
-  const [state, setState] = useState("Most Popular");
+  const [platform, setPlatform] = useState(gameDetails.platform);
+  const [state, setState] = useState(gameDetails.state);
   const [inStock, setinStock] = useState(gameDetails.inStock);
   const [releaseDate, setReleaseDate] = useState(gameDetails.releaseDate);
 
@@ -150,6 +150,36 @@ const EditProductDialog = ({ gameDetails, setIsEdit, games, setGames }) => {
                   setPrice(e.target.value);
                 }}
               />
+              <br />
+              <label>Platform:</label>
+              <br />
+              <select
+                className="input-field-select"
+                onChange={(e) => {
+                  setPlatform(e.target.value);
+                }}
+              >
+                <option value="PC">PC</option>
+                <option value="Nintendo Switch">Nintendo Switch</option>
+                <option value="PlayStation 4">PlayStation 4</option>
+                <option value="PlayStation 5">PlayStation 5</option>
+                <option value="Xbox One">Xbox One</option>
+                <option value="Xbox Series X/S">Xbox Series X/S</option>
+              </select>
+              <br />
+              <label>State:</label>
+              <br />
+              <select
+                className="input-field-select"
+                onChange={(e) => {
+                  setState(e.target.value);
+                }}
+              >
+                <option value="Most Popular">Most Popular</option>
+                <option value="New Releases">New Releases</option>
+                <option value="Recently Updated">Recently Updated</option>
+                <option value="Games On Sale">Games On Sale</option>``
+              </select>
               <br />
               <label>Release date:</label>
               <br />

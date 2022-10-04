@@ -23,3 +23,7 @@
 .cart-circle {
   border-bottom: solid 1px #c62828;
 }
+
+.logout-btn {
+  cursor: pointer;
+}

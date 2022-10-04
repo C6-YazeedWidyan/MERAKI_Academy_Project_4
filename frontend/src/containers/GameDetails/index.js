@@ -59,7 +59,7 @@ const GameDetails = () => {
     const data = {
       userId: userProfile._id,
       gameId: id,
-      total: 44,
+      total: grandTotal(cart) - game.price,
     };
     axios
       .put(`http://localhost:5000/cart/delete`, data, {
@@ -155,7 +155,7 @@ const GameDetails = () => {
             </div>
           ) : (
             <div className="wishlist-details-btn" onClick={addToWishList}>
-              add to wish list
+              add to wishlist
             </div>
           )}
           <div className="info-wrapper">

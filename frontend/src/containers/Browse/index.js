@@ -13,18 +13,18 @@ const Browse = () => {
     useContext(AuthContext);
   const [data, setData] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [pageNumber, setPageNumber] = useState(0);
+  const [page, setPage] = useState(0);
   const [limit, setLimit] = useState(4);
   const [keyword, setKeyword] = useState("");
   const [showOption, setShowOption] = useState(false);
   const navigate = useNavigate();
 
   const getAllGames = () => {
-    setPageNumber(pageNumber + 1);
-    setLimit(limit * 2);
+    setPage(page + 1);
+    console.log(page);
     setKeyword("");
     axios
-      .get(`http://localhost:5000/games?limit=${limit}&?page=${pageNumber}`)
+      .get(`http://localhost:5000/games?page=${page}&limit=${limit}`)
       .then((res) => {
         setData(res.data.games);
       });
@@ -132,6 +132,9 @@ const Browse = () => {
               />
             );
           })}
+          <div className="get-more-games-btn" onClick={getAllGames}>
+            Get More Games
+          </div>
         </div>
         <div className="browse-left-wrapper">
           <h3 className="all-btn" onClick={getAllGames}>
@@ -173,7 +176,6 @@ const Browse = () => {
           </div>
         </div>
       </div>
-      <button onClick={getAllGames}>Get More Games</button>
     </>
   );
 };

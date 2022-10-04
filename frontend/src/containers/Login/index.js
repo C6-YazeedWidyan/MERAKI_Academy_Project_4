@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 import SnackBar from "../../components/SnackBar";
 import { GoogleLogin } from "@react-oauth/google";
-import jwt_decode from "jwt-decode";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -24,11 +23,48 @@ const Login = () => {
     const data = {
       tokenId: response.credential,
     };
-    console.log(response.credential);
     axios
       .post("http://localhost:5000/googlelogin", data)
       .then((res) => {
-        console.log(res);
+        localStorage.setItem("token", res.data.token);
+        localStorage.setItem(
+          "userProfile",
+          JSON.stringify(res.data.userProfile)
+        );
+        saveToken(res.data.token, res.data.userProfile.role.role);
+
+        const data = {
+          userId: res.data.userProfile._id,
+        };
+
+        axios
+          .post("http://localhost:5000/cart", data, {
+            headers: {
+              Authorization: `Bearer ${res.data.token}`,
+            },
+          })
+          .then((res) => {
+            setCart(res.data.cart.games);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+
+        axios
+          .post("http://localhost:5000/wishlist", data, {
+            headers: {
+              Authorization: `Bearer ${res.data.token}`,
+            },
+          })
+          .then((result) => {
+            setWishList(result.data.wishList.games);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+
+        navigate("/");
+        setStatus(true);
       })
       .catch((err) => {
         console.log(err);
@@ -123,12 +159,14 @@ const Login = () => {
           Login
         </div>
         <br />
+        <div className="google">
+          <GoogleLogin
+            onSuccess={responseSuccessGoogle}
+            onError={responseErrorGoogle}
+          />
+        </div>
       </div>
       {message && <SnackBar message={message} setMessage={setMessage} />}
-      <GoogleLogin
-        onSuccess={responseSuccessGoogle}
-        onError={responseErrorGoogle}
-      />
     </>
   );
 };

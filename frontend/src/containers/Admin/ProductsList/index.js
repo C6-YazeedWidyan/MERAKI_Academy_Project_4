@@ -1,10 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import "./style.css";
 
 import axios from "axios";
 import { AuthContext } from "../../../contexts/AuthContext";
-import Select from "react-select";
 import EditProductDialog from "../../../components/EditProductDialog";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
@@ -118,7 +116,9 @@ const ProductsList = () => {
         />
       )}
       {message && <div>{message}</div>}
-      <button onClick={getAllGames}>get more games</button>
+      <div className="reload-btn" onClick={getAllGames}>
+        V
+      </div>
     </>
   );
 };
