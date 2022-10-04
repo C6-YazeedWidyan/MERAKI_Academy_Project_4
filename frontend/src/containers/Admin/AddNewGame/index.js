@@ -247,7 +247,6 @@ const AddNewGame = () => {
               <h3>{addNewGameMsg}</h3>
               <br />
             </div>
-
             <div className="product-form-right">
               <label>poster:</label>
               <br />

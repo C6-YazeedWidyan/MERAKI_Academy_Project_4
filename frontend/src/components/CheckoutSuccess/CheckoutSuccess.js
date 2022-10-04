@@ -54,7 +54,7 @@ const CheckoutSuccess = () => {
 
   return (
     <>
-      <div>CheckoutSuccess</div>
+      <div>Checkout Success</div>
       <div>{orderMsg}</div>
       {message && <SnackBar message={message} setMessage={setMessage} />}
     </>

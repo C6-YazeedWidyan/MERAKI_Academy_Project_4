@@ -25,7 +25,9 @@ const Wishlist = () => {
         .then((res) => {
           setWishList(res.data.wishList.games);
         })
-        .catch((err) => {});
+        .catch((err) => {
+          setMessage(err.message);
+        });
     }
   }, []);
 

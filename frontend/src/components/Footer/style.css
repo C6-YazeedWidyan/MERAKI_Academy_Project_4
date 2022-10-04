@@ -10,3 +10,8 @@
 .contact-us-btn {
   cursor: pointer;
 }
+
+a {
+  color: #c62828;
+  text-decoration: none;
+}
