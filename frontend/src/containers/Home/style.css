@@ -25,6 +25,7 @@
   object-fit: cover;
   flex: 5 1;
   border-radius: 14px;
+  cursor: pointer;
 }
 .card-list-item {
   display: flex;

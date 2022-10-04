@@ -2,9 +2,11 @@ import "./App.css";
 import Router from "./router";
 import { AuthContext } from "./contexts/AuthContext";
 import axios from "axios";
-import { useEffect, useContext } from "react";
+import { useEffect, useContext, useState } from "react";
+import SnackBar from "./components/SnackBar";
 
 function App() {
+  const [message, setMessage] = useState("");
   const { token, isLoggedIn, userProfile, setCart, setWishList } =
     useContext(AuthContext);
 
@@ -30,15 +32,18 @@ function App() {
           setWishList(res.data.wishList.games);
         })
         .catch((err) => {
-          console.log(err);
+          setMessage(err.message);
         });
     }
   }, [token, isLoggedIn, userProfile]);
 
   return (
-    <div className="App">
-      <Router />
-    </div>
+    <>
+      <div className="App">
+        <Router />
+      </div>
+      {message && <SnackBar message={message} setMessage={setMessage} />}
+    </>
   );
 }
 

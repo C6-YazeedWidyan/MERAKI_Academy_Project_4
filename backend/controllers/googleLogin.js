@@ -40,7 +40,7 @@ const googlelogin = (req, res) => {
                 const token = jwt.sign(payload, process.env.SECRET, options);
                 res.status(200).json({
                   success: true,
-                  message: `yazeed`,
+                  message: `login success`,
                   userProfile: result,
                   token: token,
                 });
@@ -72,7 +72,7 @@ const googlelogin = (req, res) => {
                   const token = jwt.sign(payload, process.env.SECRET, options);
                   res.status(200).json({
                     success: true,
-                    message: `aos`,
+                    message: `sign in succes`,
                     userProfile: data,
                     token: token,
                   });

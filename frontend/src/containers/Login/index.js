@@ -19,7 +19,6 @@ const Login = () => {
   const navigate = useNavigate();
 
   const responseSuccessGoogle = (response) => {
-    console.log(response);
     const data = {
       tokenId: response.credential,
     };
@@ -47,7 +46,7 @@ const Login = () => {
             setCart(res.data.cart.games);
           })
           .catch((err) => {
-            console.log(err);
+            setMessage(err.message);
           });
 
         axios
@@ -60,20 +59,18 @@ const Login = () => {
             setWishList(result.data.wishList.games);
           })
           .catch((err) => {
-            console.log(err);
+            setMessage(err.message);
           });
 
         navigate("/");
         setStatus(true);
       })
       .catch((err) => {
-        console.log(err);
+        setMessage(err.message);
       });
   };
 
-  const responseErrorGoogle = (response) => {
-    console.log(response);
-  };
+  const responseErrorGoogle = (response) => {};
 
   const login = () => {
     axios
@@ -101,7 +98,7 @@ const Login = () => {
             setCart(res.data.cart.games);
           })
           .catch((err) => {
-            console.log(err);
+            setMessage(err.message);
           });
 
         axios
@@ -114,7 +111,7 @@ const Login = () => {
             setWishList(result.data.wishList.games);
           })
           .catch((err) => {
-            console.log(err);
+            setMessage(err.message);
           });
 
         navigate("/");

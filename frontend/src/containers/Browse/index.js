@@ -23,7 +23,6 @@ const Browse = () => {
 
   const getAllGames = () => {
     setPage(page + 1);
-    console.log(page);
     setKeyword("");
     axios
       .get(`http://localhost:5000/games?page=${page}&limit=${limit}`)

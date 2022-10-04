@@ -15,6 +15,7 @@ const Home = () => {
   const [newReleasesGames, setNewReleasesGames] = useState([]);
   const [adsGames, setAdsGames] = useState([]);
   const [ADImage, setADImage] = useState("");
+  const [ADgameId, setADgameId] = useState("");
   const [ads, setAds] = useState(true);
   const [message, setMessage] = useState("");
 
@@ -26,6 +27,7 @@ const Home = () => {
       .then((res) => {
         setAdsGames(res.data);
         setADImage(res.data[0].cover);
+        setADgameId(res.data[0]._id);
       })
       .catch((err) => {
         setMessage(err.message);
@@ -105,6 +107,11 @@ const Home = () => {
       });
   };
 
+  const handleClickOnGameAds = (cover, id) => {
+    setADImage(cover);
+    setADgameId(id);
+  };
+
   const goToDetails = (id) => {
     navigate("/gameDetails", {
       state: id,
@@ -115,13 +122,18 @@ const Home = () => {
     <>
       <div className="home-container">
         <div className="ads-cards">
-          <img className="ad-image-big-item" src={ADImage} alt="" />
+          <img
+            onClick={() => goToDetails(ADgameId)}
+            className="ad-image-big-item"
+            src={ADImage}
+            alt="ad-image"
+          />
           <div className="ads-card-list">
             {adsGames.map((game) => {
               return (
                 <div
                   key={game._id}
-                  onClick={() => setADImage(game.cover)}
+                  onClick={() => handleClickOnGameAds(game.cover, game._id)}
                   className="card-list-item"
                 >
                   <img
