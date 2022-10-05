@@ -7,17 +7,16 @@ import GameCard from "../../components/GameCard";
 import { AuthContext } from "../../contexts/AuthContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
-import SnackBar from "../../components/SnackBar";
 
 const Browse = () => {
-  const { wishlist, userProfile, setWishList } = useContext(AuthContext);
+  const { wishlist, userProfile, setWishList, setLoading, setErrorMessage } =
+    useContext(AuthContext);
   const [token] = useState(localStorage.getItem("token"));
   const [data, setData] = useState([]);
   const [categories, setCategories] = useState([]);
   const [page, setPage] = useState(0);
   const [limit, setLimit] = useState(4);
   const [keyword, setKeyword] = useState("");
-  const [message, setMessage] = useState("");
   const [showOption, setShowOption] = useState(false);
   const navigate = useNavigate();
 
@@ -26,10 +25,11 @@ const Browse = () => {
     axios
       .get(`http://localhost:5000/games?page=${page}&limit=${12}`)
       .then((res) => {
+        setLoading(false);
         setData(res.data.games);
       })
       .catch((err) => {
-        setMessage(err.message);
+        setErrorMessage(err.message);
       });
   };
 
@@ -38,9 +38,10 @@ const Browse = () => {
       .get("http://localhost:5000/category/all/")
       .then((res) => {
         setCategories(res.data.categories);
+        setLoading(false);
       })
       .catch((err) => {
-        setMessage(err.message);
+        setErrorMessage(err.message);
       });
   };
 
@@ -52,7 +53,7 @@ const Browse = () => {
         setData(res.data);
       })
       .catch((err) => {
-        setMessage(err.message);
+        setErrorMessage(err.message);
       });
   };
 
@@ -79,7 +80,7 @@ const Browse = () => {
           setWishList(res.data.wishList.games);
         })
         .catch((err) => {
-          setMessage(err.message);
+          setErrorMessage(err.message);
         });
     } else {
       navigate("/login");
@@ -105,16 +106,16 @@ const Browse = () => {
         setWishList(newWishList);
       })
       .catch((err) => {
-        setMessage(err.message);
+        setErrorMessage(err.message);
       });
   };
 
   const selectPage = (i) => {
-    console.log(i);
     setPage(i);
   };
 
   useEffect(() => {
+    setLoading(true);
     getAllGames();
     getAllCategoriesTitles();
   }, []);
@@ -141,7 +142,6 @@ const Browse = () => {
             );
           })}
         </div>
-
         <div className="browse-left-wrapper">
           <h3 className="all-btn" onClick={getAllGames}>
             All
@@ -198,7 +198,6 @@ const Browse = () => {
           );
         })}
       </div>
-      {message && <SnackBar message={message} setMessage={setMessage} />}
     </div>
   );
 };

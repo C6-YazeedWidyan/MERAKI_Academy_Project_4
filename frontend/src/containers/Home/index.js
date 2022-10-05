@@ -8,7 +8,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 import SnackBar from "../../components/SnackBar";
 
 const Home = () => {
-  const { userProfile, wishlist, setWishList, setLoading } =
+  const { userProfile, wishlist, setWishList, setLoading, setErrorMessage } =
     useContext(AuthContext);
   const [token] = useState(localStorage.getItem("token"));
   const [mostPopularGames, setMostPopularGames] = useState([]);
@@ -18,7 +18,6 @@ const Home = () => {
   const [ADImage, setADImage] = useState("");
   const [ADgameId, setADgameId] = useState("");
   const [ads, setAds] = useState(true);
-  const [message, setMessage] = useState("");
 
   const navigate = useNavigate();
 
@@ -33,7 +32,7 @@ const Home = () => {
         setLoading(false);
       })
       .catch((err) => {
-        setMessage(err.message);
+        setErrorMessage(err.message);
         setLoading(false);
       });
     axios
@@ -42,7 +41,7 @@ const Home = () => {
         setMostPopularGames(res.data);
       })
       .catch((err) => {
-        setMessage(err.message);
+        setErrorMessage(err.message);
       });
 
     axios
@@ -51,7 +50,7 @@ const Home = () => {
         setGamesOnSale(res.data);
       })
       .catch((err) => {
-        setMessage(err.message);
+        setErrorMessage(err.message);
       });
 
     axios
@@ -60,7 +59,7 @@ const Home = () => {
         setNewReleasesGames(res.data);
       })
       .catch((err) => {
-        setMessage(err.message);
+        setErrorMessage(err.message);
       });
   }, []);
 
@@ -81,7 +80,7 @@ const Home = () => {
           setWishList(res.data.wishList.games);
         })
         .catch((err) => {
-          setMessage(err.message);
+          setErrorMessage(err.message);
         });
     } else {
       navigate("/login");
@@ -107,7 +106,7 @@ const Home = () => {
         setWishList(newWishList);
       })
       .catch((err) => {
-        setMessage(err.message);
+        setErrorMessage(err.message);
       });
   };
 
@@ -213,7 +212,6 @@ const Home = () => {
         </div>
       </div>
       <Footer />
-      {message && <SnackBar message={message} setMessage={setMessage} />}
     </>
   );
 };

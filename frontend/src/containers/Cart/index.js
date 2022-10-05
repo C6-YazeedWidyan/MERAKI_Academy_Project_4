@@ -6,8 +6,8 @@ import "./style.css";
 import SnackBar from "../../components/SnackBar";
 
 const Cart = () => {
-  const [message, setMessage] = useState("");
-  const { userProfile, cart, setCart } = useContext(AuthContext);
+  const { userProfile, cart, setCart, setLoading, setErrorMessage } =
+    useContext(AuthContext);
   const [token] = useState(localStorage.getItem("token"));
   const navigate = useNavigate();
   console.log(cart);
@@ -16,6 +16,7 @@ const Cart = () => {
     if (!token) {
       navigate("/login");
     } else {
+      setLoading(true);
       axios
         .get(`http://localhost:5000/cart/${userProfile._id}`, {
           headers: {
@@ -24,9 +25,11 @@ const Cart = () => {
         })
         .then((res) => {
           setCart(res.data.cart.games);
+          setLoading(false);
         })
         .catch((err) => {
-          setMessage(err.message);
+          setErrorMessage(err.message);
+          setLoading(false);
         });
     }
   }, []);
@@ -58,7 +61,7 @@ const Cart = () => {
         }
       })
       .catch((err) => {
-        setMessage(err.message);
+        setErrorMessage(err.message);
       });
   };
 
@@ -101,7 +104,6 @@ const Cart = () => {
                   );
                 })}
               </div>
-
               <div className="cart-right-wrapper">
                 <div className="cart-summary-title">Games Summary</div>
                 <div className="cart-total-details">
@@ -129,7 +131,6 @@ const Cart = () => {
           </div>
         )}
       </div>
-      {message && <SnackBar message={message} setMessage={setMessage} />}
     </>
   );
 };

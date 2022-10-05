@@ -1,15 +1,16 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import SnackBar from "../../../components/SnackBar";
+import React, { useEffect, useState, useContext } from "react";
+import { AuthContext } from "../../../contexts/AuthContext";
 import "./style.css";
 
 const Dashboard = () => {
+  const { setErrorMessage } = useContext(AuthContext);
+
   const [token] = useState(localStorage.getItem("token"));
   const [usersTotal, setUsersTotal] = useState(0);
   const [gamesTotal, setGamesTotal] = useState(0);
   const [ordersTotal, setOrdersTotal] = useState(0);
   const [orderTotalAmount, setOrderTotalAmount] = useState([]);
-  const [message, setMessage] = useState("");
 
   const grandTotal = (arr) => {
     return arr.reduce((sum, i) => {
@@ -28,7 +29,7 @@ const Dashboard = () => {
         setUsersTotal(res.data.usersTotal);
       })
       .catch((err) => {
-        setMessage(err.message);
+        setErrorMessage(err.message);
       });
 
     axios
@@ -41,7 +42,7 @@ const Dashboard = () => {
         setGamesTotal(res.data.gamesTotal);
       })
       .catch((err) => {
-        setMessage(err.message);
+        setErrorMessage(err.message);
       });
 
     axios
@@ -55,7 +56,7 @@ const Dashboard = () => {
         setOrderTotalAmount(res.data.orders);
       })
       .catch((err) => {
-        setMessage(err.message);
+        setErrorMessage(err.message);
       });
   }, []);
 
@@ -98,7 +99,9 @@ const Dashboard = () => {
         <div className="dashboard-card">
           <div>
             <div className="total-text">Total Sales profit</div>
-            <div className="total-number">${grandTotal(orderTotalAmount)}</div>
+            <div className="total-number">
+              ${Math.ceil(grandTotal(orderTotalAmount))}
+            </div>
           </div>
           <img
             className="dashboard-card-image"
@@ -107,7 +110,6 @@ const Dashboard = () => {
           />
         </div>
       </div>
-      {message && <SnackBar message={message} setMessage={setMessage} />}
     </>
   );
 };

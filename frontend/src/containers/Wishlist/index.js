@@ -7,15 +7,16 @@ import "./style.css";
 import SnackBar from "../../components/SnackBar";
 
 const Wishlist = () => {
-  const [message, setMessage] = useState("");
   const [token] = useState(localStorage.getItem("token"));
-  const { userProfile, wishlist, setWishList } = useContext(AuthContext);
+  const { userProfile, wishlist, setWishList, setLoading, setErrorMessage } =
+    useContext(AuthContext);
   const navigate = useNavigate();
 
   useEffect(() => {
     if (!token) {
       navigate("/login");
     } else {
+      setLoading(true);
       axios
         .get(`http://localhost:5000/wishlist/${userProfile._id}`, {
           headers: {
@@ -24,9 +25,11 @@ const Wishlist = () => {
         })
         .then((res) => {
           setWishList(res.data.wishList.games);
+          setLoading(false);
         })
         .catch((err) => {
-          setMessage(err.message);
+          setErrorMessage(err.message);
+          setLoading(false);
         });
     }
   }, []);
@@ -49,7 +52,7 @@ const Wishlist = () => {
         setWishList(newWishList);
       })
       .catch((err) => {
-        setMessage(err.message);
+        setErrorMessage(err.message);
       });
   };
 
@@ -104,7 +107,6 @@ const Wishlist = () => {
           </div>
         )}
       </div>
-      {message && <SnackBar message={message} setMessage={setMessage} />}
     </>
   );
 };

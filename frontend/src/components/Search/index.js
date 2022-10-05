@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
 import "./style.css";
 import { useNavigate } from "react-router-dom";
-import SnackBar from "../SnackBar";
+import { AuthContext } from "../../contexts/AuthContext";
 
 const Search = () => {
   const [searchResult, setSearchResult] = useState([]);
   const [keyword, setKeyword] = useState("");
-  const [message, setMessage] = useState("");
+  const { setErrorMessage } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
@@ -19,7 +19,7 @@ const Search = () => {
         setSearchResult(res.data.slice(0, 3));
       })
       .catch((err) => {
-        setMessage(err.message);
+        setErrorMessage(err.message);
       });
   };
 
@@ -82,7 +82,6 @@ const Search = () => {
           )
         )}
       </div>
-      {message && <SnackBar message={message} setMessage={setMessage} />}
     </>
   );
 };

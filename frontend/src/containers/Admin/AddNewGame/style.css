@@ -32,3 +32,18 @@
 .photos-div {
   margin-top: 40px;
 }
+
+.image-input-field {
+  border-radius: 4px;
+  border: solid 1px dimgrey;
+  padding: 12px;
+  width: 90%;
+}
+.image-input-field::file-selector-button {
+  font-weight: bold;
+  color: #c62828;
+  padding: 0.5em;
+  border: thin solid grey;
+  border-radius: 3px;
+  cursor: pointer;
+}

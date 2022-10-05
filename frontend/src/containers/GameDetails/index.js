@@ -8,8 +8,15 @@ import SnackBar from "../../components/SnackBar";
 const GameDetails = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { userProfile, wishlist, setWishList, cart, setCart, setLoading } =
-    useContext(AuthContext);
+  const {
+    userProfile,
+    wishlist,
+    setWishList,
+    cart,
+    setCart,
+    setLoading,
+    setErrorMessage,
+  } = useContext(AuthContext);
   const [token] = useState(localStorage.getItem("token"));
   const [game, setGame] = useState({});
   const [inCart, setInCart] = useState(false);
@@ -26,7 +33,7 @@ const GameDetails = () => {
       })
       .catch((err) => {
         setLoading(false);
-        setMessage(err.message);
+        setErrorMessage(err.message);
       });
 
     const foundInCart = cart.find((item) => {
@@ -64,7 +71,7 @@ const GameDetails = () => {
         setCart(res.data.cart.games);
       })
       .catch((err) => {
-        setMessage(err.message);
+        setErrorMessage(err.message);
       });
   };
 
@@ -87,7 +94,7 @@ const GameDetails = () => {
         setCart(newCart);
       })
       .catch((err) => {
-        setMessage(err.message);
+        setErrorMessage(err.message);
       });
   };
 
@@ -107,7 +114,7 @@ const GameDetails = () => {
         setWishList(res.data.wishList.games);
       })
       .catch((err) => {
-        setMessage(err.message);
+        setErrorMessage(err.message);
       });
   };
 
@@ -129,7 +136,7 @@ const GameDetails = () => {
         setWishList(newWishList);
       })
       .catch((err) => {
-        setMessage(err.message);
+        setErrorMessage(err.message);
       });
   };
 
@@ -193,7 +200,6 @@ const GameDetails = () => {
           </div>
         </div>
       </div>
-      {message && <SnackBar message={message} setMessage={setMessage} />}
     </>
   );
 };

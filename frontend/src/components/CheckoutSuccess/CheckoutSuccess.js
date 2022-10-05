@@ -4,11 +4,9 @@ import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import SnackBar from "../SnackBar";
 
 const CheckoutSuccess = () => {
-  const { setCart } = useContext(AuthContext);
-  const [message, setMessage] = useState("");
+  const { setCart, setErrorMessage } = useContext(AuthContext);
   const [orderMsg, setOrderMsg] = useState("");
   const [token] = useState(localStorage.getItem("token"));
 
@@ -36,11 +34,10 @@ const CheckoutSuccess = () => {
         },
       })
       .then((res) => {
-        console.log(res);
         setOrderMsg(res.data.message);
       })
       .catch((err) => {
-        setMessage(err.message);
+        setErrorMessage(err.message);
       });
 
     axios
@@ -53,7 +50,7 @@ const CheckoutSuccess = () => {
         setCart([]);
       })
       .catch((err) => {
-        setMessage(err.message);
+        setErrorMessage(err.message);
       });
   }, []);
 
@@ -61,7 +58,6 @@ const CheckoutSuccess = () => {
     <>
       <div>Checkout Success</div>
       <div>{orderMsg}</div>
-      {message && <SnackBar message={message} setMessage={setMessage} />}
     </>
   );
 };

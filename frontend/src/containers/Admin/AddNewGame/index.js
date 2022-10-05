@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "./style.css";
 import axios from "axios";
 import { AuthContext } from "../../../contexts/AuthContext";
 import Select from "react-select";
-import SnackBar from "../../../components/SnackBar";
 
 const options = [
   { label: "Action", value: "Action" },
@@ -32,6 +31,7 @@ const options = [
 ];
 
 const AddNewGame = () => {
+  const { setErrorMessage } = useContext(AuthContext);
   const [token] = useState(localStorage.getItem("token"));
 
   const config = {
@@ -53,7 +53,6 @@ const AddNewGame = () => {
   const [inStock, setinStock] = useState(false);
   const [releaseDate, setReleaseDate] = useState("");
   const [addNewGameMsg, setAddNewGameMsg] = useState("");
-  const [message, setMessage] = useState("");
 
   const uploadPoster = async (e) => {
     const file = e.target.files[0];
@@ -112,7 +111,7 @@ const AddNewGame = () => {
         setAddNewGameMsg(res.data.message);
       })
       .catch((err) => {
-        setMessage(err.message);
+        setErrorMessage(err.message);
       });
     e.preventDefault();
   };
@@ -154,12 +153,11 @@ const AddNewGame = () => {
                   setPrice(e.target.value);
                 }}
               />
-
               <br />
               <label>Platform:</label>
               <br />
               <select
-                className="input-field-select"
+                className="input-field"
                 onChange={(e) => {
                   setPlatform(e.target.value);
                 }}
@@ -175,7 +173,7 @@ const AddNewGame = () => {
               <label>State:</label>
               <br />
               <select
-                className="input-field-select"
+                className="input-field"
                 onChange={(e) => {
                   setState(e.target.value);
                 }}
@@ -231,7 +229,6 @@ const AddNewGame = () => {
                 in Stock
               </label>
               <br />
-
               <label>
                 <input
                   type="checkbox"
@@ -250,7 +247,7 @@ const AddNewGame = () => {
               <label>poster:</label>
               <br />
               <input
-                className="input-field"
+                className="image-input-field"
                 type="file"
                 required
                 onChange={(e) => {
@@ -261,7 +258,7 @@ const AddNewGame = () => {
               <label>Logo:</label>
               <br />
               <input
-                className="input-field"
+                className="image-input-field"
                 type="file"
                 required
                 onChange={(e) => {
@@ -272,7 +269,7 @@ const AddNewGame = () => {
               <label>Cover:</label>
               <br />
               <input
-                className="input-field"
+                className="image-input-field"
                 type="file"
                 required
                 onChange={(e) => {
@@ -291,7 +288,6 @@ const AddNewGame = () => {
           <input className="add-btn" type="submit" value="Save" />
         </form>
       </div>
-      {message && <SnackBar message={message} setMessage={setMessage} />}
     </>
   );
 };

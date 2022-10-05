@@ -3,7 +3,6 @@ import "./EditProductDialog.css";
 import Select from "react-select";
 import axios from "axios";
 import { AuthContext } from "../../contexts/AuthContext";
-import SnackBar from "../SnackBar";
 
 const options = [
   { label: "Action", value: "Action" },
@@ -33,6 +32,7 @@ const options = [
 
 const EditProductDialog = ({ gameDetails, setIsEdit, games, setGames }) => {
   const [token] = useState(localStorage.getItem("token"));
+  const { setErrorMessage } = useContext(AuthContext);
 
   const [name, setName] = useState(gameDetails.name);
   const [price, setPrice] = useState(gameDetails.price);
@@ -48,7 +48,6 @@ const EditProductDialog = ({ gameDetails, setIsEdit, games, setGames }) => {
   const [state, setState] = useState(gameDetails.state);
   const [inStock, setinStock] = useState(gameDetails.inStock);
   const [releaseDate, setReleaseDate] = useState(gameDetails.releaseDate);
-  const [message, setMessage] = useState("");
 
   useEffect(() => {
     const result = gameDetails.category.map((item) => ({
@@ -106,7 +105,7 @@ const EditProductDialog = ({ gameDetails, setIsEdit, games, setGames }) => {
         setIsEdit(false);
       })
       .catch((err) => {
-        setMessage(err.message);
+        setErrorMessage(err.message);
         setIsEdit(false);
       });
     e.preventDefault();
@@ -284,7 +283,6 @@ const EditProductDialog = ({ gameDetails, setIsEdit, games, setGames }) => {
           </form>
         </div>
       </div>
-      {message && <SnackBar message={message} setMessage={setMessage} />}
     </>
   );
 };

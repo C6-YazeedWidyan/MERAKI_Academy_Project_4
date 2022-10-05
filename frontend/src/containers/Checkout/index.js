@@ -6,8 +6,8 @@ import { AuthContext } from "../../contexts/AuthContext";
 import "./style.css";
 
 const Checkout = () => {
-  const [message, setMessage] = useState("");
-  const { userProfile, cart } = useContext(AuthContext);
+  const { userProfile, cart, setLoading, setErrorMessage } =
+    useContext(AuthContext);
 
   const handleCheckout = () => {
     localStorage.setItem("cart", JSON.stringify(cart));
@@ -19,22 +19,24 @@ const Checkout = () => {
       .post("http://localhost:5000/payment/create-checkout-session", data)
       .then((res) => {
         if (res.data.url) {
+          setLoading(false);
           window.location.href = res.data.url;
         }
       })
       .catch((err) => {
-        setMessage(err.message);
+        setLoading(false);
+        setErrorMessage(err.message);
       });
   };
 
   useEffect(() => {
     handleCheckout();
+    setLoading(true);
   }, []);
 
   return (
     <>
       <div></div>;
-      {message && <SnackBar message={message} setMessage={setMessage} />}
     </>
   );
 };

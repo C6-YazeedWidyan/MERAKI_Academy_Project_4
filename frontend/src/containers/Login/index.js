@@ -16,11 +16,19 @@ const Login = () => {
     setUserProfile,
     setIsLoggedIn,
     setErrorMessage,
+    setLoading,
   } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
+  useEffect(() => {
+    setLoading(true);
+  }, []);
+
+  setLoading(false);
+
   const responseSuccessGoogle = (response) => {
+    setLoading(true);
     const data = {
       tokenId: response.credential,
     };
@@ -32,7 +40,7 @@ const Login = () => {
           "userProfile",
           JSON.stringify(res.data.userProfile)
         );
-
+        setLoading(false);
         const data = {
           userId: res.data.userProfile._id,
         };
@@ -45,9 +53,11 @@ const Login = () => {
           })
           .then((res) => {
             setCart(res.data.cart.games);
+            setLoading(false);
           })
           .catch((err) => {
             setErrorMessage(err.message);
+            setLoading(false);
           });
 
         axios
@@ -57,9 +67,11 @@ const Login = () => {
             },
           })
           .then((result) => {
+            setLoading(false);
             setWishList(result.data.wishList.games);
           })
           .catch((err) => {
+            setLoading(false);
             setErrorMessage(err.message);
           });
 
@@ -82,6 +94,7 @@ const Login = () => {
   const responseErrorGoogle = (response) => {};
 
   const login = () => {
+    setLoading(true);
     axios
       .post("http://localhost:5000/login", { email, password })
       .then((res) => {
@@ -90,6 +103,7 @@ const Login = () => {
           "userProfile",
           JSON.stringify(res.data.userProfile)
         );
+        setLoading(false);
 
         const data = {
           userId: res.data.userProfile._id,
@@ -103,9 +117,11 @@ const Login = () => {
           })
           .then((res) => {
             setCart(res.data.cart.games);
+            setLoading(false);
           })
           .catch((err) => {
             setErrorMessage(err.message);
+            setLoading(false);
           });
 
         axios
@@ -116,9 +132,11 @@ const Login = () => {
           })
           .then((result) => {
             setWishList(result.data.wishList.games);
+            setLoading(false);
           })
           .catch((err) => {
             setErrorMessage(err.message);
+            setLoading(false);
           });
         setIsLoggedIn(true);
         setUserType(
@@ -136,6 +154,7 @@ const Login = () => {
           return setErrorMessage(err.response.data.message);
         }
         setErrorMessage("Error happened while Login, please try again");
+        setLoading(false);
       });
   };
 

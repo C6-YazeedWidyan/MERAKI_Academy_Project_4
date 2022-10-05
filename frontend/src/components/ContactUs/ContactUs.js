@@ -1,11 +1,12 @@
 import React from "react";
 import "./style.css";
-import { useRef, useState } from "react";
+import { useRef, useState, useContext } from "react";
 import emailjs from "@emailjs/browser";
-import SnackBar from "../SnackBar";
+import { AuthContext } from "../../contexts/AuthContext";
 
 const ContactUs = () => {
-  const [message, setMessage] = useState("");
+  const { setErrorMessage } = useContext(AuthContext);
+
   const [emailSendMessage, setEmailSendMessage] = useState("");
   const form = useRef();
 
@@ -24,7 +25,7 @@ const ContactUs = () => {
           setEmailSendMessage("Email send");
         },
         (error) => {
-          setMessage(error.text);
+          setErrorMessage(error.text);
         }
       );
   };
@@ -51,7 +52,6 @@ const ContactUs = () => {
           <h3 className="contact-message">{emailSendMessage}</h3>
         </form>
       </div>
-      {message && <SnackBar message={message} setMessage={setMessage} />}
     </>
   );
 };
