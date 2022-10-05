@@ -4,17 +4,19 @@ import { useState } from "react";
 import "./style.css";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
-import SnackBar from "../../components/SnackBar";
 import { GoogleLogin } from "@react-oauth/google";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [message, setMessage] = useState("");
-  const [status, setStatus] = useState(false);
-
-  const { isLoggedIn, saveToken, setCart, setWishList } =
-    useContext(AuthContext);
+  const {
+    setCart,
+    setWishList,
+    setUserType,
+    setUserProfile,
+    setIsLoggedIn,
+    setErrorMessage,
+  } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
@@ -30,7 +32,6 @@ const Login = () => {
           "userProfile",
           JSON.stringify(res.data.userProfile)
         );
-        saveToken(res.data.token, res.data.userProfile.role.role);
 
         const data = {
           userId: res.data.userProfile._id,
@@ -46,7 +47,7 @@ const Login = () => {
             setCart(res.data.cart.games);
           })
           .catch((err) => {
-            setMessage(err.message);
+            setErrorMessage(err.message);
           });
 
         axios
@@ -59,14 +60,22 @@ const Login = () => {
             setWishList(result.data.wishList.games);
           })
           .catch((err) => {
-            setMessage(err.message);
+            setErrorMessage(err.message);
           });
 
-        navigate("/");
-        setStatus(true);
+        setIsLoggedIn(true);
+        setUserType(
+          JSON.parse(localStorage.getItem("userProfile"))?.role?.role
+        );
+        setUserProfile(JSON.parse(localStorage.getItem("userProfile")));
+        if (res.data.userProfile?.role?.role === "user") {
+          navigate("/");
+        } else {
+          navigate("/admin/dashboard");
+        }
       })
       .catch((err) => {
-        setMessage(err.message);
+        setErrorMessage(err.message);
       });
   };
 
@@ -76,13 +85,11 @@ const Login = () => {
     axios
       .post("http://localhost:5000/login", { email, password })
       .then((res) => {
-        setMessage("");
         localStorage.setItem("token", res.data.token);
         localStorage.setItem(
           "userProfile",
           JSON.stringify(res.data.userProfile)
         );
-        saveToken(res.data.token, res.data.userProfile.role.role);
 
         const data = {
           userId: res.data.userProfile._id,
@@ -98,7 +105,7 @@ const Login = () => {
             setCart(res.data.cart.games);
           })
           .catch((err) => {
-            setMessage(err.message);
+            setErrorMessage(err.message);
           });
 
         axios
@@ -111,26 +118,26 @@ const Login = () => {
             setWishList(result.data.wishList.games);
           })
           .catch((err) => {
-            setMessage(err.message);
+            setErrorMessage(err.message);
           });
-
-        navigate("/");
-        setStatus(true);
+        setIsLoggedIn(true);
+        setUserType(
+          JSON.parse(localStorage.getItem("userProfile"))?.role?.role
+        );
+        setUserProfile(JSON.parse(localStorage.getItem("userProfile")));
+        if (res.data.userProfile?.role?.role === "user") {
+          navigate("/");
+        } else {
+          navigate("/admin/dashboard");
+        }
       })
       .catch((err) => {
         if (err.response && err.response.data) {
-          setStatus(false);
-          return setMessage(err.response.data.message);
+          return setErrorMessage(err.response.data.message);
         }
-        setMessage("Error happened while Login, please try again");
+        setErrorMessage("Error happened while Login, please try again");
       });
   };
-
-  useEffect(() => {
-    if (isLoggedIn) {
-      navigate("/");
-    }
-  });
 
   return (
     <>
@@ -146,7 +153,7 @@ const Login = () => {
         />
         <input
           className="auth-input"
-          type="text"
+          type="password"
           placeholder="Password"
           onChange={(e) => {
             setPassword(e.target.value);
@@ -163,7 +170,6 @@ const Login = () => {
           />
         </div>
       </div>
-      {message && <SnackBar message={message} setMessage={setMessage} />}
     </>
   );
 };

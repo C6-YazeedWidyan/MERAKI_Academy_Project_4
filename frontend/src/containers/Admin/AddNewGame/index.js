@@ -1,6 +1,5 @@
-import React, { useContext } from "react";
+import React, { useState } from "react";
 import "./style.css";
-import { useState } from "react";
 import axios from "axios";
 import { AuthContext } from "../../../contexts/AuthContext";
 import Select from "react-select";
@@ -33,7 +32,7 @@ const options = [
 ];
 
 const AddNewGame = () => {
-  const { token } = useContext(AuthContext);
+  const [token] = useState(localStorage.getItem("token"));
 
   const config = {
     headers: {

@@ -1,11 +1,10 @@
 import axios from "axios";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import SnackBar from "../../../components/SnackBar";
-import { AuthContext } from "../../../contexts/AuthContext";
 import "./style.css";
 
 const Dashboard = () => {
-  const { token } = useContext(AuthContext);
+  const [token] = useState(localStorage.getItem("token"));
   const [usersTotal, setUsersTotal] = useState(0);
   const [gamesTotal, setGamesTotal] = useState(0);
   const [ordersTotal, setOrdersTotal] = useState(0);

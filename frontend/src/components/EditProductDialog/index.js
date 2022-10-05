@@ -32,7 +32,7 @@ const options = [
 ];
 
 const EditProductDialog = ({ gameDetails, setIsEdit, games, setGames }) => {
-  const { token } = useContext(AuthContext);
+  const [token] = useState(localStorage.getItem("token"));
 
   const [name, setName] = useState(gameDetails.name);
   const [price, setPrice] = useState(gameDetails.price);

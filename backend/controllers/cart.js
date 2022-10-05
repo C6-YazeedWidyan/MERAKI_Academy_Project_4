@@ -129,7 +129,6 @@ const updateOnUserCart = (req, res) => {
 
 const deleteFromUserCart = (req, res) => {
   const { userId, gameId, total } = req.body;
-  console.log(total);
 
   cartModel
     .findOneAndUpdate({ userId }, { $pull: { games: gameId }, total: total })
@@ -152,11 +151,12 @@ const deleteFromUserCart = (req, res) => {
 
 const makeCartEmptyAfterOrder = (req, res) => {
   const { userId } = req.body;
+  console.log("empty cart user id : ", userId);
 
   cartModel
     .findOneAndUpdate({ userId }, { $set: { games: [] } })
     .then((result) => {
-      console.log(result);
+      console.log("empty cart", result);
       res.status(201).json({
         success: true,
         message: "Empty the cart",

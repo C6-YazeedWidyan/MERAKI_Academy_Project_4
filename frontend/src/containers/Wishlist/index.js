@@ -8,12 +8,12 @@ import SnackBar from "../../components/SnackBar";
 
 const Wishlist = () => {
   const [message, setMessage] = useState("");
-  const { token, isLoggedIn, userProfile, wishlist, setWishList } =
-    useContext(AuthContext);
+  const [token] = useState(localStorage.getItem("token"));
+  const { userProfile, wishlist, setWishList } = useContext(AuthContext);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!isLoggedIn) {
+    if (!token) {
       navigate("/login");
     } else {
       axios

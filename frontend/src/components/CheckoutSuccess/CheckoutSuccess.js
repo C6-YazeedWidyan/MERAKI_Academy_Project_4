@@ -7,9 +7,10 @@ import axios from "axios";
 import SnackBar from "../SnackBar";
 
 const CheckoutSuccess = () => {
-  const { token, userProfile, cart, setCart } = useContext(AuthContext);
+  const { setCart } = useContext(AuthContext);
   const [message, setMessage] = useState("");
   const [orderMsg, setOrderMsg] = useState("");
+  const [token] = useState(localStorage.getItem("token"));
 
   const grandTotal = (arr) => {
     return arr.reduce((sum, i) => {
@@ -18,6 +19,9 @@ const CheckoutSuccess = () => {
   };
 
   useEffect(() => {
+    const userProfile = JSON.parse(localStorage.getItem("userProfile"));
+    const cart = JSON.parse(localStorage.getItem("cart"));
+    setCart(cart);
     const data = {
       userId: userProfile._id,
       userEmail: userProfile.email,
@@ -32,6 +36,7 @@ const CheckoutSuccess = () => {
         },
       })
       .then((res) => {
+        console.log(res);
         setOrderMsg(res.data.message);
       })
       .catch((err) => {

@@ -18,7 +18,7 @@ import CheckoutSuccess from "../components/CheckoutSuccess/CheckoutSuccess";
 import ContactUs from "../components/ContactUs/ContactUs";
 
 const Router = () => {
-  const { userType } = useContext(AuthContext);
+  const { userType, isLoggedIn } = useContext(AuthContext);
 
   return (
     <>
@@ -37,8 +37,12 @@ const Router = () => {
         <Route path="checkout-success" element={<CheckoutSuccess />} />
         <Route path="contactUs" element={<ContactUs />} />
         <Route path="wishlist" element={<Wishlist />} />
-        <Route path="login" element={<Login />} />
-        <Route path="register" element={<Register />} />
+        {!isLoggedIn && (
+          <>
+            <Route path="login" element={<Login />} />
+            <Route path="register" element={<Register />} />
+          </>
+        )}
         <Route path="*" element={<p>There's nothing here: 404!</p>} />
       </Routes>
     </>

@@ -8,8 +8,9 @@ import { AuthContext } from "../../contexts/AuthContext";
 import SnackBar from "../../components/SnackBar";
 
 const Home = () => {
-  const { token, isLoggedIn, userProfile, wishlist, setWishList } =
+  const { userProfile, wishlist, setWishList, setLoading } =
     useContext(AuthContext);
+  const [token] = useState(localStorage.getItem("token"));
   const [mostPopularGames, setMostPopularGames] = useState([]);
   const [gamesOnSale, setGamesOnSale] = useState([]);
   const [newReleasesGames, setNewReleasesGames] = useState([]);
@@ -22,15 +23,18 @@ const Home = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    setLoading(true);
     axios
       .get(`http://localhost:5000/games/ads/${ads}`)
       .then((res) => {
         setAdsGames(res.data);
         setADImage(res.data[0].cover);
         setADgameId(res.data[0]._id);
+        setLoading(false);
       })
       .catch((err) => {
         setMessage(err.message);
+        setLoading(false);
       });
     axios
       .get(`http://localhost:5000/games/state/${"Most Popular"}`)
@@ -62,7 +66,7 @@ const Home = () => {
 
   const addToWishList = (e, game_id) => {
     e.stopPropagation();
-    if (isLoggedIn) {
+    if (token) {
       const data = {
         userId: userProfile._id,
         gameId: game_id,

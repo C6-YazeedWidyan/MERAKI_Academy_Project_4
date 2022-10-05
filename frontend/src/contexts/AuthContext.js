@@ -1,64 +1,63 @@
+import axios from "axios";
 import React, { useState, useEffect, createContext } from "react";
-import { useNavigate } from "react-router-dom";
 
 export const AuthContext = createContext();
 
 const AuthProvider = (props) => {
-  const navigate = useNavigate();
-
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userProfile, setUserProfile] = useState({});
   const [userType, setUserType] = useState("user");
-  const [token, setToken] = useState("");
   const [cart, setCart] = useState([]);
   const [wishlist, setWishList] = useState([]);
-
-  const saveToken = (token, userType) => {
-    setToken(token);
-    setIsLoggedIn(true);
-    setUserType(userType);
-  };
-
-  const logout = () => {
-    setToken("");
-    setIsLoggedIn(false);
-    localStorage.clear();
-    navigate("/login");
-  };
+  const [token, setToken] = useState(localStorage.getItem("token"));
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
-    setToken(localStorage.getItem("token"));
-    setUserProfile(JSON.parse(localStorage.getItem("userProfile")));
-    setUserType(JSON.parse(localStorage.getItem("userProfile"))?.role?.role);
-
-    if (!JSON.parse(localStorage.getItem("userProfile"))?.role?.role) {
-      setUserType("user");
-    }
-
     if (token) {
-      saveToken(token, userType);
+      setToken(localStorage.getItem("token"));
+      setUserProfile(JSON.parse(localStorage.getItem("userProfile")));
+      setUserType(JSON.parse(localStorage.getItem("userProfile"))?.role?.role);
+      axios
+        .get(`http://localhost:5000/cart/${userProfile?._id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((res) => {
+          setCart(res.data.cart.games);
+        });
+
+      axios
+        .get(`http://localhost:5000/wishlist/${userProfile?._id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((res) => {
+          setWishList(res.data.wishList.games);
+        })
+        .catch((err) => {
+          // setMessage(err.message);
+        });
     }
-    if (isLoggedIn && userType === "user") {
-      navigate("/");
-    }
-    if (isLoggedIn && userType === "admin") {
-      navigate("/admin/dashboard");
-    }
-  }, [token, isLoggedIn]);
+  }, [token]);
 
   const state = {
-    token,
-    isLoggedIn,
-    logout,
-    saveToken,
-    setIsLoggedIn,
     userType,
     setUserType,
+    setUserProfile,
     userProfile,
     cart,
     setCart,
     wishlist,
     setWishList,
+    isLoggedIn,
+    setIsLoggedIn,
+    setLoading,
+    loading,
+    errorMessage,
+    setErrorMessage,
   };
 
   return (

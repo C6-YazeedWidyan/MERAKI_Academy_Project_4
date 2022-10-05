@@ -1,14 +1,13 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./style.css";
 
 import axios from "axios";
-import { AuthContext } from "../../../contexts/AuthContext";
 import EditProductDialog from "../../../components/EditProductDialog";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 const ProductsList = () => {
-  const { token } = useContext(AuthContext);
+  const [token] = useState(localStorage.getItem("token"));
   const [games, setGames] = useState("");
   const [show, setShow] = useState(false);
   const [limit, setLimit] = useState(4);

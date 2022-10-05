@@ -1,20 +1,9 @@
-.header-container {
-  padding: 16px 36px;
-  background-color: rgb(32, 32, 32);
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-}
 .wrapper {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   width: 8rem;
-}
-.brandName {
-  font-size: 22px;
 }
 .logo {
   width: 55px;
@@ -26,4 +15,71 @@
 
 .logout-btn {
   cursor: pointer;
+}
+
+.flex-01 {
+  flex: 0.1;
+}
+.flex-1 {
+  flex: 1;
+}
+.flex-05 {
+  flex: 0.5;
+}
+
+.margin-30 {
+  margin: 0 30px;
+}
+
+.margin-20 {
+  margin: 0 30px;
+}
+
+.Navbar {
+  background-color: rgb(32, 32, 32);
+  display: flex;
+  padding: 16px;
+  color: white;
+  align-items: center;
+}
+.Navbar-Link {
+  padding-right: 8px;
+}
+.Navbar-Items {
+  display: flex;
+  align-items: center;
+}
+.Navbar-Items--right {
+  margin-left: auto;
+}
+.Navbar-Link-toggle {
+  display: none;
+}
+@media only screen and (max-width: 768px) {
+  .Navbar-Items,
+  .Navbar {
+    flex-direction: column;
+    align-items: stretch !important;
+  }
+  .Navbar-Items {
+    display: none;
+  }
+  .Navbar-Items--right {
+    margin-left: 0;
+  }
+  .Navbar-ToggleShow {
+    display: flex;
+  }
+  .Navbar-Link-toggle {
+    align-self: flex-end;
+    display: initial;
+    position: absolute;
+    cursor: pointer;
+  }
+  .margin-30 {
+    margin: 0;
+  }
+  .margin-20 {
+    margin: 0;
+  }
 }

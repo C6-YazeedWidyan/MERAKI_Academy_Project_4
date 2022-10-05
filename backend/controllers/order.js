@@ -5,6 +5,9 @@ const createOrder = (req, res) => {
   const { userId, userEmail } = req.body;
   const cart = req.body.cart;
   const total = req.body.total;
+  console.log("order", userId);
+  console.log("order", cart);
+  console.log("order", total);
 
   const order = new orderModel({
     userId,
@@ -15,6 +18,7 @@ const createOrder = (req, res) => {
   order
     .save()
     .then(async (result) => {
+      console.log(result);
       res.status(201);
       res.json({
         success: true,

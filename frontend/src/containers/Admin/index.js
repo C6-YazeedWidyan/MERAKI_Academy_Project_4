@@ -4,15 +4,21 @@ import { AuthContext } from "../../contexts/AuthContext";
 import "./style.css";
 
 const Admin = () => {
-  const { logout } = useContext(AuthContext);
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState(0);
+  const { setUserType, setIsLoggedIn } = useContext(AuthContext);
   const [tabs, setTabs] = useState([
     { name: "Dashboard", route: "dashboard" },
     { name: "Products", route: "productsList" },
     { name: "Add new game", route: "addNewGame" },
   ]);
 
+  const logout = () => {
+    localStorage.clear();
+    setIsLoggedIn(false);
+    setUserType("user");
+    navigate("/login");
+  };
   const handleTabs = (tab, index) => {
     setActiveTab(index);
     navigate(tab);

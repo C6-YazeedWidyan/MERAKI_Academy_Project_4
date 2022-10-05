@@ -10,8 +10,8 @@ import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import SnackBar from "../../components/SnackBar";
 
 const Browse = () => {
-  const { wishlist, userProfile, isLoggedIn, token, setWishList } =
-    useContext(AuthContext);
+  const { wishlist, userProfile, setWishList } = useContext(AuthContext);
+  const [token] = useState(localStorage.getItem("token"));
   const [data, setData] = useState([]);
   const [categories, setCategories] = useState([]);
   const [page, setPage] = useState(0);
@@ -22,10 +22,9 @@ const Browse = () => {
   const navigate = useNavigate();
 
   const getAllGames = () => {
-    setPage(page + 1);
     setKeyword("");
     axios
-      .get(`http://localhost:5000/games?page=${page}&limit=${limit}`)
+      .get(`http://localhost:5000/games?page=${page}&limit=${12}`)
       .then((res) => {
         setData(res.data.games);
       })
@@ -65,7 +64,7 @@ const Browse = () => {
 
   const addToWishList = (e, game_id) => {
     e.stopPropagation();
-    if (isLoggedIn) {
+    if (token) {
       const data = {
         userId: userProfile._id,
         gameId: game_id,
@@ -110,13 +109,18 @@ const Browse = () => {
       });
   };
 
+  const selectPage = (i) => {
+    console.log(i);
+    setPage(i);
+  };
+
   useEffect(() => {
     getAllGames();
     getAllCategoriesTitles();
   }, []);
 
   return (
-    <>
+    <div className="main-container">
       <div className="browse-container">
         <div className="browse-grid">
           {data.map((game) => {
@@ -136,10 +140,8 @@ const Browse = () => {
               />
             );
           })}
-          <div className="get-more-games-btn" onClick={getAllGames}>
-            Get More Games
-          </div>
         </div>
+
         <div className="browse-left-wrapper">
           <h3 className="all-btn" onClick={getAllGames}>
             All
@@ -171,7 +173,7 @@ const Browse = () => {
                         }
                       : { borderRadius: "4px", padding: "12px", color: "white" }
                   }
-                  class="category-item"
+                  className="category-item"
                   onClick={() => getGameByCategory(category.category)}
                 >
                   {category.category}
@@ -180,8 +182,24 @@ const Browse = () => {
           </div>
         </div>
       </div>
+      <div className="pagination-wrapper" onClick={getAllGames}>
+        {data.map((item, i) => {
+          return (
+            <div
+              onClick={() => selectPage(i)}
+              className={
+                page === i
+                  ? "activePage pagination-select"
+                  : "pagination-select"
+              }
+            >
+              {i + 1}
+            </div>
+          );
+        })}
+      </div>
       {message && <SnackBar message={message} setMessage={setMessage} />}
-    </>
+    </div>
   );
 };
 

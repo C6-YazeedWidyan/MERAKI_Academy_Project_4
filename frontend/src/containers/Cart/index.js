@@ -7,12 +7,13 @@ import SnackBar from "../../components/SnackBar";
 
 const Cart = () => {
   const [message, setMessage] = useState("");
-  const { token, isLoggedIn, userProfile, cart, setCart } =
-    useContext(AuthContext);
+  const { userProfile, cart, setCart } = useContext(AuthContext);
+  const [token] = useState(localStorage.getItem("token"));
   const navigate = useNavigate();
-
+  console.log(cart);
+  console.log(userProfile);
   useEffect(() => {
-    if (!isLoggedIn) {
+    if (!token) {
       navigate("/login");
     } else {
       axios

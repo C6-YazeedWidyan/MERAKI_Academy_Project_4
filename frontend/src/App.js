@@ -1,48 +1,28 @@
 import "./App.css";
 import Router from "./router";
 import { AuthContext } from "./contexts/AuthContext";
-import axios from "axios";
-import { useEffect, useContext, useState } from "react";
+import { useContext,  } from "react";
 import SnackBar from "./components/SnackBar";
 
 function App() {
-  const [message, setMessage] = useState("");
-  const { token, isLoggedIn, userProfile, setCart, setWishList } =
-    useContext(AuthContext);
-
-  useEffect(() => {
-    if (isLoggedIn) {
-      axios
-        .get(`http://localhost:5000/cart/${userProfile?._id}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((res) => {
-          setCart(res.data.cart.games);
-        });
-
-      axios
-        .get(`http://localhost:5000/wishlist/${userProfile?._id}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((res) => {
-          setWishList(res.data.wishList.games);
-        })
-        .catch((err) => {
-          setMessage(err.message);
-        });
-    }
-  }, [token, isLoggedIn, userProfile]);
-
+  const { loading, errorMessage, setErrorMessage } = useContext(AuthContext);
   return (
     <>
       <div className="App">
+        {loading && (
+          <div className="overlay">
+            <div className="overlay-inner">
+              <div className="overlay-content">
+                <span className="spinner"></span>
+              </div>
+            </div>
+          </div>
+        )}
         <Router />
       </div>
-      {message && <SnackBar message={message} setMessage={setMessage} />}
+      {errorMessage && (
+        <SnackBar message={errorMessage} setMessage={setErrorMessage} />
+      )}
     </>
   );
 }

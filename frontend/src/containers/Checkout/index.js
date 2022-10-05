@@ -7,14 +7,10 @@ import "./style.css";
 
 const Checkout = () => {
   const [message, setMessage] = useState("");
-  const { token, userProfile, cart, setCart } = useContext(AuthContext);
-  const grandTotal = (arr) => {
-    return arr.reduce((sum, i) => {
-      return sum + i.price;
-    }, 0);
-  };
+  const { userProfile, cart } = useContext(AuthContext);
 
   const handleCheckout = () => {
+    localStorage.setItem("cart", JSON.stringify(cart));
     const data = {
       cart: cart,
       userId: userProfile._id,

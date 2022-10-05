@@ -52,8 +52,6 @@ const getAllOrdersWithTotal = (req, res) => {
       const totalAmount = result.reduce((accumulator, element, index) => {
         return accumulator + element.total;
       }, 0);
-      console.log(totalAmount);
-      console.log(result);
       res.status(200);
       res.json({
         success: true,
@@ -64,7 +62,6 @@ const getAllOrdersWithTotal = (req, res) => {
       });
     })
     .catch((err) => {
-      console.log(err);
       res.status(500);
       res.json({
         success: false,

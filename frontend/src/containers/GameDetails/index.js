@@ -1,26 +1,31 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./style.css";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../../contexts/AuthContext";
 import SnackBar from "../../components/SnackBar";
 
 const GameDetails = () => {
   const location = useLocation();
-  const { token, userProfile, wishlist, setWishList, cart, setCart } =
+  const navigate = useNavigate();
+  const { userProfile, wishlist, setWishList, cart, setCart, setLoading } =
     useContext(AuthContext);
+  const [token] = useState(localStorage.getItem("token"));
   const [game, setGame] = useState({});
   const [inCart, setInCart] = useState(false);
   const [inWishlist, setInWishlist] = useState(false);
   const [message, setMessage] = useState("");
 
   useEffect(() => {
+    setLoading(true);
     axios
       .get(`http://localhost:5000/games/${location.state}`)
       .then((res) => {
         setGame(res.data.game);
+        setLoading(false);
       })
       .catch((err) => {
+        setLoading(false);
         setMessage(err.message);
       });
 
@@ -42,6 +47,7 @@ const GameDetails = () => {
   };
 
   const addToCart = () => {
+    if (!token) return navigate("/login");
     const data = {
       userId: userProfile._id,
       gameId: game._id,

@@ -1,7 +1,12 @@
+.main-container {
+  display: flex;
+  flex-direction: column;
+}
+
 .browse-container {
   display: flex;
   margin: 0 auto;
-  width: 75%;
+  width: 80%;
   margin-top: 30px;
   margin-bottom: 30px;
   align-items: center;
@@ -53,22 +58,40 @@
   align-self: flex-start;
 }
 
-.get-more-games-btn {
-  background-color: red;
-  width: 200px;
-  margin: 0 auto;
+.pagination-wrapper {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  align-self: center;
+}
+.pagination-select {
+  background-color: gray;
+  font-size: 22px;
+  margin-right: 24px;
+  width: 34px;
+  height: 34px;
   text-align: center;
-  border-radius: 5px;
+  border-radius: 22px;
   cursor: pointer;
+  margin-bottom: 24px;
+}
+.activePage {
+  background-color: red;
 }
 
-.get-more-games-btn:hover {
-  background-color: rgba(255, 255, 255, 0.127);
+@media (max-width: 768px) {
+  .browse-grid {
+    grid-template-columns: repeat(2, 4fr);
+  }
+  .browse-container {
+    width: 100%;
+    flex-direction: column;
+  }
 }
 
 @media (min-width: 768px) {
   .browse-grid {
-    grid-template-columns: repeat(1, 4fr);
+    grid-template-columns: repeat(2, 4fr);
   }
 }
 @media (min-width: 960px) {
