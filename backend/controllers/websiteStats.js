@@ -50,15 +50,16 @@ const getAllOrdersWithTotal = (req, res) => {
     .find({})
     .then((result) => {
       const totalAmount = result.reduce((accumulator, element, index) => {
-        return accumulator + element.total;
+        return Math.ceil(accumulator) + element.total;
       }, 0);
+      console.log(totalAmount);
       res.status(200);
       res.json({
         success: true,
         message: "All the orders",
         orders: result,
         ordersTotal: result.length,
-        totalAmount: totalAmount,
+        totalAmount: Math.ceil(totalAmount),
       });
     })
     .catch((err) => {

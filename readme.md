@@ -1,13 +1,15 @@
 <p align="center">
-  <a href="" rel="noopener">
- <img width=200px height=200px src="https://www.meraki-academy.org/assets/img/logov02.svg" alt="Project logo"></a>
+<a href="http://localhost:3000" target="_blank" rel="noopener noreferrer">
+ <img width="400px" height="100px" src="https://res.cloudinary.com/dxg8ehdcq/image/upload/v1665074864/logo_c6adqq.png" alt="RED">
+ </a>
 </p>
 
-<h3 align="center">MERAKI</h3>
+<h3 align="center">RED
+</h3>
 
 ---
 
-<p align="center"> An awesome Project to descripe README 
+<p align="center"> An awesome Project to describe README 
     <br> 
 <a href=''>Demo</a>
     <br> 
@@ -35,17 +37,17 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-- Visual Studio Code follow this <a href=''>link</a> to install.
-- Git Bash follow this <a href=''>link</a> to install.
-- MongoDB follow this <a href=''>link</a> to install.
-- Node.js follow this <a href=''>link</a> to install.
+- Visual Studio Code follow this <a href='https://visualstudio.microsoft.com/downloads'>link</a> to install.
+- Git Bash follow this <a href='https://git-scm.com/downloads'>link</a> to install.
+- MongoDB follow this <a href='https://www.mongodb.com/try/download/community2'>link</a> to install.
+- Node.js follow this <a href='https://nodejs.org/en/download'>link</a> to install.
 
 ### Installing:
 
 1. Clone the repo to your local machine using git bash.
 
 ```
-git clone https://github.com/your_username_/Project-Name.git
+git clone https://github.com/C6-YazeedWidyan/MERAKI_Academy_Project_4.git
 ```
 
 2. Install packeges repeat this step in backend and frontend folder
@@ -68,14 +70,17 @@ npm run start
 
 Now app ready to use
 
+ <img width="400px" height="100px" src="https://res.cloudinary.com/dxg8ehdcq/image/upload/v1665074864/logo_c6adqq.png" alt="RED">
+
 ## 🎈 Usage <a name="usage"></a>
 
 Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
 
 Ex.
+
 - You don't have to register to navigate our web app
 - You can click on the **Home** tab provided in the navigation bar to view the home section
-- You can click on the **Add to cart** button to add this product to your cart but you have to be one of our users, so you should create an account 
+- You can click on the **Add to cart** button to add this product to your cart but you have to be one of our users, so you should create an account
 
 ## ⛏️ Built Using <a name = "built_using"></a>
 
