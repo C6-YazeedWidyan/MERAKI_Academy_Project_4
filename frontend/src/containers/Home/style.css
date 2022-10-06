@@ -53,6 +53,25 @@
   grid-gap: 16px;
 }
 
+@media (min-width: 268px) and (max-width: 767px) {
+  .home-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .ads-cards {
+    flex-direction: column;
+  }
+  .ads-card-list {
+    flex-direction: row;
+  }
+  .ad-image-big-item {
+    width: 100%;
+  }
+  .card-list-item {
+    text-align: center;
+    display: block;
+  }
+}
+
 @media (min-width: 768px) {
   .home-grid {
     grid-template-columns: repeat(2, 1fr);

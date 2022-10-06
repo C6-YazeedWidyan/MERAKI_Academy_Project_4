@@ -4,7 +4,7 @@ import { AuthContext } from "../../../contexts/AuthContext";
 import "./style.css";
 
 const Dashboard = () => {
-  const { setErrorMessage } = useContext(AuthContext);
+  const { setErrorMessage, setLoading } = useContext(AuthContext);
 
   const [token] = useState(localStorage.getItem("token"));
   const [usersTotal, setUsersTotal] = useState(0);
@@ -19,6 +19,7 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
+    setLoading(true);
     axios
       .get("http://localhost:5000/adminpanel/users", {
         headers: {
@@ -27,9 +28,11 @@ const Dashboard = () => {
       })
       .then((res) => {
         setUsersTotal(res.data.usersTotal);
+        setLoading(false);
       })
       .catch((err) => {
         setErrorMessage(err.message);
+        setLoading(false);
       });
 
     axios
@@ -40,9 +43,11 @@ const Dashboard = () => {
       })
       .then((res) => {
         setGamesTotal(res.data.gamesTotal);
+        setLoading(false);
       })
       .catch((err) => {
         setErrorMessage(err.message);
+        setLoading(false);
       });
 
     axios
@@ -54,9 +59,11 @@ const Dashboard = () => {
       .then((res) => {
         setOrdersTotal(res.data.ordersTotal);
         setOrderTotalAmount(res.data.orders);
+        setLoading(false);
       })
       .catch((err) => {
         setErrorMessage(err.message);
+        setLoading(false);
       });
   }, []);
 

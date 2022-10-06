@@ -16,6 +16,7 @@ import Admin from "../containers/Admin";
 import ProductsList from "../containers/Admin/ProductsList";
 import CheckoutSuccess from "../components/CheckoutSuccess/CheckoutSuccess";
 import ContactUs from "../components/ContactUs/ContactUs";
+import Footer from "../components/Footer";
 
 const Router = () => {
   const { userType, isLoggedIn } = useContext(AuthContext);
@@ -45,6 +46,7 @@ const Router = () => {
         )}
         <Route path="*" element={<p>There's nothing here: 404!</p>} />
       </Routes>
+      {userType === "user" && <Footer />}
     </>
   );
 };

@@ -1,10 +1,7 @@
 .footer-container {
-  padding: 106px 62px;
+  padding: 80px 36px;
   background-color: rgb(32, 32, 32);
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
+  margin-top: 34px;
 }
 
 .contact-us-btn {
@@ -14,4 +11,20 @@
 a {
   color: #c62828;
   text-decoration: none;
+}
+.website-social-media {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  margin-top: 16px;
+}
+.website-about {
+  margin-top: 12px;
+  font-size: 12px;
+  width: 60%;
+  margin-bottom: 40px;
+}
+.social-icon {
+  width: 24px;
 }

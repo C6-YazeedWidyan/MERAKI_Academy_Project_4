@@ -91,6 +91,15 @@
   padding: 16px;
 }
 
+@media (min-width: 268px) and (max-width: 767px) {
+  .cart-card {
+    display: block;
+  }
+  .cart-outline-btn {
+    margin-top: 16px;
+  }
+}
+
 @media (min-width: 768px) {
   .cart-grid {
     flex-direction: column;

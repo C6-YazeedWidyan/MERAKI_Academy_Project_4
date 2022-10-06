@@ -57,3 +57,9 @@
   color: white;
   min-width: 21%;
 }
+
+@media (min-width: 268px) and (max-width: 960px) {
+  .edit-dialog-content {
+    width: 90%;
+  }
+}

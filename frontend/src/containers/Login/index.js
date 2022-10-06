@@ -161,7 +161,7 @@ const Login = () => {
   return (
     <>
       <div className="login-container">
-        <div className="login-text">Welcome Back</div>
+        <div className="login-text">Login with your Email</div>
         <input
           className="auth-input"
           type="text"
@@ -181,6 +181,8 @@ const Login = () => {
         <div className="login-btn" onClick={login}>
           Login
         </div>
+        <br />
+        <span>or</span>
         <br />
         <div className="google">
           <GoogleLogin
