@@ -27,7 +27,8 @@
 
 ## 🧐 About <a name = "about"></a>
 
-Are you looking for a quick and easy way to action, action, and action? The **(name of application)** is the greatest and most accurate application to do this for you. It helps you to **(list of activities)**. The **(name of application)** provides a simple design to ensure having the best user experience.
+Whether you’re a gamer or shop, **RED** makes it easy to find your next addictive game.
+With **RED** webiste, you get access to many games all over the world, as we help you to search, filter for new and interseting games, add to your cart and purchase them with a simple design to ensure having the best user experience.
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
 
@@ -68,32 +69,70 @@ npm run start
 
 Now app ready to use
 
- <img width="400px" height="100px" src="https://res.cloudinary.com/dxg8ehdcq/image/upload/v1665074864/logo_c6adqq.png" alt="RED">
+<img width="400px" height="200px" 
+ src="https://res.cloudinary.com/dxg8ehdcq/image/upload/v1665238089/Screenshot_25_vdfonj.png" alt="RED">
 
 ## 🎈 Usage <a name="usage"></a>
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-Ex.
-
 - You don't have to register to navigate our web app
+
+<img width="400px" height="200px" 
+ src="https://res.cloudinary.com/dxg8ehdcq/image/upload/v1665239807/Screenshot_1_hf4lib.png" alt="RED">
 
 - You can click on the **Home** tab provided in the header to view the home section
 
 - In web app you will see games card with small details you can click on it to go to **Game Details** section
 
+<img width="400px" height="200px" 
+ src="https://res.cloudinary.com/dxg8ehdcq/image/upload/v1665239932/game_sypdlu.png" alt="game">
+
 - Once you in **Game Details** you will see game detatils with **Add to cart** button and **Add to wish list** button
+
+<img width="400px" height="200px" 
+ src="https://res.cloudinary.com/dxg8ehdcq/image/upload/v1665240253/game_detils_a5qrfs.png" alt="game">
 
 - You can click on the **Add to cart** button to add this game to your cart but you have to be one of our users, so you should create an account
 
+<img width="400px" height="100px" 
+ src="https://res.cloudinary.com/dxg8ehdcq/image/upload/v1665240262/Screenshot_2_szuark.png" alt="game">
+
 - You can click on the **Add to wish list** button to add this game to your with list but you have to be one of our users, so you should create an account
+
+<img width="400px" height="0px" 
+ src="https://res.cloudinary.com/dxg8ehdcq/image/upload/v1665240266/Screenshot_3_w66qau.png" alt="game">
 
 - You can click on the **Browse** tab provided in the header to view the browse section or you can search about the game and you will see view all games and when click on it you will go to browse section
 
+<img width="400px" height="200px" 
+ src="https://res.cloudinary.com/dxg8ehdcq/image/upload/v1665240274/browse_oyy5eo.png" alt="game">
+
+- In **Browse** section you can filter by genre you can pick any game you want
+
+<img width="150px" height="500px" 
+ src="https://res.cloudinary.com/dxg8ehdcq/image/upload/v1665240279/gener_dkfxu2.png" alt="game">
+
 - You can click on the **Cart** tab provided in the header to view your Cart but you have to be one of our users, so you should create an account or login
 
+<img width="400px" height="200px" 
+src="https://res.cloudinary.com/dxg8ehdcq/image/upload/v1665239797/cart_adouvv.png" alt="game">
+
 - In **Cart** section you will see your games that you added
-  you will see **remove** button
+  you will see **remove** button and you can remove any game from cart
+
+<img width="200px" height="100px" 
+src="https://res.cloudinary.com/dxg8ehdcq/image/upload/v1665240723/Screenshot_4_xto9zb.png" alt="game">
+
+- You can click on the **Wish list** tab provided in the header to view your Cart but you have to be one of our users, so you should create an account or login
+
+<img width="400px" height="200px" 
+src="https://res.cloudinary.com/dxg8ehdcq/image/upload/v1665239811/wish_list_llf0xt.png" alt="game">
+
+- In **Wish list** section you will see your games that you added you will see **remove** button and you can remove any game from wish list
+
+<img width="200px" height="100px" 
+ src="https://res.cloudinary.com/dxg8ehdcq/image/upload/v1665240727/Screenshot_5_s8lzpe.png" alt="game">
+
+-
 
 ## ⛏️ Built Using <a name = "built_using"></a>
 
