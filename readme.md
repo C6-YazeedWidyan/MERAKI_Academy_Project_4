@@ -148,7 +148,7 @@ Your trello board link
 
 ## Data Flow <a name = "#data_flow"></a>
 
-<img width=200px height=200px src="https://res.cloudinary.com/dxg8ehdcq/image/upload/v1665077420/diagram_xbsjfv.png" alt="Diagram"></a>
+<img width=200px height=200px src="https://res.cloudinary.com/dxg8ehdcq/image/upload/v1665263544/diagramYzd_zql4ig.png" alt="Diagram"></a>
 
 ## ⚠️ Guided By <a name = "guided_by"></a>
 
