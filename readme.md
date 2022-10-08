@@ -98,7 +98,7 @@ Now app ready to use
 
 - You can click on the **Add to wish list** button to add this game to your with list but you have to be one of our users, so you should create an account
 
-<img width="400px" height="0px" 
+<img width="400px" height="50px" 
  src="https://res.cloudinary.com/dxg8ehdcq/image/upload/v1665240266/Screenshot_3_w66qau.png" alt="game">
 
 - You can click on the **Browse** tab provided in the header to view the browse section or you can search about the game and you will see view all games and when click on it you will go to browse section
