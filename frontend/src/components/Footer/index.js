@@ -18,8 +18,7 @@ const Footer = () => {
         Games logo, Fortnite, the Fortnite logo, RED, RED Engine, the RED Engine
         logo, RED Tournament, and the RED Tournament logo are trademarks or
         registered trademarks of RED Games, Inc. in the United States of America
-        and elsewhere. Other brands or product names are the trademarks of their
-        respective owners. Non-US transactions through RED Games International
+        and elsewhere.
       </div>
       <div>
         <div className="website-social-media">

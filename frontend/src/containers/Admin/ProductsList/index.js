@@ -83,7 +83,7 @@ const ProductsList = () => {
         <tbody>
           {show &&
             games.map((game) => (
-              <tr>
+              <tr key={game._id}>
                 <td data-label="Name">{game.name}</td>
                 <td data-label="Price">${game.price}</td>
                 <td data-label="Platform">{game.platform}</td>

@@ -206,16 +206,7 @@ const EditProductDialog = ({ gameDetails, setIsEdit, games, setGames }) => {
                     setDescription(e.target.value);
                   }}
                 />
-                <br />
-                <label>Category:</label>
-                <br />
-                <Select
-                  className="category-select"
-                  isMulti
-                  onChange={onChange}
-                  options={options}
-                  value={categories}
-                />
+
                 <br />
                 <label>
                   <input
@@ -227,7 +218,6 @@ const EditProductDialog = ({ gameDetails, setIsEdit, games, setGames }) => {
                   />
                   in Stock
                 </label>
-                <br />
                 <br />
                 <label>
                   <input
@@ -276,6 +266,16 @@ const EditProductDialog = ({ gameDetails, setIsEdit, games, setGames }) => {
                   onChange={(e) => {
                     setCover(e.target.value);
                   }}
+                />
+                <br />
+                <label>Category:</label>
+                <br />
+                <Select
+                  className="category-select"
+                  isMulti
+                  onChange={onChange}
+                  options={options}
+                  value={categories}
                 />
               </div>
             </div>

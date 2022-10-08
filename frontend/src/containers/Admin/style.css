@@ -10,22 +10,6 @@
     "sidebar main main main";
 }
 
-.admin-header {
-  display: flex;
-  justify-content: space-between;
-}
-
-.admin-navbar {
-  background: #ffffff;
-  grid-area: nav;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 30px 0 30px;
-  border-bottom: 1px solid lightgray;
-}
-
 main {
   background: #f3f4f6;
   grid-area: main;
@@ -48,18 +32,59 @@ main {
   background-color: aqua;
 }
 
-.navbar-left {
-  display: flex;
-  align-items: center;
-  width: 75px;
-  object-fit: contain;
-}
-
 .sidebar-img > img {
   display: flex;
   align-items: center;
   width: 75px;
   object-fit: contain;
+}
+.admin-title {
+  color: black;
+}
+.admin-Navbar {
+  grid-area: nav;
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  padding: 16px;
+  color: black;
+  align-items: center;
+}
+
+.admin-Navbar-Link {
+  padding-right: 8px;
+}
+.admin-Navbar-Items {
+  display: none;
+}
+.admin-Navbar-Items--right {
+  margin-left: auto;
+  display: flex;
+}
+.admin-Navbar-Link-toggle {
+  display: none;
+}
+@media only screen and (max-width: 768px) {
+  .admin-Navbar-Items,
+  .admin-Navbar {
+    flex-direction: column;
+    align-items: stretch !important;
+  }
+  .admin-Navbar-Items {
+    display: none;
+  }
+  .admin-Navbar-Items--right {
+    margin-left: 0;
+  }
+  .admin-Navbar-ToggleShow {
+    display: flex;
+    margin-top: 23px;
+  }
+  .admin-Navbar-Link-toggle {
+    align-self: flex-end;
+    display: initial;
+    position: absolute;
+    cursor: pointer;
+  }
 }
 
 @media only screen and (max-width: 978px) {

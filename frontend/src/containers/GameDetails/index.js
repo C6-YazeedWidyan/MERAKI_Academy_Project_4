@@ -99,6 +99,7 @@ const GameDetails = () => {
   };
 
   const addToWishList = () => {
+    if (!token) return navigate("/login");
     const data = {
       userId: userProfile._id,
       gameId: game._id,

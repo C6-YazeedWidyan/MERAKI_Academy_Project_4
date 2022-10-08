@@ -4,11 +4,13 @@ import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const CheckoutSuccess = () => {
   const { setCart, setErrorMessage } = useContext(AuthContext);
   const [orderMsg, setOrderMsg] = useState("");
   const [token] = useState(localStorage.getItem("token"));
+  const navigate = useNavigate();
 
   const grandTotal = (arr) => {
     return arr.reduce((sum, i) => {
@@ -55,10 +57,22 @@ const CheckoutSuccess = () => {
   }, []);
 
   return (
-    <>
-      <div>Checkout Success</div>
-      <div>{orderMsg}</div>
-    </>
+    <div className="success-checkout-container">
+      <div className="success-checkout-wrapper">
+        <img
+          className="success-checkout-image"
+          src="./assets/images/check.png"
+          alt=""
+        />
+        <h1>THANK YOU FOR YOUR PURCHASE</h1>
+        <div>
+          We will email you the game installation code at provided email
+        </div>
+        <div className="success-checkout-btn" onClick={() => navigate("/")}>
+          Continue Shopping
+        </div>
+      </div>
+    </div>
   );
 };
 

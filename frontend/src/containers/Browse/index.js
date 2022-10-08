@@ -23,7 +23,7 @@ const Browse = () => {
   const getAllGames = () => {
     setKeyword("");
     axios
-      .get(`http://localhost:5000/games?page=${page}&limit=${12}`)
+      .get(`http://localhost:5000/games?page=${page}`)
       .then((res) => {
         setLoading(false);
         setData(res.data.games);
@@ -110,10 +110,6 @@ const Browse = () => {
       });
   };
 
-  const selectPage = (i) => {
-    setPage(i);
-  };
-
   useEffect(() => {
     setLoading(true);
     getAllGames();
@@ -163,6 +159,7 @@ const Browse = () => {
             {showOption &&
               categories.map((category) => (
                 <div
+                  key={category.category}
                   style={
                     keyword == category.category
                       ? {
@@ -186,7 +183,8 @@ const Browse = () => {
         {data.map((item, i) => {
           return (
             <div
-              onClick={() => selectPage(i)}
+              key={i}
+              onClick={() => setPage(i)}
               className={
                 page === i
                   ? "activePage pagination-select"

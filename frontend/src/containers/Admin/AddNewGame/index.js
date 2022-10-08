@@ -207,16 +207,7 @@ const AddNewGame = () => {
                   setDescription(e.target.value);
                 }}
               />
-              <br />
-              <label>Category:</label>
-              <br />
-              <Select
-                className="category-select"
-                isMulti
-                onChange={onChange}
-                options={options}
-                value={categories}
-              />
+
               <br />
               <label>
                 <input
@@ -283,6 +274,16 @@ const AddNewGame = () => {
                   <img src={logo} alt="logo" height="125px" />
                 </div>
               ) : null}
+              <br />
+              <label>Category:</label>
+              <br />
+              <Select
+                className="category-select"
+                isMulti
+                onChange={onChange}
+                options={options}
+                value={categories}
+              />
             </div>
           </div>
           <input className="add-btn" type="submit" value="Save" />

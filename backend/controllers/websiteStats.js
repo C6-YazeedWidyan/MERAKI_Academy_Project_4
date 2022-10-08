@@ -52,7 +52,6 @@ const getAllOrdersWithTotal = (req, res) => {
       const totalAmount = result.reduce((accumulator, element, index) => {
         return Math.ceil(accumulator) + element.total;
       }, 0);
-      console.log(totalAmount);
       res.status(200);
       res.json({
         success: true,

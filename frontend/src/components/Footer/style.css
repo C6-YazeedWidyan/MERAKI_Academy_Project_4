@@ -1,5 +1,5 @@
 .footer-container {
-  padding: 80px 36px;
+  padding: 70px 80px;
   background-color: rgb(32, 32, 32);
   margin-top: 34px;
 }
@@ -22,7 +22,8 @@ a {
 .website-about {
   margin-top: 12px;
   font-size: 12px;
-  width: 60%;
+  width: 80%;
+  color: #8d8d8d;
   margin-bottom: 40px;
 }
 .social-icon {

@@ -1,6 +1,6 @@
 <p align="center">
 <a href="http://localhost:3000" target="_blank" rel="noopener noreferrer">
- <img width="400px" height="100px" src="https://res.cloudinary.com/dxg8ehdcq/image/upload/v1665074864/logo_c6adqq.png" alt="RED">
+ <img width="200px" height="100px" src="https://res.cloudinary.com/dxg8ehdcq/image/upload/v1665074864/logo_c6adqq.png" alt="RED">
  </a>
 </p>
 
@@ -27,9 +27,7 @@
 
 ## 🧐 About <a name = "about"></a>
 
-Write about 1-2 paragraphs describing the purpose of your project.
-
-Ex. Are you looking for a quick and easy way to action, action, and action? The **(name of application)** is the greatest and most accurate application to do this for you. It helps you to **(list of activities)**. The **(name of application)** provides a simple design to ensure having the best user experience.
+Are you looking for a quick and easy way to action, action, and action? The **(name of application)** is the greatest and most accurate application to do this for you. It helps you to **(list of activities)**. The **(name of application)** provides a simple design to ensure having the best user experience.
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
 
@@ -79,8 +77,23 @@ Use this space to show useful examples of how a project can be used. Additional 
 Ex.
 
 - You don't have to register to navigate our web app
-- You can click on the **Home** tab provided in the navigation bar to view the home section
-- You can click on the **Add to cart** button to add this product to your cart but you have to be one of our users, so you should create an account
+
+- You can click on the **Home** tab provided in the header to view the home section
+
+- In web app you will see games card with small details you can click on it to go to **Game Details** section
+
+- Once you in **Game Details** you will see game detatils with **Add to cart** button and **Add to wish list** button
+
+- You can click on the **Add to cart** button to add this game to your cart but you have to be one of our users, so you should create an account
+
+- You can click on the **Add to wish list** button to add this game to your with list but you have to be one of our users, so you should create an account
+
+- You can click on the **Browse** tab provided in the header to view the browse section or you can search about the game and you will see view all games and when click on it you will go to browse section
+
+- You can click on the **Cart** tab provided in the header to view your Cart but you have to be one of our users, so you should create an account or login
+
+- In **Cart** section you will see your games that you added
+  you will see **remove** button
 
 ## ⛏️ Built Using <a name = "built_using"></a>
 
@@ -92,11 +105,11 @@ Ex.
 ## User Story <a name = "#user_story"></a>
 
 Your trello board link
-<a href=''>Trello</a>
+<a href='https://trello.com/b/GdZ1iBN5/project-4'>Trello</a>
 
 ## Data Flow <a name = "#data_flow"></a>
 
-<img width=200px height=200px src="https://cacoo.com/assets/site/img/templates/screenshots/er-database-diagram.png" alt="Diagram"></a>
+<img width=200px height=200px src="https://res.cloudinary.com/dxg8ehdcq/image/upload/v1665077420/diagram_xbsjfv.png" alt="Diagram"></a>
 
 ## ⚠️ Guided By <a name = "guided_by"></a>
 

@@ -22,6 +22,9 @@ const Home = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    const userType = JSON.parse(localStorage.getItem("userProfile"))?.role
+      ?.role;
+    if (userType === "admin") return navigate("/admin/dashboard");
     setLoading(true);
     axios
       .get(`http://localhost:5000/games/ads/${ads}`)
