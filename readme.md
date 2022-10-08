@@ -138,7 +138,7 @@ src="https://res.cloudinary.com/dxg8ehdcq/image/upload/v1665239811/wish_list_llf
 
 - [MongoDB](https://www.mongodb.com/) - Database
 - [Express JS](https://expressjs.com/) - Server Framework
-- [React JS](https://https://reactjs.org/) - Web Framework
+- [React JS](https://reactjs.org/) - Web Framework
 - [Node JS](https://nodejs.org/en/) - Server Environment
 
 ## User Story <a name = "#user_story"></a>
